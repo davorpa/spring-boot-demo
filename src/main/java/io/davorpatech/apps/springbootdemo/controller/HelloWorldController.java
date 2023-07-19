@@ -10,4 +10,14 @@ public class HelloWorldController {
     public String index() {
         return "Hello World!";
     }
+
+    @GetMapping("salute")
+    public String salute() {
+        return "Kaixo!";
+    }
+
+    @GetMapping("farewell")
+    public String farewell() {
+        return "さようなら!";
+    }
 }
