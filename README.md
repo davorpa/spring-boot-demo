@@ -1,7 +1,6 @@
 # spring-boot-demo
 
-Spring Boot Demo application.
-
+Spring Boot Demo application with a bunch of services as course exercises.
 
 ## Getting Started
 
