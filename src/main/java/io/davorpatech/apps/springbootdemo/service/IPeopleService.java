@@ -9,4 +9,6 @@ public interface IPeopleService
     List<Person> findAll();
 
     List<Person> findBySurnameInitialAndAge(String initial, Long age);
+
+    Person create(Person person);
 }

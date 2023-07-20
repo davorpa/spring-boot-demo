@@ -38,7 +38,9 @@ public class Person {
     }
 
     public long getAge() {
-        return ChronoUnit.YEARS.between(getBirthdate(), LocalDate.now());
+        LocalDate date = getBirthdate();
+        if (date == null) return -1;
+        return ChronoUnit.YEARS.between(date, LocalDate.now());
     }
 
     @Override

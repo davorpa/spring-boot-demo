@@ -26,4 +26,11 @@ public class InMemoryPeopleDAO implements IPeopleDAO
     public List<Person> findAll() {
         return List.copyOf(people);
     }
+
+    @Override
+    public Person persist(
+            final Person person) {
+        people.add(person);
+        return person;
+    }
 }

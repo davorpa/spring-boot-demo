@@ -49,4 +49,10 @@ public class PeopleService implements IPeopleService
                 .filter(predicate)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Person create(
+            final Person person) {
+        return peopleDAO.persist(person);
+    }
 }

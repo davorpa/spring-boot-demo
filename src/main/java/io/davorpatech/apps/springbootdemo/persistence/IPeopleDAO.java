@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IPeopleDAO {
     List<Person> findAll();
+
+    Person persist(Person person);
 }
