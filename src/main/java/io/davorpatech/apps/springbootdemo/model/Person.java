@@ -2,22 +2,32 @@ package io.davorpatech.apps.springbootdemo.model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.regex.Pattern;
 
 public class Person {
-    public Person(String name, LocalDate birthdate) {
-        setName(name);
+    private String fullname;
+    private String surnames;
+
+    private LocalDate birthdate;
+
+    public Person(String fullname, LocalDate birthdate) {
+        setFullname(fullname);
         setBirthdate(birthdate);
     }
 
-    private String name;
-    private LocalDate birthdate;
-
-    public String getName() {
-        return name;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String extractSurname() {
+        if (fullname == null) return null;
+        String name = getFullname().trim();
+        int index = name.indexOf(" ");
+        return index < 0 ? name : name.substring(index);
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public LocalDate getBirthdate() {
@@ -34,6 +44,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("Person{name='%s', birthdate=%s, age=%s'}'", getName(), getBirthdate(), getAge());
+        return String.format(
+                "Person{fullname='%s', birthdate=%s, age=%s'}'",
+                getFullname(), getBirthdate(), getAge());
     }
 }

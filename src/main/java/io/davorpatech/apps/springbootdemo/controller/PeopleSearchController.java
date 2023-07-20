@@ -1,6 +1,8 @@
 package io.davorpatech.apps.springbootdemo.controller;
 
 import io.davorpatech.apps.springbootdemo.model.Person;
+import io.davorpatech.apps.springbootdemo.service.IPeopleService;
+import io.davorpatech.apps.springbootdemo.service.PeopleService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,29 +15,19 @@ import java.util.stream.Collectors;
 
 @RestController()
 @RequestMapping("people")
-public class PeopleSearchController {
+public class PeopleSearchController
+{
+    private IPeopleService peopleService = new PeopleService();
+
+    @GetMapping
+    public List<Person> listAll() {
+        return peopleService.findAll();
+    }
 
     @GetMapping("search")
     public List<Person> search(
             @RequestParam(required = false) String initial,
             @RequestParam(required = false) Long age) {
-        Predicate<Person> predicate = p -> true;
-        if (initial != null) {
-            predicate = predicate.and(p -> p.getName().startsWith(initial));
-        }
-        if (age != null) {
-            predicate = predicate.and(p -> Long.compare(age, p.getAge()) == 0);
-        }
-
-        return List.of(
-                    new Person("David", LocalDate.of(1983, 5, 24)),
-                    new Person("Lola", LocalDate.of(1950, 4, 30)),
-                    new Person("Isabel", LocalDate.of(1972, 6, 6)),
-                    new Person("Facundo", LocalDate.of(1992, 7, 5)),
-                    new Person("Israel", LocalDate.of(1980, 3, 10))
-                )
-                .stream()
-                .filter(predicate)
-                .collect(Collectors.toList());
+        return peopleService.findBySurnameInitialAndAge(initial, age);
     }
 }
