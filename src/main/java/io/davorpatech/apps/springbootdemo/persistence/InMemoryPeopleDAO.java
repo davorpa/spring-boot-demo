@@ -1,11 +1,13 @@
 package io.davorpatech.apps.springbootdemo.persistence;
 
 import io.davorpatech.apps.springbootdemo.model.Person;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
+@Repository
 public class InMemoryPeopleDAO implements IPeopleDAO
 {
     private final List<Person> people = new LinkedList<>();

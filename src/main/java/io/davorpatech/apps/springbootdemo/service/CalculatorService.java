@@ -1,8 +1,8 @@
 package io.davorpatech.apps.springbootdemo.service;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CalculatorService {
     public double add(double num1, double num2) {
         return num1 + num2;

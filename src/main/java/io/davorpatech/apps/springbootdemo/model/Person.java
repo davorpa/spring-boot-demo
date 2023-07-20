@@ -2,7 +2,6 @@ package io.davorpatech.apps.springbootdemo.model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.regex.Pattern;
 
 public class Person {
     private String fullname;

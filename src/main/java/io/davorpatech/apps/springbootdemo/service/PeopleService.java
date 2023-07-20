@@ -2,17 +2,25 @@ package io.davorpatech.apps.springbootdemo.service;
 
 import io.davorpatech.apps.springbootdemo.model.Person;
 import io.davorpatech.apps.springbootdemo.persistence.IPeopleDAO;
-import io.davorpatech.apps.springbootdemo.persistence.InMemoryPeopleDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Service
 public class PeopleService implements IPeopleService
 {
-    IPeopleDAO peopleDAO = new InMemoryPeopleDAO();
+    IPeopleDAO peopleDAO;
+
+    public PeopleService(
+            final @Autowired IPeopleDAO peopleDAO) {
+        this.peopleDAO = Objects.requireNonNull(
+                peopleDAO, "peopleDAO must not be null");
+    }
 
     @Override
     public List<Person> findAll() {
@@ -20,7 +28,9 @@ public class PeopleService implements IPeopleService
     }
 
     @Override
-    public List<Person> findBySurnameInitialAndAge(String initial, Long age) {
+    public List<Person> findBySurnameInitialAndAge(
+            final @Nullable String initial,
+            final @Nullable Long age) {
         Predicate<Person> predicate = p -> true;
         if (initial != null) {
             predicate = predicate.and(p -> {

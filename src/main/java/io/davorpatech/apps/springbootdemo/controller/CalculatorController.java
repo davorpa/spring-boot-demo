@@ -1,16 +1,25 @@
 package io.davorpatech.apps.springbootdemo.controller;
 
 import io.davorpatech.apps.springbootdemo.service.CalculatorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController()
 @RequestMapping("calculator")
-public class CalculatorController {
+public class CalculatorController
+{
+    private CalculatorService calculatorService;
 
-    private CalculatorService calculatorService = new CalculatorService();
+    public CalculatorController(
+            final @Autowired CalculatorService calculatorService) {
+        this.calculatorService = Objects.requireNonNull(
+                calculatorService, "calculatorService must not be null");
+    }
 
     @GetMapping("add")
     public double add(
