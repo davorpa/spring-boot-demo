@@ -35,8 +35,8 @@ public class CalculatorController {
 
     @GetMapping("divide")
     public double divide(
-            @RequestParam double num1,
-            @RequestParam double num2) {
-        return calculatorService.divide(num1, num2);
+            @RequestParam double dividend,
+            @RequestParam double divisor) {
+        return calculatorService.divide(dividend, divisor);
     }
 }

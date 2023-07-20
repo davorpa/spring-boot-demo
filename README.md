@@ -12,7 +12,7 @@ The project provides the following service endpoints:
 - `/calculator/add?num1=[num1]&num2=[num2]` Summatory of two numbers.
 - `/calculator/substract?num1=[num1]&num2=[num2]`: Subtracts two numbers.
 - `/calculator/multiply?num1=[num1]&num2=[num2]`: Multiplies two numbers.
-- `/calculator/divide?num1=[num1]&num2=[num2]`: Divides two numbers.
+- `/calculator/divide?dividend=[num1]&divisor=[num2]`: Divides two numbers.
 - `/people/search?initial=[letter]&age=[number]`: Emits a JSON response with the people list matching the given optional parameters.
 
 ## Getting Started

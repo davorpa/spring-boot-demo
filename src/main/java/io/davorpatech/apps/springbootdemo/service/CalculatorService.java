@@ -16,10 +16,10 @@ public class CalculatorService {
         return num1 * num2;
     }
 
-    public double divide(double num1, double num2) {
-        if (Double.compare(num2, 0) == 0) {
+    public double divide(double dividend, double divisor) {
+        if (Double.compare(divisor, 0) == 0) {
             throw new ArithmeticException("Division by zero");
         }
-        return num1 / num2;
+        return dividend / divisor;
     }
 }
