@@ -17,6 +17,7 @@ public class InMemoryPeopleDAO implements IPeopleDAO
         people.add(new Person("Isabel Alonso", LocalDate.of(1972, 6, 6)));
         people.add(new Person("Facundo Loureiro", LocalDate.of(1992, 7, 5)));
         people.add(new Person("Israel Alonso", LocalDate.of(1980, 3, 10)));
+        people.add(new Person("Leonardo", LocalDate.of(1985, 5, 13)));
     }
 
     @Override
