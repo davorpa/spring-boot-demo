@@ -14,11 +14,11 @@ import java.util.Objects;
 
 @RestController()
 @RequestMapping("people")
-public class PeopleSearchController
+public class PeopleController
 {
     private IPeopleService peopleService;
 
-    public PeopleSearchController(
+    public PeopleController(
             final @Autowired PeopleService peopleService) {
         this.peopleService = Objects.requireNonNull(
                 peopleService, "peopleService must not be null");
