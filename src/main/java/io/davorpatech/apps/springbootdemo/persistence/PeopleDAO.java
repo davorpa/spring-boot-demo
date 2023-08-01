@@ -4,7 +4,7 @@ import io.davorpatech.apps.springbootdemo.model.Person;
 
 import java.util.List;
 
-public interface IPeopleDAO {
+public interface PeopleDAO {
     List<Person> findAll();
 
     Person persist(Person person);

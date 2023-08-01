@@ -1,6 +1,7 @@
-package io.davorpatech.apps.springbootdemo.persistence;
+package io.davorpatech.apps.springbootdemo.persistence.impl;
 
 import io.davorpatech.apps.springbootdemo.model.Person;
+import io.davorpatech.apps.springbootdemo.persistence.PeopleDAO;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Repository
-public class InMemoryPeopleDAO implements IPeopleDAO
+public class InMemoryPeopleDAO implements PeopleDAO
 {
     private final List<Person> people = new LinkedList<>();
 

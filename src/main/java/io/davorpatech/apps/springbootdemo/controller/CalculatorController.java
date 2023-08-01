@@ -1,6 +1,6 @@
 package io.davorpatech.apps.springbootdemo.controller;
 
-import io.davorpatech.apps.springbootdemo.service.CalculatorService;
+import io.davorpatech.apps.springbootdemo.service.impl.CalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,8 +1,8 @@
 package io.davorpatech.apps.springbootdemo.controller;
 
 import io.davorpatech.apps.springbootdemo.model.Person;
-import io.davorpatech.apps.springbootdemo.service.IPeopleService;
 import io.davorpatech.apps.springbootdemo.service.PeopleService;
+import io.davorpatech.apps.springbootdemo.service.impl.PeopleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ import java.util.Objects;
 @RequestMapping("people")
 public class PeopleController
 {
-    private IPeopleService peopleService;
+    private PeopleService peopleService;
 
     public PeopleController(
-            final @Autowired PeopleService peopleService) {
+            final @Autowired PeopleServiceImpl peopleService) {
         this.peopleService = Objects.requireNonNull(
                 peopleService, "peopleService must not be null");
     }
