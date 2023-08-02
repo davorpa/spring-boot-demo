@@ -1,9 +1,12 @@
 package io.davorpatech.apps.springbootdemo.model;
 
+import io.davorpatech.fwk.model.BaseValueObject;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Person {
+public class Person extends BaseValueObject
+{
     private String fullname;
 
     private LocalDate birthdate;
@@ -43,9 +46,8 @@ public class Person {
     }
 
     @Override
-    public String toString() {
-        return String.format(
-                "Person{fullname='%s', birthdate=%s, age=%s'}'",
+    protected String defineObjAttrs() {
+        return String.format("fullname='%s', birthdate=%s, age=%s",
                 getFullname(), getBirthdate(), getAge());
     }
 }
