@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 
 public class Person {
     private String fullname;
-    private String surnames;
 
     private LocalDate birthdate;
 
