@@ -3,7 +3,6 @@ package io.davorpatech.apps.springbootdemo.service.impl;
 import io.davorpatech.apps.springbootdemo.model.Person;
 import io.davorpatech.apps.springbootdemo.persistence.PeopleDAO;
 import io.davorpatech.apps.springbootdemo.service.PeopleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +16,7 @@ public class PeopleServiceImpl implements PeopleService
 {
     PeopleDAO peopleDAO;
 
-    public PeopleServiceImpl(
-            final @Autowired PeopleDAO peopleDAO) {
+    public PeopleServiceImpl(final PeopleDAO peopleDAO) {
         this.peopleDAO = Objects.requireNonNull(
                 peopleDAO, "peopleDAO must not be null!");
     }
