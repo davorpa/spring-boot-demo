@@ -48,6 +48,10 @@ public interface ServiceWriteOps<T, ID> // NOSONAR
 
     /**
      * Removes an existent record given it identifier.
+     * <p>
+     * If by chance the record identified by the given {@literal id}
+     * is not found, the operation is silently ignored following the
+     * normal flow of the system.
      *
      * @param id the identifier of record to remove, never {@code null}
      */

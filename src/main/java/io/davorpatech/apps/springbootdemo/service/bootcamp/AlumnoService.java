@@ -64,9 +64,9 @@ public interface AlumnoService // NOSONAR
      * Elimina alumnos por su clave natural
      * (documento nacional de indentidad).
      * <p>
-     * Aquellos registros que no se hayan podido encontrar por su {@literal nid},
-     * es como si ya no existieran, volviendo al flujo del programa
-     * silenciosamente.
+     * Si por casualidad no se encuentra el registro identificado por el
+     * {@literal nid} proporcionado, la operación se ignora silenciosamente
+     * siguiendo flujo normal del sistema.
      *
      * @param nids números de documento nacional de indentidad de los alumnos,
      *            nunca {@code null}.
