@@ -55,7 +55,7 @@ public class Clase extends BaseEntity<Long> // NOSONAR
     }
 
     public void setId(final Long id) {
-        this.id = Objects.requireNonNull(id, "id must not be null");
+        this.id = Objects.requireNonNull(id, "id must not be null!");
     }
 
     public String getCodigo() {
@@ -63,7 +63,7 @@ public class Clase extends BaseEntity<Long> // NOSONAR
     }
 
     public void setCodigo(final String codigo) {
-        this.codigo = Objects.requireNonNull(codigo, "codigo must not be null");
+        this.codigo = Objects.requireNonNull(codigo, "codigo must not be null!");
     }
 
     public String getNombre() {
@@ -71,7 +71,7 @@ public class Clase extends BaseEntity<Long> // NOSONAR
     }
 
     public void setNombre(final String nombre) {
-        this.nombre = Objects.requireNonNull(nombre, "nombre must not be null");
+        this.nombre = Objects.requireNonNull(nombre, "nombre must not be null!");
     }
 
     public Set<Asistencia> getAsistencias() {
@@ -79,17 +79,17 @@ public class Clase extends BaseEntity<Long> // NOSONAR
     }
 
     public void setAsistencias(final Set<Asistencia> asistencias) {
-        this.asistencias = Objects.requireNonNull(asistencias, "asistencias must not be null");
+        this.asistencias = Objects.requireNonNull(asistencias, "asistencias must not be null!");
     }
 
     public void addAsistencia(final Asistencia asistencia) {
-        Objects.requireNonNull(asistencia, "asistencia to add must not be null");
+        Objects.requireNonNull(asistencia, "asistencia to add must not be null!");
         asistencias.add(asistencia);
         asistencia.setClase(this);
     }
 
     public void removeAsistencia(final Asistencia asistencia) {
-        Objects.requireNonNull(asistencia, "asistencia to remove must not be null");
+        Objects.requireNonNull(asistencia, "asistencia to remove must not be null!");
         asistencias.remove(asistencia);
         asistencia.setClase(null);
     }

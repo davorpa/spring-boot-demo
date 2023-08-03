@@ -20,7 +20,7 @@ public class PeopleServiceImpl implements PeopleService
     public PeopleServiceImpl(
             final @Autowired PeopleDAO peopleDAO) {
         this.peopleDAO = Objects.requireNonNull(
-                peopleDAO, "peopleDAO must not be null");
+                peopleDAO, "peopleDAO must not be null!");
     }
 
     @Override

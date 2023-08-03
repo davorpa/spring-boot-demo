@@ -18,7 +18,7 @@ public class CalculatorController
     public CalculatorController(
             final @Autowired CalculatorService calculatorService) {
         this.calculatorService = Objects.requireNonNull(
-                calculatorService, "calculatorService must not be null");
+                calculatorService, "calculatorService must not be null!");
     }
 
     @GetMapping("add")

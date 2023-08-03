@@ -67,7 +67,7 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
     }
 
     public void setId(final Long id) {
-        this.id = Objects.requireNonNull(id, "id must not be null");
+        this.id = Objects.requireNonNull(id, "id must not be null!");
     }
 
     public Clase getClase() {
@@ -80,7 +80,7 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
     }
 
     public void setClase(final Clase clase) {
-        this.clase = Objects.requireNonNull(clase, "clase must not be null");
+        this.clase = Objects.requireNonNull(clase, "clase must not be null!");
     }
 
     public Alumno getAlumno() {
@@ -93,7 +93,7 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
     }
 
     public void setAlumno(final Alumno alumno) {
-        this.alumno = Objects.requireNonNull(alumno, "alumno must not be null");
+        this.alumno = Objects.requireNonNull(alumno, "alumno must not be null!");
     }
 
     public LocalDate getFecha() {
@@ -101,7 +101,7 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
     }
 
     public void setFecha(final LocalDate fecha) {
-        this.fecha = Objects.requireNonNull(fecha, "fecha must not be null");
+        this.fecha = Objects.requireNonNull(fecha, "fecha must not be null!");
     }
 
     public boolean isAsiste() {

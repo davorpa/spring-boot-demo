@@ -20,7 +20,7 @@ public class PeopleController
     public PeopleController(
             final @Autowired PeopleServiceImpl peopleService) {
         this.peopleService = Objects.requireNonNull(
-                peopleService, "peopleService must not be null");
+                peopleService, "peopleService must not be null!");
     }
 
     @GetMapping
