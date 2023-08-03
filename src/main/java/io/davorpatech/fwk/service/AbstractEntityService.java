@@ -51,7 +51,7 @@ public abstract class AbstractEntityService<T extends Entitier<ID>, ID extends S
 
 
     /**
-     * Gets the repository used to manage the data of this domain entity service.
+     * Gets the repository that handles the data of this domain entity service.
      *
      * @return the JPA repository
      */
