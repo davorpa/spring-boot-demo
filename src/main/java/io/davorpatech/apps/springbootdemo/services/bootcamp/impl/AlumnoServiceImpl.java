@@ -22,7 +22,7 @@ public class AlumnoServiceImpl
         extends AbstractCrudEntityService<Alumno, Long>
         implements AlumnoService
 {
-    private AlumnoRepository alumnoRepository;
+    private final AlumnoRepository alumnoRepository;
 
     public AlumnoServiceImpl(final AlumnoRepository alumnoRepository) {
         this.alumnoRepository = Objects.requireNonNull(

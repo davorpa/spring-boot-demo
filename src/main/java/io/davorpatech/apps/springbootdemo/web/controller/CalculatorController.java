@@ -12,7 +12,7 @@ import java.util.Objects;
 @RequestMapping("calculator")
 public class CalculatorController
 {
-    private CalculatorService calculatorService;
+    private final CalculatorService calculatorService;
 
     public CalculatorController(final CalculatorService calculatorService) {
         this.calculatorService = Objects.requireNonNull(
