@@ -2,7 +2,6 @@ package io.davorpatech.apps.springbootdemo.controller;
 
 import io.davorpatech.apps.springbootdemo.model.Person;
 import io.davorpatech.apps.springbootdemo.service.PeopleService;
-import io.davorpatech.apps.springbootdemo.service.impl.PeopleServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class PeopleController
 {
     private PeopleService peopleService;
 
-    public PeopleController(final PeopleServiceImpl peopleService) {
+    public PeopleController(final PeopleService peopleService) {
         this.peopleService = Objects.requireNonNull(
                 peopleService, "peopleService must not be null!");
     }
