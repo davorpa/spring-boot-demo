@@ -26,6 +26,7 @@ public class Alumno extends BaseEntity<Long> // NOSONAR
     @SequenceGenerator(
             name = "bootcamp_alumno_generator", sequenceName = "bootcamp_alumno_seq",
             initialValue = 1, allocationSize = 50)
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private Long id;
 
     @NaturalId(mutable = false)

@@ -25,6 +25,7 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
     @SequenceGenerator(
             name = "bootcamp_asistencia_generator", sequenceName = "bootcamp_asistencia_seq",
             initialValue = 1, allocationSize = 50)
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
