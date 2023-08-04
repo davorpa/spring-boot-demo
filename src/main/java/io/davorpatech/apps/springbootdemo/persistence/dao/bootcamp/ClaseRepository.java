@@ -26,7 +26,8 @@ public interface ClaseRepository extends JpaRepository<Clase, Long>
      * @return nunca {@code null}, {@literal Optional.empty()} si el
      *         registro no existe.
      */
-    Optional<Clase> findByCodigo(@NonNull String codigo);
+    Optional<Clase> findByCodigo(
+            @NonNull String codigo);
 
     /**
      * Comprueba si una clase existe dada su clave natural
@@ -36,7 +37,8 @@ public interface ClaseRepository extends JpaRepository<Clase, Long>
      *            nunca {@code null}.
      * @return @{@code true} si existe
      */
-    boolean existsByCodigo(@NonNull String codigo);
+    boolean existsByCodigo(
+            @NonNull String codigo);
 
     /**
      * Busca todos las clases por sus claves naturales
@@ -50,7 +52,8 @@ public interface ClaseRepository extends JpaRepository<Clase, Long>
      * @return la lista de registros, nunca {@code null}.
      */
     @Query("SELECT e FROM #{#entityName} e WHERE e.codigo IN ?1")
-    List<Clase> findAllByCodigo(@NonNull Iterable<String> codigos);
+    List<Clase> findAllByCodigo(
+            @NonNull Iterable<String> codigos);
 
     /**
      * Elimina una clase por su clave natural
@@ -64,7 +67,8 @@ public interface ClaseRepository extends JpaRepository<Clase, Long>
     @Transactional
     @Modifying
     @Query("DELETE FROM #{#entityName} e WHERE e.codigo = ?1")
-    void deleteByCodigo(@NonNull String codigo);
+    void deleteByCodigo(
+            @NonNull String codigo);
 
     /**
      * Elimina clases por su clave natural
@@ -79,5 +83,6 @@ public interface ClaseRepository extends JpaRepository<Clase, Long>
     @Transactional
     @Modifying
     @Query("DELETE FROM #{#entityName} e WHERE e.codigo IN ?1")
-    void deleteAllByCodigo(@NonNull Iterable<String> codigos);
+    void deleteAllByCodigo(
+            @NonNull Iterable<String> codigos);
 }

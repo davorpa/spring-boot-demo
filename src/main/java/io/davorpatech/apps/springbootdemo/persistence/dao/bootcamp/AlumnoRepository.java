@@ -26,7 +26,8 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>
      * @return nunca {@code null}, {@literal Optional.empty()} si el
      *         registro no existe.
      */
-    Optional<Alumno> findByNid(@NonNull String nid);
+    Optional<Alumno> findByNid(
+            @NonNull String nid);
 
     /**
      * Comprueba si un alumno existe dada su clave natural
@@ -36,7 +37,8 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>
      *            nunca {@code null}.
      * @return @{@code true} si existe
      */
-    boolean existsByNid(@NonNull String nid);
+    boolean existsByNid(
+            @NonNull String nid);
 
     /**
      * Busca todos los alumnos dadas sus claves naturales
@@ -51,7 +53,8 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>
      * @return la lista de registros, nunca {@code null}.
      */
     @Query("SELECT e FROM #{#entityName} e WHERE e.nid IN ?1")
-    List<Alumno> findAllByNid(@NonNull Iterable<String> nids);
+    List<Alumno> findAllByNid(
+            @NonNull Iterable<String> nids);
 
     /**
      * Elimina un alumno por su clave natural
@@ -66,7 +69,8 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>
     @Transactional
     @Modifying
     @Query("DELETE FROM #{#entityName} e WHERE e.nid = ?1")
-    void deleteByNid(@NonNull String nid);
+    void deleteByNid(
+            @NonNull String nid);
 
     /**
      * Elimina alumnos por su clave natural
@@ -82,5 +86,6 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long>
     @Transactional
     @Modifying
     @Query("DELETE FROM #{#entityName} e WHERE e.nid IN ?1")
-    void deleteAllByNid(@NonNull Iterable<String> nids);
+    void deleteAllByNid(
+            @NonNull Iterable<String> nids);
 }

@@ -39,30 +39,36 @@ public class Clase extends BaseEntity<Long> // NOSONAR
     @OrderBy("alumno.id ASC, fecha ASC")
     private Set<Asistencia> asistencias = new LinkedHashSet<>();
 
-    public Clase() {
+    public Clase()
+    {
         super();
     }
 
-    public Clase(final String codigo, final String nombre) {
+    public Clase(final String codigo, final String nombre)
+    {
         super();
         setCodigo(codigo);
         setNombre(nombre);
     }
 
     @Override
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
-    public void setId(final Long id) {
+    public void setId(final Long id)
+    {
         this.id = Objects.requireNonNull(id, "id must not be null!");
     }
 
-    public String getCodigo() {
+    public String getCodigo()
+    {
         return codigo;
     }
 
-    public void setCodigo(final String codigo) {
+    public void setCodigo(final String codigo)
+    {
         this.codigo = Objects.requireNonNull(codigo, "codigo must not be null!");
     }
 
@@ -70,31 +76,37 @@ public class Clase extends BaseEntity<Long> // NOSONAR
         return nombre;
     }
 
-    public void setNombre(final String nombre) {
+    public void setNombre(final String nombre)
+    {
         this.nombre = Objects.requireNonNull(nombre, "nombre must not be null!");
     }
 
-    public Set<Asistencia> getAsistencias() {
+    public Set<Asistencia> getAsistencias()
+    {
         return Set.copyOf(asistencias);
     }
 
-    public void setAsistencias(final Set<Asistencia> asistencias) {
+    public void setAsistencias(final Set<Asistencia> asistencias)
+    {
         this.asistencias = Objects.requireNonNull(asistencias, "asistencias must not be null!");
     }
 
-    public void addAsistencia(final Asistencia asistencia) {
+    public void addAsistencia(final Asistencia asistencia)
+    {
         Objects.requireNonNull(asistencia, "asistencia to add must not be null!");
         asistencias.add(asistencia);
         asistencia.setClase(this);
     }
 
-    public void removeAsistencia(final Asistencia asistencia) {
+    public void removeAsistencia(final Asistencia asistencia)
+    {
         Objects.requireNonNull(asistencia, "asistencia to remove must not be null!");
         asistencias.remove(asistencia);
         asistencia.setClase(null);
     }
 
-    public Set<Alumno> getAlumnos() {
+    public Set<Alumno> getAlumnos()
+    {
         return this.asistencias
                 .stream()
                 .map(Asistencia::getAlumno)
@@ -102,7 +114,8 @@ public class Clase extends BaseEntity<Long> // NOSONAR
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(final Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Clase other = (Clase) o;
@@ -110,12 +123,14 @@ public class Clase extends BaseEntity<Long> // NOSONAR
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(codigo);
     }
 
     @Override
-    protected String defineObjAttrs() {
+    protected String defineObjAttrs()
+    {
         return String.format("id=%s, codigo='%s', nombre='%s', asistencias=%s, alumnos=%s",
                 id, codigo, nombre, asistencias.size(), getAlumnos().size());
     }

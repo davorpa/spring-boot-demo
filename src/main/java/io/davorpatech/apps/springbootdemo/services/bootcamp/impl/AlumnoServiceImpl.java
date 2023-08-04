@@ -24,38 +24,51 @@ public class AlumnoServiceImpl
 {
     private final AlumnoRepository alumnoRepository;
 
-    public AlumnoServiceImpl(final AlumnoRepository alumnoRepository) {
+    public AlumnoServiceImpl(
+            final AlumnoRepository alumnoRepository)
+    {
         this.alumnoRepository = Objects.requireNonNull(
                 alumnoRepository, "alumnoRepository must not be null!");
     }
 
     @Override
-    protected AlumnoRepository getRepository() {
+    protected AlumnoRepository getRepository()
+    {
         return this.alumnoRepository;
     }
 
     @Override
-    public Optional<Alumno> findByNid(final @NonNull String nid) {
+    public Optional<Alumno> findByNid(
+            final @NonNull String nid)
+    {
         return alumnoRepository.findByNid(nid);
     }
 
     @Override
-    public boolean existsByNid(final @NonNull String nid) {
+    public boolean existsByNid(
+            final @NonNull String nid)
+    {
         return alumnoRepository.existsByNid(nid);
     }
 
     @Override
-    public List<Alumno> findAllByNid(final @NonNull Iterable<String> nids) {
+    public List<Alumno> findAllByNid(
+            final @NonNull Iterable<String> nids)
+    {
         return alumnoRepository.findAllByNid(nids);
     }
 
     @Override
-    public void deleteByNid(final @NonNull String nid) {
+    public void deleteByNid(
+            final @NonNull String nid)
+    {
         alumnoRepository.deleteByNid(nid);
     }
 
     @Override
-    public void deleteAllByNid(final @NonNull Iterable<String> nids) {
+    public void deleteAllByNid(
+            final @NonNull Iterable<String> nids)
+    {
         alumnoRepository.deleteAllByNid(nids);
     }
 }

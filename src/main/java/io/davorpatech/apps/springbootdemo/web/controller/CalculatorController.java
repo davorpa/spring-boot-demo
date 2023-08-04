@@ -14,7 +14,8 @@ public class CalculatorController
 {
     private final CalculatorService calculatorService;
 
-    public CalculatorController(final CalculatorService calculatorService) {
+    public CalculatorController(final CalculatorService calculatorService)
+    {
         this.calculatorService = Objects.requireNonNull(
                 calculatorService, "calculatorService must not be null!");
     }
@@ -22,28 +23,32 @@ public class CalculatorController
     @GetMapping("add")
     public double add(
             @RequestParam double num1,
-            @RequestParam double num2) {
+            @RequestParam double num2)
+    {
         return calculatorService.add(num1, num2);
     }
 
     @GetMapping("substract")
     public double substract(
             @RequestParam double num1,
-            @RequestParam double num2) {
+            @RequestParam double num2)
+    {
         return calculatorService.substract(num1, num2);
     }
 
     @GetMapping("multiply")
     public double multiply(
             @RequestParam double num1,
-            @RequestParam double num2) {
+            @RequestParam double num2)
+    {
         return calculatorService.multiply(num1, num2);
     }
 
     @GetMapping("divide")
     public double divide(
             @RequestParam double dividend,
-            @RequestParam double divisor) {
+            @RequestParam double divisor)
+    {
         return calculatorService.divide(dividend, divisor);
     }
 }

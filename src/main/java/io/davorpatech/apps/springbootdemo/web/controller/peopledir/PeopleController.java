@@ -15,29 +15,33 @@ public class PeopleController
 {
     private final PeopleService peopleService;
 
-    public PeopleController(final PeopleService peopleService) {
+    public PeopleController(final PeopleService peopleService)
+    {
         this.peopleService = Objects.requireNonNull(
                 peopleService, "peopleService must not be null!");
     }
 
     @GetMapping
-    public List<Person> listAll() {
+    public List<Person> listAll()
+    {
         return peopleService.findAll();
     }
 
     @GetMapping("search")
     public List<Person> search(
             @RequestParam(required = false) String initial,
-            @RequestParam(required = false) Long age) {
+            @RequestParam(required = false) Long age)
+    {
         return peopleService.findAllBySurnameInitialAndAge(initial, age);
     }
 
     @PostMapping
     public ResponseEntity<Person> create(
-            @RequestBody Person person) {
+            @RequestBody Person person)
+    {
         person = peopleService.create(person);
         return new ResponseEntity<>(person, HttpStatus.CREATED);
-        /* TODO: Provide 201 REST location url on create
+        /* TODO: Provide 201 REST location url for CREATED response
         return ResponseEntity
                 .created(ServletUriComponentsBuilder
                         .fromCurrentRequest()

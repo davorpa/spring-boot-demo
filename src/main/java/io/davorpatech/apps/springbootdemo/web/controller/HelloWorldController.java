@@ -7,17 +7,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController
 {
     @GetMapping
-    public String index() {
+    public String index()
+    {
         return "Hello World!";
     }
 
     @GetMapping("salute")
-    public String salute() {
+    public String salute()
+    {
         return "Kaixo!";
     }
 
     @GetMapping("farewell")
-    public String farewell() {
+    public String farewell()
+    {
         return "さようなら!";
     }
 }

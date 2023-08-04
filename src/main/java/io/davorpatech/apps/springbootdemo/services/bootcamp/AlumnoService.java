@@ -22,7 +22,8 @@ public interface AlumnoService // NOSONAR
      * @return nunca {@code null}, {@literal Optional.empty()} si el
      *         registro no existe.
      */
-    Optional<Alumno> findByNid(@NonNull String nid);
+    Optional<Alumno> findByNid(
+            @NonNull String nid);
 
     /**
      * Comprueba si un alumno existe dada su clave natural
@@ -32,7 +33,8 @@ public interface AlumnoService // NOSONAR
      *            nunca {@code null}.
      * @return @{@code true} si existe
      */
-    boolean existsByNid(@NonNull String nid);
+    boolean existsByNid(
+            @NonNull String nid);
 
     /**
      * Busca todos los alumnos dadas sus claves naturales
@@ -46,7 +48,8 @@ public interface AlumnoService // NOSONAR
      *             los alumnos, nunca {@code null}.
      * @return la lista de registros, nunca {@code null}.
      */
-    List<Alumno> findAllByNid(@NonNull Iterable<String> nids);
+    List<Alumno> findAllByNid(
+            @NonNull Iterable<String> nids);
 
     /**
      * Elimina un alumno por su clave natural
@@ -58,7 +61,8 @@ public interface AlumnoService // NOSONAR
      * @param nid número de documento nacional de indentidad del alumno,
      *            nunca {@code null}.
      */
-    void deleteByNid(@NonNull String nid);
+    void deleteByNid(
+            @NonNull String nid);
 
     /**
      * Elimina alumnos por su clave natural
@@ -71,5 +75,6 @@ public interface AlumnoService // NOSONAR
      * @param nids números de documento nacional de indentidad de los alumnos,
      *            nunca {@code null}.
      */
-    void deleteAllByNid(@NonNull Iterable<String> nids);
+    void deleteAllByNid(
+            @NonNull Iterable<String> nids);
 }

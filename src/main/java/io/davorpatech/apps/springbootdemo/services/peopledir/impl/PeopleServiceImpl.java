@@ -16,20 +16,23 @@ public class PeopleServiceImpl implements PeopleService
 {
     private final PeopleDao peopleDao;
 
-    public PeopleServiceImpl(final PeopleDao peopleDao) {
+    public PeopleServiceImpl(final PeopleDao peopleDao)
+    {
         this.peopleDao = Objects.requireNonNull(
                 peopleDao, "peopleDao must not be null!");
     }
 
     @Override
-    public List<Person> findAll() {
+    public List<Person> findAll()
+    {
         return peopleDao.findAll();
     }
 
     @Override
     public List<Person> findAllBySurnameInitialAndAge(
             final @Nullable String initial,
-            final @Nullable Long age) {
+            final @Nullable Long age)
+    {
         Predicate<Person> predicate = p -> true;
         if (initial != null) {
             predicate = predicate.and(p -> {
@@ -51,7 +54,8 @@ public class PeopleServiceImpl implements PeopleService
 
     @Override
     public Person create(
-            final Person person) {
+            final Person person)
+    {
         return peopleDao.persist(person);
     }
 }

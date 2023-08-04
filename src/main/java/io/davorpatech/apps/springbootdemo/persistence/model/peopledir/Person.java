@@ -11,43 +11,51 @@ public class Person extends BaseValueObject
 
     private LocalDate birthdate;
 
-    public Person(String fullname, LocalDate birthdate) {
+    public Person(String fullname, LocalDate birthdate)
+    {
         setFullname(fullname);
         setBirthdate(birthdate);
     }
 
-    public String getFullname() {
+    public String getFullname()
+    {
         return fullname;
     }
 
-    public String extractSurname() {
+    public String extractSurname()
+    {
         if (fullname == null) return null;
         String name = getFullname().trim();
         int index = name.indexOf(" ");
         return index < 0 ? name : name.substring(index);
     }
 
-    public void setFullname(String fullname) {
+    public void setFullname(String fullname)
+    {
         this.fullname = fullname;
     }
 
-    public LocalDate getBirthdate() {
+    public LocalDate getBirthdate()
+    {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(LocalDate birthdate)
+    {
         this.birthdate = birthdate;
     }
 
-    public long getAge() {
+    public long getAge()
+    {
         LocalDate date = getBirthdate();
         if (date == null) return -1;
         return ChronoUnit.YEARS.between(date, LocalDate.now());
     }
 
     @Override
-    protected String defineObjAttrs() {
+    protected String defineObjAttrs()
+    {
         return String.format("fullname='%s', birthdate=%s, age=%s",
-                getFullname(), getBirthdate(), getAge());
+                fullname, birthdate, getAge());
     }
 }

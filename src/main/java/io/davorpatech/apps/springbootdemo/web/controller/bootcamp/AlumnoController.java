@@ -20,20 +20,23 @@ public class AlumnoController
 {
     private AlumnoService alumnoService;
 
-    public AlumnoController(final AlumnoService alumnoService) {
+    public AlumnoController(final AlumnoService alumnoService)
+    {
         this.alumnoService = Objects.requireNonNull(
                 alumnoService, "alumnoService must not be null!");
     }
 
     @GetMapping
-    public List<Alumno> list() {
+    public List<Alumno> list()
+    {
         // TODO: Apply Entity-2-Dto conversion
         return alumnoService.findAll();
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Alumno> retrieveById(
-            final @PathVariable("id") Long id) {
+            final @PathVariable("id") Long id)
+    {
         Optional<Alumno> entity = alumnoService.findById(id);
         // TODO: Apply Entity-2-Dto conversion
         return entity.map(ResponseEntity::ok)
@@ -42,7 +45,8 @@ public class AlumnoController
 
     @GetMapping(value = "nid.{id}")
     public ResponseEntity<Alumno> retrieveByNid(
-            final @PathVariable("id") String nid) {
+            final @PathVariable("id") String nid)
+    {
         Optional<Alumno> entity = alumnoService.findByNid(nid);
         // TODO: Apply Entity-2-Dto conversion
         return entity.map(ResponseEntity::ok)
@@ -51,7 +55,8 @@ public class AlumnoController
 
     @PostMapping
     public ResponseEntity<Alumno> create(
-            final @RequestBody @Valid Alumno body) {
+            final @RequestBody @Valid Alumno body)
+    {
         // TODO: Apply Dto-2-Entity conversion
         Alumno entity = alumnoService.create(body);
         // TODO: Apply Entity-2-Dto conversion
@@ -66,7 +71,8 @@ public class AlumnoController
     @PutMapping("{id}")
     public Alumno update(
             final @PathVariable("id") Long id,
-            final @RequestBody @Valid Alumno body) {
+            final @RequestBody @Valid Alumno body)
+    {
         if (!id.equals(body.getId())) {
             throw new IllegalArgumentException("update.id not matches update.body.id");
         }
@@ -79,7 +85,8 @@ public class AlumnoController
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(
-            final @PathVariable("id") Long id) {
+            final @PathVariable("id") Long id)
+    {
         alumnoService.deleteById(id);
     }
 }
