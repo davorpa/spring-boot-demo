@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -60,11 +61,15 @@ public class AlumnoController
         // TODO: Apply Dto-2-Entity conversion
         Alumno entity = alumnoService.create(body);
         // TODO: Apply Entity-2-Dto conversion
-        return ResponseEntity.created(
-                    ServletUriComponentsBuilder.fromCurrentRequest()
-                        .path("/{id}")
-                        .buildAndExpand(entity.getId())
-                        .toUri())
+
+        // Compose URI Location of the retrieve endpoint for this created resource
+        final URI createdResourceLocationUri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(entity.getId())
+                .toUri();
+        // build response entity providing URI and body of the created resource
+        return ResponseEntity
+                .created(createdResourceLocationUri)
                 .body(entity);
     }
 
