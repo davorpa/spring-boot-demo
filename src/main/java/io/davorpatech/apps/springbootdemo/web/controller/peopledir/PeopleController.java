@@ -37,7 +37,7 @@ public class PeopleController
             @RequestBody Person person) {
         person = peopleService.create(person);
         return new ResponseEntity<>(person, HttpStatus.CREATED);
-        /**
+        /* TODO: Provide 201 REST location url on create
         return ResponseEntity
                 .created(ServletUriComponentsBuilder
                         .fromCurrentRequest()
