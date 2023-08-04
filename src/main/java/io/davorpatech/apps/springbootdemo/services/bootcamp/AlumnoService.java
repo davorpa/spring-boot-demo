@@ -1,6 +1,6 @@
-package io.davorpatech.apps.springbootdemo.service.bootcamp;
+package io.davorpatech.apps.springbootdemo.services.bootcamp;
 
-import io.davorpatech.apps.springbootdemo.model.bootcamp.Alumno;
+import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Alumno;
 import io.davorpatech.fwk.service.CrudEntityService;
 import org.springframework.lang.NonNull;
 

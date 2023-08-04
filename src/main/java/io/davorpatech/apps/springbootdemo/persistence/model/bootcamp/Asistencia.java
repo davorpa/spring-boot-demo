@@ -1,4 +1,4 @@
-package io.davorpatech.apps.springbootdemo.model.bootcamp;
+package io.davorpatech.apps.springbootdemo.persistence.model.bootcamp;
 
 import io.davorpatech.fwk.model.BaseEntity;
 

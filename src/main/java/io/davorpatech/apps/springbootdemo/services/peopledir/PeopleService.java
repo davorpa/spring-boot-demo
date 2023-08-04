@@ -1,6 +1,6 @@
-package io.davorpatech.apps.springbootdemo.service;
+package io.davorpatech.apps.springbootdemo.services.peopledir;
 
-import io.davorpatech.apps.springbootdemo.model.Person;
+import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
 
 import java.util.List;
 

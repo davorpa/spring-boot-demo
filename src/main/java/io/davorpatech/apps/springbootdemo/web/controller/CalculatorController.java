@@ -1,6 +1,6 @@
-package io.davorpatech.apps.springbootdemo.controller;
+package io.davorpatech.apps.springbootdemo.web.controller;
 
-import io.davorpatech.apps.springbootdemo.service.impl.CalculatorService;
+import io.davorpatech.apps.springbootdemo.services.CalculatorService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

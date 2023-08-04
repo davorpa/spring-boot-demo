@@ -1,4 +1,4 @@
-package io.davorpatech.apps.springbootdemo.model;
+package io.davorpatech.apps.springbootdemo.persistence.model.peopledir;
 
 import io.davorpatech.fwk.model.BaseValueObject;
 

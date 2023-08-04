@@ -1,8 +1,8 @@
-package io.davorpatech.apps.springbootdemo.service.impl;
+package io.davorpatech.apps.springbootdemo.services.peopledir.impl;
 
-import io.davorpatech.apps.springbootdemo.model.Person;
-import io.davorpatech.apps.springbootdemo.persistence.PeopleDAO;
-import io.davorpatech.apps.springbootdemo.service.PeopleService;
+import io.davorpatech.apps.springbootdemo.persistence.dao.peopledir.PeopleDao;
+import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
+import io.davorpatech.apps.springbootdemo.services.peopledir.PeopleService;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +14,16 @@ import java.util.stream.Collectors;
 @Service
 public class PeopleServiceImpl implements PeopleService
 {
-    PeopleDAO peopleDAO;
+    PeopleDao peopleDao;
 
-    public PeopleServiceImpl(final PeopleDAO peopleDAO) {
-        this.peopleDAO = Objects.requireNonNull(
-                peopleDAO, "peopleDAO must not be null!");
+    public PeopleServiceImpl(final PeopleDao peopleDao) {
+        this.peopleDao = Objects.requireNonNull(
+                peopleDao, "peopleDao must not be null!");
     }
 
     @Override
     public List<Person> findAll() {
-        return peopleDAO.findAll();
+        return peopleDao.findAll();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PeopleServiceImpl implements PeopleService
         if (age != null) {
             predicate = predicate.and(p -> Long.compare(age, p.getAge()) == 0);
         }
-        return peopleDAO.findAll()
+        return peopleDao.findAll()
                 .stream()
                 .filter(predicate)
                 .collect(Collectors.toList());
@@ -52,6 +52,6 @@ public class PeopleServiceImpl implements PeopleService
     @Override
     public Person create(
             final Person person) {
-        return peopleDAO.persist(person);
+        return peopleDao.persist(person);
     }
 }

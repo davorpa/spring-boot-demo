@@ -1,6 +1,6 @@
-package io.davorpatech.apps.springbootdemo.persistence.bootcamp;
+package io.davorpatech.apps.springbootdemo.persistence.dao.bootcamp;
 
-import io.davorpatech.apps.springbootdemo.model.bootcamp.Alumno;
+import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Alumno;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

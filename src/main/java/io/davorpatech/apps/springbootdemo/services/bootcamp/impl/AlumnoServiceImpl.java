@@ -1,8 +1,8 @@
-package io.davorpatech.apps.springbootdemo.service.bootcamp.impl;
+package io.davorpatech.apps.springbootdemo.services.bootcamp.impl;
 
-import io.davorpatech.apps.springbootdemo.model.bootcamp.Alumno;
-import io.davorpatech.apps.springbootdemo.persistence.bootcamp.AlumnoRepository;
-import io.davorpatech.apps.springbootdemo.service.bootcamp.AlumnoService;
+import io.davorpatech.apps.springbootdemo.persistence.dao.bootcamp.AlumnoRepository;
+import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Alumno;
+import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
 import io.davorpatech.fwk.service.AbstractCrudEntityService;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
-package io.davorpatech.apps.springbootdemo.controller;
+package io.davorpatech.apps.springbootdemo.web.controller.peopledir;
 
-import io.davorpatech.apps.springbootdemo.model.Person;
-import io.davorpatech.apps.springbootdemo.service.PeopleService;
+import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
+import io.davorpatech.apps.springbootdemo.services.peopledir.PeopleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

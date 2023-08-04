@@ -1,7 +1,7 @@
-package io.davorpatech.apps.springbootdemo.controller.bootcamp;
+package io.davorpatech.apps.springbootdemo.web.controller.bootcamp;
 
-import io.davorpatech.apps.springbootdemo.model.bootcamp.Alumno;
-import io.davorpatech.apps.springbootdemo.service.bootcamp.AlumnoService;
+import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Alumno;
+import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +27,7 @@ public class AlumnoController
 
     @GetMapping
     public List<Alumno> list() {
+        // TODO: Apply Entity-2-Dto conversion
         return alumnoService.findAll();
     }
 
@@ -34,6 +35,7 @@ public class AlumnoController
     public ResponseEntity<Alumno> retrieveById(
             final @PathVariable("id") Long id) {
         Optional<Alumno> entity = alumnoService.findById(id);
+        // TODO: Apply Entity-2-Dto conversion
         return entity.map(ResponseEntity::ok)
                 .orElseGet(ResponseEntity.notFound()::build);
     }
@@ -42,6 +44,7 @@ public class AlumnoController
     public ResponseEntity<Alumno> retrieveByNid(
             final @PathVariable("id") String nid) {
         Optional<Alumno> entity = alumnoService.findByNid(nid);
+        // TODO: Apply Entity-2-Dto conversion
         return entity.map(ResponseEntity::ok)
                 .orElseGet(ResponseEntity.notFound()::build);
     }
@@ -49,7 +52,9 @@ public class AlumnoController
     @PostMapping
     public ResponseEntity<Alumno> create(
             final @RequestBody @Valid Alumno body) {
+        // TODO: Apply Dto-2-Entity conversion
         Alumno entity = alumnoService.create(body);
+        // TODO: Apply Entity-2-Dto conversion
         return ResponseEntity.created(
                     ServletUriComponentsBuilder.fromCurrentRequest()
                         .path("/{id}")
@@ -61,11 +66,13 @@ public class AlumnoController
     @PutMapping("{id}")
     public Alumno update(
             final @PathVariable("id") Long id,
-            final @RequestBody Alumno body) {
+            final @RequestBody @Valid Alumno body) {
         if (!id.equals(body.getId())) {
             throw new IllegalArgumentException("update.id not matches update.body.id");
         }
+        // TODO: Apply Dto-2-Entity conversion
         Alumno entity = alumnoService.update(body);
+        // TODO: Apply Entity-2-Dto conversion
         return entity;
     }
 

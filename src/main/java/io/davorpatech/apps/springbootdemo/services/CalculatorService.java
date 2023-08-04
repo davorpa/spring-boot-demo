@@ -1,4 +1,4 @@
-package io.davorpatech.apps.springbootdemo.service.impl;
+package io.davorpatech.apps.springbootdemo.services;
 
 import org.springframework.stereotype.Service;
 

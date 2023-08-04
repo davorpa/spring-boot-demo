@@ -1,7 +1,7 @@
-package io.davorpatech.apps.springbootdemo.persistence.impl;
+package io.davorpatech.apps.springbootdemo.persistence.dao.peopledir.impl;
 
-import io.davorpatech.apps.springbootdemo.model.Person;
-import io.davorpatech.apps.springbootdemo.persistence.PeopleDAO;
+import io.davorpatech.apps.springbootdemo.persistence.dao.peopledir.PeopleDao;
+import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -9,11 +9,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Repository
-public class InMemoryPeopleDAO implements PeopleDAO
+public class InMemoryPeopleDao implements PeopleDao
 {
     private final List<Person> people = new LinkedList<>();
 
-    public InMemoryPeopleDAO() {
+    public InMemoryPeopleDao() {
         people.add(new Person("            ", LocalDate.of(1983, 7, 18)));
         people.add(new Person("David Lawson", LocalDate.of(1983, 5, 24)));
         people.add(new Person("Lola Farrel", LocalDate.of(1950, 4, 30)));
