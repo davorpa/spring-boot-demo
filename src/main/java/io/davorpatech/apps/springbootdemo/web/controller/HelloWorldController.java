@@ -12,13 +12,13 @@ public class HelloWorldController
         return "Hello World!";
     }
 
-    @GetMapping("salute")
+    @GetMapping("/salute")
     public String salute()
     {
         return "Kaixo!";
     }
 
-    @GetMapping("farewell")
+    @GetMapping("/farewell")
     public String farewell()
     {
         return "さようなら!";

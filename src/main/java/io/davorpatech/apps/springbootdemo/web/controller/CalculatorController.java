@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("calculator")
+@RequestMapping("/calculator")
 public class CalculatorController
 {
     private final CalculatorService calculatorService;
@@ -20,7 +20,7 @@ public class CalculatorController
                 calculatorService, "calculatorService must not be null!");
     }
 
-    @GetMapping("add")
+    @GetMapping("/add")
     public double add(
             @RequestParam double num1,
             @RequestParam double num2)
@@ -28,7 +28,7 @@ public class CalculatorController
         return calculatorService.add(num1, num2);
     }
 
-    @GetMapping("substract")
+    @GetMapping("/substract")
     public double substract(
             @RequestParam double num1,
             @RequestParam double num2)
@@ -36,7 +36,7 @@ public class CalculatorController
         return calculatorService.substract(num1, num2);
     }
 
-    @GetMapping("multiply")
+    @GetMapping("/multiply")
     public double multiply(
             @RequestParam double num1,
             @RequestParam double num2)
@@ -44,7 +44,7 @@ public class CalculatorController
         return calculatorService.multiply(num1, num2);
     }
 
-    @GetMapping("divide")
+    @GetMapping("/divide")
     public double divide(
             @RequestParam double dividend,
             @RequestParam double divisor)

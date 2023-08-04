@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("people")
+@RequestMapping("/people")
 public class PeopleController
 {
     private final PeopleService peopleService;
@@ -27,7 +27,7 @@ public class PeopleController
         return peopleService.findAll();
     }
 
-    @GetMapping("search")
+    @GetMapping("/search")
     public List<Person> search(
             @RequestParam(required = false) String initial,
             @RequestParam(required = false) Long age)

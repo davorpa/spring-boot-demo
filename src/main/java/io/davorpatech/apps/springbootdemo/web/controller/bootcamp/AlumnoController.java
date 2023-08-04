@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("bootcamp/alumnos")
+@RequestMapping("/bootcamp/alumnos")
 @Validated
 public class AlumnoController
 {
@@ -33,7 +33,7 @@ public class AlumnoController
         return alumnoService.findAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Alumno> retrieveById(
             final @PathVariable("id") Long id)
     {
@@ -43,7 +43,7 @@ public class AlumnoController
                 .orElseGet(ResponseEntity.notFound()::build);
     }
 
-    @GetMapping(value = "nid.{id}")
+    @GetMapping("/nid.{id}")
     public ResponseEntity<Alumno> retrieveByNid(
             final @PathVariable("id") String nid)
     {
@@ -68,7 +68,7 @@ public class AlumnoController
                 .body(entity);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public Alumno update(
             final @PathVariable("id") Long id,
             final @RequestBody @Valid Alumno body)
@@ -82,7 +82,7 @@ public class AlumnoController
         return entity;
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(
             final @PathVariable("id") Long id)
