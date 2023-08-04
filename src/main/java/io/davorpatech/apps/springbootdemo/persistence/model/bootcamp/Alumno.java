@@ -106,7 +106,7 @@ public class Alumno extends BaseEntity<Long> // NOSONAR
     {
         Objects.requireNonNull(asistencia, "asistencia to remove must not be null!");
         asistencias.remove(asistencia);
-        asistencia.setAlumno(null);
+        asistencia.unsetAlumno();
     }
 
     public Set<Clase> getClases()

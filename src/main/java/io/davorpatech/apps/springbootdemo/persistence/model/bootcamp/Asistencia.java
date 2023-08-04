@@ -90,6 +90,11 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
         this.clase = Objects.requireNonNull(clase, "clase must not be null!");
     }
 
+    void unsetClase()
+    {
+        this.clase = null;
+    }
+
     public Alumno getAlumno()
     {
         return alumno;
@@ -104,6 +109,11 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
     public void setAlumno(final Alumno alumno)
     {
         this.alumno = Objects.requireNonNull(alumno, "alumno must not be null!");
+    }
+
+    void unsetAlumno()
+    {
+        this.alumno = null;
     }
 
     public LocalDate getFecha()

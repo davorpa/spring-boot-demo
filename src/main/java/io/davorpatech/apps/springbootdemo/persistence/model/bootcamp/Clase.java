@@ -72,7 +72,8 @@ public class Clase extends BaseEntity<Long> // NOSONAR
         this.codigo = Objects.requireNonNull(codigo, "codigo must not be null!");
     }
 
-    public String getNombre() {
+    public String getNombre()
+    {
         return nombre;
     }
 
@@ -102,7 +103,7 @@ public class Clase extends BaseEntity<Long> // NOSONAR
     {
         Objects.requireNonNull(asistencia, "asistencia to remove must not be null!");
         asistencias.remove(asistencia);
-        asistencia.setClase(null);
+        asistencia.unsetClase();
     }
 
     public Set<Alumno> getAlumnos()
