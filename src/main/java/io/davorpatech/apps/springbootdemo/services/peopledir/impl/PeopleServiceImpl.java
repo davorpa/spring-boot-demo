@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class PeopleServiceImpl implements PeopleService
 {
-    PeopleDao peopleDao;
+    private final PeopleDao peopleDao;
 
     public PeopleServiceImpl(final PeopleDao peopleDao) {
         this.peopleDao = Objects.requireNonNull(
@@ -27,7 +27,7 @@ public class PeopleServiceImpl implements PeopleService
     }
 
     @Override
-    public List<Person> findBySurnameInitialAndAge(
+    public List<Person> findAllBySurnameInitialAndAge(
             final @Nullable String initial,
             final @Nullable Long age) {
         Predicate<Person> predicate = p -> true;

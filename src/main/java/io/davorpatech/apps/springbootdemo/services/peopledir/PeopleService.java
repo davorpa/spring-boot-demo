@@ -8,7 +8,7 @@ public interface PeopleService
 {
     List<Person> findAll();
 
-    List<Person> findBySurnameInitialAndAge(String initial, Long age);
+    List<Person> findAllBySurnameInitialAndAge(String initial, Long age);
 
     Person create(Person person);
 }

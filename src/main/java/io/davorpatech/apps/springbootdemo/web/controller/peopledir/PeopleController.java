@@ -13,7 +13,7 @@ import java.util.Objects;
 @RequestMapping("people")
 public class PeopleController
 {
-    private PeopleService peopleService;
+    private final PeopleService peopleService;
 
     public PeopleController(final PeopleService peopleService) {
         this.peopleService = Objects.requireNonNull(
@@ -29,7 +29,7 @@ public class PeopleController
     public List<Person> search(
             @RequestParam(required = false) String initial,
             @RequestParam(required = false) Long age) {
-        return peopleService.findBySurnameInitialAndAge(initial, age);
+        return peopleService.findAllBySurnameInitialAndAge(initial, age);
     }
 
     @PostMapping
