@@ -157,6 +157,30 @@
 			"response": []
 		},
 		{
+			"name": "Detail by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{controller_url}}/2",
+					"host": [
+						"{{controller_url}}"
+					],
+					"path": [
+						"2"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create new record",
 			"request": {
 				"method": "POST",

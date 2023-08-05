@@ -16,12 +16,14 @@ The project provides the following service endpoints:
   - `GET` `/calculator/divide?dividend=[num1]&divisor=[num2]`: Divides two numbers.
 - People Directory:
   - `GET` `/people`: Emits a JSON with all registered people.
+  - `GET` `/people/[id]`: Emits a JSON with the detail of a record given it ID.
   - `GET` `/people/search?initial=[letter]&age=[number]`: Emits a JSON response with the people list matching the given optional parameters.
   - `POST` `/people`: Creates a new person. Attributes are specified as a JSON request body.
 
 ## Getting Started
 
 #### Reference Documentation
+
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
@@ -30,6 +32,7 @@ For further reference, please consider the following sections:
 * [Spring Web](https://docs.spring.io/spring-boot/docs/2.7.13/reference/htmlsingle/#web)
 
 #### Guides
+
 The following guides illustrate how to use some features concretely:
 
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
