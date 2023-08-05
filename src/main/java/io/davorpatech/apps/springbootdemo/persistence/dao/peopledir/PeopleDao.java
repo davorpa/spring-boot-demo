@@ -9,6 +9,9 @@ public interface PeopleDao
 {
     List<Person> findAll();
 
+    Person read(
+            final @NonNull Long id);
+
     Person persist(
-            @NonNull Person person);
+            final @NonNull Person person);
 }

@@ -44,12 +44,18 @@ public class PeopleServiceImpl implements PeopleService
             });
         }
         if (age != null) {
-            predicate = predicate.and(p -> Long.compare(age, p.getAge()) == 0);
+            predicate = predicate.and(p -> age == p.getAge());
         }
         return peopleDao.findAll()
                 .stream()
                 .filter(predicate)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Person read(Long id)
+    {
+        return peopleDao.read(id);
     }
 
     @Override

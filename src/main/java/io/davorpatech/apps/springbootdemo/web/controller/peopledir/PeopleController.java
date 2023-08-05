@@ -2,9 +2,9 @@ package io.davorpatech.apps.springbootdemo.web.controller.peopledir;
 
 import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
 import io.davorpatech.apps.springbootdemo.services.peopledir.PeopleService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,20 +35,27 @@ public class PeopleController
         return peopleService.findAllBySurnameInitialAndAge(initial, age);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Person> read(@PathVariable("id") Long id) {
+        Person person = peopleService.read(id);
+        if (person == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(person);
+    }
+
     @PostMapping
     public ResponseEntity<Person> create(
-            @RequestBody Person person)
+            final @RequestBody Person person)
     {
-        person = peopleService.create(person);
-        return new ResponseEntity<>(person, HttpStatus.CREATED);
-        /* TODO: Provide 201 REST location url for CREATED response
-        return ResponseEntity
-                .created(ServletUriComponentsBuilder
-                        .fromCurrentRequest()
+        Person createdPerson = peopleService.create(person);
+
+        // Build 201 CREATED response with REST body and location url
+        return ResponseEntity.created(
+                    ServletUriComponentsBuilder.fromCurrentRequest()
                         .path("/{id}")
-                        .buildAndExpand(person.getId())
+                        .buildAndExpand(createdPerson.getId())
                         .toUri())
-                .body(person);
-         */
+                .body(createdPerson);
     }
 }

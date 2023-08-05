@@ -11,9 +11,12 @@ public interface PeopleService
     List<Person> findAll();
 
     List<Person> findAllBySurnameInitialAndAge(
-            @Nullable String initial,
-            @Nullable Long age);
+            final @Nullable String initial,
+            final @Nullable Long age);
+
+    Person read(
+            final @NonNull Long id);
 
     Person create(
-            @NonNull Person person);
+            final @NonNull Person person);
 }
