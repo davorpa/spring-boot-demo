@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "BOOTCAMP_ALUMNO")
+@Table(name = "ALUMNO", schema = "BOOTCAMP")
 @org.hibernate.annotations.Cache(
         usage = CacheConcurrencyStrategy.READ_WRITE
 )

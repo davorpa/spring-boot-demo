@@ -8,7 +8,8 @@ import java.util.Objects;
 
 @Entity
 @Table(
-        name = "BOOTCAMP_ASISTENCIA",
+        name = "ASISTENCIA",
+        schema = "BOOTCAMP",
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "UK_bootcamp_asistencia_clase_alumno_fecha",
