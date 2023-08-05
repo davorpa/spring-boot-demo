@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 @Repository
 public class InMemoryPeopleDao implements PeopleDao
 {
-
     // DB repository mock
     private final Map<Long, Person> repository = new ConcurrentHashMap<>();
 

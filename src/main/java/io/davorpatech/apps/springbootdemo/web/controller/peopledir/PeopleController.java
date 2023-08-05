@@ -36,7 +36,8 @@ public class PeopleController
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person> read(@PathVariable("id") Long id) {
+    public ResponseEntity<Person> read(@PathVariable("id") Long id)
+    {
         Person person = peopleService.read(id);
         if (person == null) {
             return ResponseEntity.notFound().build();
