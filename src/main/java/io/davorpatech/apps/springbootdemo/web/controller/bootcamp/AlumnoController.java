@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -40,7 +41,8 @@ public class AlumnoController
     {
         Optional<Alumno> entity = alumnoService.findById(id);
         // TODO: Apply Entity-2-Dto conversion
-        return entity.map(ResponseEntity::ok)
+        return entity
+                .map(ResponseEntity::ok)
                 .orElseGet(ResponseEntity.notFound()::build);
     }
 
@@ -50,7 +52,8 @@ public class AlumnoController
     {
         Optional<Alumno> entity = alumnoService.findByNid(nid);
         // TODO: Apply Entity-2-Dto conversion
-        return entity.map(ResponseEntity::ok)
+        return entity
+                .map(ResponseEntity::ok)
                 .orElseGet(ResponseEntity.notFound()::build);
     }
 
@@ -74,17 +77,19 @@ public class AlumnoController
     }
 
     @PutMapping("/{id}")
-    public Alumno update(
+    public ResponseEntity<Alumno> update(
             final @PathVariable("id") Long id,
             final @RequestBody @Valid Alumno body)
     {
-        if (!id.equals(body.getId())) {
-            throw new IllegalArgumentException("update.id not matches update.body.id");
+        final Long bodyId = body.getId();
+        if (bodyId != null && !id.equals(bodyId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "update.id not matches update.body.id");
         }
         // TODO: Apply Dto-2-Entity conversion
         Alumno entity = alumnoService.update(body);
         // TODO: Apply Entity-2-Dto conversion
-        return entity;
+        return ResponseEntity.ok(entity);
     }
 
     @DeleteMapping("/{id}")
