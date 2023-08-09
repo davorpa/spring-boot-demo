@@ -2,6 +2,8 @@ package io.davorpatech.apps.springbootdemo.web.controller.bootcamp;
 
 import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Alumno;
 import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
+import io.davorpatech.fwk.validation.groups.OnCreate;
+import io.davorpatech.fwk.validation.groups.OnUpdate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -10,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import javax.validation.groups.Default;
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
@@ -59,7 +62,7 @@ public class AlumnoController
 
     @PostMapping
     public ResponseEntity<Alumno> create(
-            final @RequestBody @Valid Alumno body)
+            final @RequestBody @Validated({ Default.class, OnCreate.class }) @Valid Alumno body)
     {
         // TODO: Apply Dto-2-Entity conversion
         Alumno entity = alumnoService.create(body);
@@ -79,7 +82,7 @@ public class AlumnoController
     @PutMapping("/{id}")
     public ResponseEntity<Alumno> update(
             final @PathVariable("id") Long id,
-            final @RequestBody @Valid Alumno body)
+            final @RequestBody @Validated({ Default.class, OnUpdate.class }) @Valid Alumno body)
     {
         final Long bodyId = body.getId();
         if (bodyId != null && !id.equals(bodyId)) {
