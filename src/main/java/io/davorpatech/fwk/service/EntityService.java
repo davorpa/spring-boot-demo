@@ -3,6 +3,7 @@ package io.davorpatech.fwk.service;
 import io.davorpatech.fwk.model.Entitier;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.groups.Default;
 import java.io.Serializable;
 
 /**
@@ -13,7 +14,7 @@ import java.io.Serializable;
  * @see Entitier
  * @see io.davorpatech.fwk.model.Identifiable Identifiable
  */
-@Validated
+@Validated({ Default.class })
 public interface EntityService<T extends Entitier<ID>, ID extends Serializable> // NOSONAR
         extends Service // NOSONAR
 {

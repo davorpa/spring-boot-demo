@@ -1,5 +1,10 @@
 package io.davorpatech.fwk.service;
 
+import io.davorpatech.fwk.validation.ValidatedGroups;
+import io.davorpatech.fwk.validation.groups.OnCreate;
+import io.davorpatech.fwk.validation.groups.OnDelete;
+import io.davorpatech.fwk.validation.groups.OnUpdate;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -25,6 +30,7 @@ public interface ServiceWriteOps<T, ID> // NOSONAR
      * @param entity the data object to persist, never {@code null}
      * @return the persisted data object, never {@code null}
      */
+    @ValidatedGroups({ OnCreate.class })
     <S extends T> S create(
             final @NotNull @Valid S entity);
 
@@ -35,6 +41,7 @@ public interface ServiceWriteOps<T, ID> // NOSONAR
      * @param entity the data object to merge, never {@code null}
      * @return the merged data object, never {@code null}
      */
+    @ValidatedGroups({ OnUpdate.class })
     <S extends T> S update(
             final @NotNull @Valid S entity);
 
@@ -43,6 +50,7 @@ public interface ServiceWriteOps<T, ID> // NOSONAR
      *
      * @param entity the data object to remove, never {@code null}
      */
+    @ValidatedGroups({ OnDelete.class })
     void delete(
             final @NotNull @Valid T entity);
 
