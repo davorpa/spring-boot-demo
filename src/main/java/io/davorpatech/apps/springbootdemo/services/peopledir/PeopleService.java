@@ -1,6 +1,7 @@
 package io.davorpatech.apps.springbootdemo.services.peopledir;
 
 import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
+import io.davorpatech.fwk.validation.ValidatedGroups;
 import io.davorpatech.fwk.validation.groups.OnCreate;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -22,7 +23,7 @@ public interface PeopleService
     Person read(
             final @NonNull Long id);
 
-    @Validated({ Default.class, OnCreate.class })
+    @ValidatedGroups({ OnCreate.class })
     Person create(
             final @NonNull @Valid Person person);
 }

@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/people")
-@Validated({ Default.class })
+@Validated
 public class PeopleController
 {
     private final PeopleService peopleService;
