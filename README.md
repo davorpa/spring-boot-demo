@@ -41,3 +41,4 @@ The following guides illustrate how to use some features concretely:
 * [Custom Error Handling in REST Controllers with Spring Boot](https://thepracticaldeveloper.com/custom-error-handling-rest-controllers-spring-boot/)
 * [Spring Boot Starter Request Correlation](https://github.com/stevesaliman/spring-boot-starter-request-correlation)
 * [Spring Boot Actuator with Correlation ID](https://www.jvt.me/posts/2022/01/13/spring-boot-actuator-audit/)
+* [Validation with Spring Boot - the Complete Guide](https://reflectoring.io/bean-validation-with-spring-boot/)

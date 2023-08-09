@@ -39,7 +39,8 @@ public class InMemoryPeopleDao implements PeopleDao
     }
 
     @Override
-    public Person read(Long id)
+    public Person read(
+            final @NonNull Long id)
     {
         return repository.get(id);
     }

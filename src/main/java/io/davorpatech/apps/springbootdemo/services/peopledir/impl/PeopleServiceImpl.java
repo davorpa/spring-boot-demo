@@ -3,6 +3,7 @@ package io.davorpatech.apps.springbootdemo.services.peopledir.impl;
 import io.davorpatech.apps.springbootdemo.persistence.dao.peopledir.PeopleDao;
 import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
 import io.davorpatech.apps.springbootdemo.services.peopledir.PeopleService;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -53,14 +54,15 @@ public class PeopleServiceImpl implements PeopleService
     }
 
     @Override
-    public Person read(Long id)
+    public Person read(
+            final @NonNull Long id)
     {
         return peopleDao.read(id);
     }
 
     @Override
     public Person create(
-            final Person person)
+            final @NonNull Person person)
     {
         return peopleDao.persist(person);
     }

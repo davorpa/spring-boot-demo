@@ -1,11 +1,16 @@
 package io.davorpatech.apps.springbootdemo.services.peopledir;
 
 import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
+import io.davorpatech.fwk.validation.groups.OnCreate;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+import javax.validation.groups.Default;
 import java.util.List;
 
+@Validated({ Default.class })
 public interface PeopleService
 {
     List<Person> findAll();
@@ -17,6 +22,7 @@ public interface PeopleService
     Person read(
             final @NonNull Long id);
 
+    @Validated({ Default.class, OnCreate.class })
     Person create(
-            final @NonNull Person person);
+            final @NonNull @Valid Person person);
 }

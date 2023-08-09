@@ -1,7 +1,14 @@
 package io.davorpatech.apps.springbootdemo.persistence.model.peopledir;
 
 import io.davorpatech.fwk.model.BaseValueObject;
+import io.davorpatech.fwk.validation.groups.OnCreate;
+import io.davorpatech.fwk.validation.groups.OnDelete;
+import io.davorpatech.fwk.validation.groups.OnUpdate;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
@@ -10,13 +17,18 @@ public class Person extends BaseValueObject
 {
     private static final long serialVersionUID = -7516723556324606215L;
 
+    @Null(groups = { OnCreate.class })
+    @NotNull(groups = { OnUpdate.class, OnDelete.class })
     private Long id;
 
+    @NotBlank
     private String fullname;
 
+    @NotNull
+    @PastOrPresent
     private LocalDate birthdate;
 
-    public Person(String fullname, LocalDate birthdate)
+    public Person(final String fullname, final LocalDate birthdate)
     {
         setFullname(fullname);
         setBirthdate(birthdate);
