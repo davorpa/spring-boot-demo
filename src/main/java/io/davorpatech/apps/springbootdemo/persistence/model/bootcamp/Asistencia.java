@@ -1,8 +1,15 @@
 package io.davorpatech.apps.springbootdemo.persistence.model.bootcamp;
 
 import io.davorpatech.fwk.model.BaseEntity;
+import io.davorpatech.fwk.validation.groups.OnCreate;
+import io.davorpatech.fwk.validation.groups.OnDelete;
+import io.davorpatech.fwk.validation.groups.OnUpdate;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -27,6 +34,8 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
             name = "bootcamp_asistencia_generator", sequenceName = "bootcamp_asistencia_seq",
             initialValue = 1, allocationSize = 50)
     @Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @Null(groups = { OnCreate.class })
+    @NotNull(groups = { OnUpdate.class, OnDelete.class })
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -35,6 +44,7 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
             nullable = false,
             updatable = false,
             foreignKey = @ForeignKey(name = "FK_bootcamp_asistencia_clase_id"))
+    @Valid
     private Clase clase;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -43,9 +53,12 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
             nullable = false,
             updatable = false,
             foreignKey = @ForeignKey(name = "FK_bootcamp_asistencia_alumno_id"))
+    @Valid
     private Alumno alumno;
 
     @Column(name = "fecha", nullable = false, updatable = false)
+    @NotNull
+    @PastOrPresent
     private LocalDate fecha;
 
     @Column(name = "asiste", nullable = false)

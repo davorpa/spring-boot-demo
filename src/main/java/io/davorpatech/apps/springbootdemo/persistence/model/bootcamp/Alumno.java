@@ -1,11 +1,15 @@
 package io.davorpatech.apps.springbootdemo.persistence.model.bootcamp;
 
 import io.davorpatech.fwk.model.BaseEntity;
+import io.davorpatech.fwk.validation.groups.OnCreate;
+import io.davorpatech.fwk.validation.groups.OnUpdate;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -27,18 +31,25 @@ public class Alumno extends BaseEntity<Long> // NOSONAR
             name = "bootcamp_alumno_generator", sequenceName = "bootcamp_alumno_seq",
             initialValue = 1, allocationSize = 50)
     @Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @Null(groups = { OnCreate.class })
+    @NotNull(groups = { OnUpdate.class })
     private Long id;
 
     @NaturalId(mutable = false)
-    @Column(name = "nid", length = 50, nullable = false, updatable = false)
+    @Column(name = "nid", length = 20, nullable = false, updatable = false)
+    @NotBlank
+    @Size(min = 1, max = 20)
+    @Pattern(regexp = "[A-Z0-9]+")
     private String nid;
 
     @Column(name = "fullname", length = 255, nullable = false)
+    @NotBlank
+    @Size(min = 1, max = 255)
     private String fullname;
 
     @OneToMany(mappedBy = "alumno", orphanRemoval = true)
     @OrderBy("clase.id ASC, fecha ASC")
-    private Set<Asistencia> asistencias = new LinkedHashSet<>();
+    private Set<@Valid Asistencia> asistencias = new LinkedHashSet<>();
 
     public Alumno()
     {

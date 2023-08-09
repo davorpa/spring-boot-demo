@@ -1,11 +1,16 @@
 package io.davorpatech.apps.springbootdemo.persistence.model.bootcamp;
 
 import io.davorpatech.fwk.model.BaseEntity;
+import io.davorpatech.fwk.validation.groups.OnCreate;
+import io.davorpatech.fwk.validation.groups.OnDelete;
+import io.davorpatech.fwk.validation.groups.OnUpdate;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -27,18 +32,25 @@ public class Clase extends BaseEntity<Long> // NOSONAR
             name = "bootcamp_clase_generator", sequenceName = "bootcamp_clase_seq",
             initialValue = 1, allocationSize = 50)
     @Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @Null(groups = { OnCreate.class })
+    @NotNull(groups = { OnUpdate.class, OnDelete.class })
     private Long id;
 
     @NaturalId(mutable = false)
-    @Column(name = "codigo", nullable = false, unique = true, updatable = false)
+    @Column(name = "codigo", length = 50, nullable = false, unique = true, updatable = false)
+    @NotBlank
+    @Size(min = 1, max = 50)
+    @Pattern(regexp = "[A-Z0-9\\-]+")
     private String codigo;
 
     @Column(name = "nombre", length = 255, nullable = false)
+    @NotBlank
+    @Size(min = 1, max = 255)
     private String nombre;
 
     @OneToMany(mappedBy = "clase", orphanRemoval = true)
     @OrderBy("alumno.id ASC, fecha ASC")
-    private Set<Asistencia> asistencias = new LinkedHashSet<>();
+    private Set<@Valid Asistencia> asistencias = new LinkedHashSet<>();
 
     public Clase()
     {
