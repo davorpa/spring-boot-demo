@@ -84,8 +84,7 @@ public class AlumnoController
             final @PathVariable("id") Long id,
             final @RequestBody @Validated({ Default.class, OnUpdate.class }) @Valid Alumno body)
     {
-        final Long bodyId = body.getId();
-        if (bodyId != null && !id.equals(bodyId)) {
+        if (body.hasId() && !Objects.equals(id, body.getId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "update.id not matches update.body.id");
         }

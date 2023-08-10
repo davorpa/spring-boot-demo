@@ -22,7 +22,9 @@ public interface Entitier<ID extends Serializable> // NOSONAR
      * the underlying persistence entity.
      *
      * @return the value of the artificial key that uniquely identifies
-     *         the underlying persistence entity. Never {@code null}.
+     *         the underlying persistence entity. It should never be
+     *         {@code null} performing an update/delete action and
+     *         {@code null} versus a creation.
      */
     @Override
     ID getId();

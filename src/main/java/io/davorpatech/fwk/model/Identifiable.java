@@ -17,9 +17,24 @@ public interface Identifiable<ID> // NOSONAR
      * the underlying record.
      *
      * @return the value of the artificial key that uniquely identifies
-     *         the underlying record. Never {@code null}.
+     *         the underlying record. It should never be {@code null}
+     *         performing an update/delete action and {@code null}
+     *         versus a creation.
      */
     ID getId();
+
+    /**
+     * Finds out if the {@link #getId()} is present.
+     *
+     * <p>By default, an {@code id} can be considered present
+     * if not is {@code null}.
+     *
+     * @return {@code true} if matches the defined condition.
+     * @see #getId()
+     */
+    default boolean hasId() {
+        return getId() != null;
+    }
 
     /**
      * Compose a {@link Predicate} to filter by {@link Identifiable}s.
@@ -27,8 +42,8 @@ public interface Identifiable<ID> // NOSONAR
      * It will accept all those records whose {@code id} is identical
      * to the passed by parameter.
      *
-     * @param <T> component type {@link Identifiable} to inspect
-     * @param <ID> component type identifier to inspect
+     * @param <T> component type of the {@link Identifiable} to inspect
+     * @param <ID> component type of the identifier to inspect
      * @param id identifier value to accept
      * @return a @{@literal Predicate}
      *
