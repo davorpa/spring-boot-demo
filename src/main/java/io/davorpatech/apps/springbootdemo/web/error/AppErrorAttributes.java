@@ -1,5 +1,6 @@
 package io.davorpatech.apps.springbootdemo.web.error;
 
+import io.davorpatech.fwk.model.AdditionalArgumentsPopulator;
 import io.davorpatech.fwk.model.ErrorCode;
 import io.davorpatech.fwk.model.ErrorDomain;
 import io.davorpatech.fwk.model.Identifiable;
@@ -143,6 +144,12 @@ public class AppErrorAttributes extends DefaultErrorAttributes
         if (error instanceof Identifiable) {
             final Object modelId = ((Identifiable) error).getId();
             attributes.put("identifier", modelId);
+        }
+        if (error instanceof AdditionalArgumentsPopulator) {
+            final Map<String, Object> arguments = new LinkedHashMap<>();
+            ((AdditionalArgumentsPopulator) error).populate(
+                    environment, arguments);
+            attributes.put("arguments", arguments);
         }
     }
 
