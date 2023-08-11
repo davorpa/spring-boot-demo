@@ -32,7 +32,8 @@ public interface Identifiable<ID> // NOSONAR
      * @return {@code true} if matches the defined condition.
      * @see #getId()
      */
-    default boolean hasId() {
+    default boolean hasId()
+    {
         return getId() != null;
     }
 
@@ -50,7 +51,8 @@ public interface Identifiable<ID> // NOSONAR
      * @see Objects#equals(Object, Object)
      * @see #getId()
      */
-    static <T extends Identifiable<ID>, ID> Predicate<T> idfinder(final ID id) { // NOSONAR
+    static <T extends Identifiable<ID>, ID> Predicate<T> idfinder(final ID id) // NOSONAR
+    {
         return e -> Objects.equals(e.getId(), id);
     }
 }
