@@ -20,7 +20,8 @@ public abstract class BaseEntity<ID extends Serializable> // NOSONAR
     private static final long serialVersionUID = 9152012390311413530L;
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(final Object o)
+    {
         if (this == o) return true;
         if (!(o instanceof Entitier)) return false;
         Entitier other = (Entitier) o; // NOSONAR
@@ -28,12 +29,14 @@ public abstract class BaseEntity<ID extends Serializable> // NOSONAR
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(getId());
+    public int hashCode()
+    {
+        return Objects.hash(getClass(), getId());
     }
 
     @Override
-    protected String defineObjAttrs() {
+    protected String defineObjAttrs()
+    {
         return String.format("id=%s", getId());
     }
 }
