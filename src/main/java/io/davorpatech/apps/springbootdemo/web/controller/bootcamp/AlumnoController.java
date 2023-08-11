@@ -85,8 +85,9 @@ public class AlumnoController
             final @RequestBody @Validated({ Default.class, OnUpdate.class }) @Valid Alumno body)
     {
         if (body.hasId() && !Objects.equals(id, body.getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "update.id not matches update.body.id");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format(
+                    "update.id (%s) not matches update.body.id (%s)",
+                    id, body.getId()));
         }
         // TODO: Apply Dto-2-Entity conversion
         Alumno entity = alumnoService.update(body);
