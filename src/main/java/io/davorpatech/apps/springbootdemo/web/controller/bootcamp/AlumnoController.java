@@ -2,13 +2,13 @@ package io.davorpatech.apps.springbootdemo.web.controller.bootcamp;
 
 import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Alumno;
 import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
+import io.davorpatech.fwk.exception.NoMatchingRelatedFieldsException;
 import io.davorpatech.fwk.validation.groups.OnCreate;
 import io.davorpatech.fwk.validation.groups.OnUpdate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -85,9 +85,8 @@ public class AlumnoController
             final @RequestBody @Validated({ Default.class, OnUpdate.class }) @Valid Alumno body)
     {
         if (body.hasId() && !Objects.equals(id, body.getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format(
-                    "update.id (%s) not matches update.body.id (%s)",
-                    id, body.getId()));
+            throw new NoMatchingRelatedFieldsException(
+                    "update.id", id, "update.body.id", body.getId());
         }
         // TODO: Apply Dto-2-Entity conversion
         Alumno entity = alumnoService.update(body);
