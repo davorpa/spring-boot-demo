@@ -16,11 +16,10 @@ public class RequestCorrelationProperties
     /**
      * The priority order of the request correlation filter.
      *
-     * <p>
-     * Defaults to {@link Ordered#HIGHEST_PRECEDENCE}, so the correlating ids
+     * <p>Defaults to {@link Ordered#HIGHEST_PRECEDENCE}, so the correlating ids
      * is set very early in the process, but you may need to override this.
      *
-     * For example, if you use shared sessions via the spring-session project,
+     * <p>For example, if you use shared sessions via the spring-session project,
      * you need to make sure the request correlation filter comes AFTER the
      * Spring Session filter, or the request correlation filter won't get the
      * right request object and your ids will be wrong.
@@ -44,8 +43,7 @@ public class RequestCorrelationProperties
     /**
      * When to enable sessions correlation identification.
      *
-     * <p>
-     * {@code false} by default, to avoid create new HTTP sessions.
+     * <p>{@code false} by default, to avoid create new HTTP sessions.
      */
     private boolean enableSessions = false;
 
@@ -60,7 +58,7 @@ public class RequestCorrelationProperties
     private String requestHeaderName = RequestCorrelationConstants.REQUEST_HEADER_NAME;
 
     /**
-     * Configuration properties used to setup the request correlation logging system.
+     * Configuration properties used to set up the request correlation logging system.
      */
     @NestedConfigurationProperty
     private final LoggingProperties logging = new LoggingProperties();
@@ -117,7 +115,7 @@ public class RequestCorrelationProperties
     /**
      * Retrieves the header name used to extract the correlation session id.
      *
-     * Defaults to {@code X-Session-Id}.
+     * <p>Defaults to {@code X-Session-Id}.
      *
      * @return the header name used to extract the correlation session id
      */
@@ -139,7 +137,7 @@ public class RequestCorrelationProperties
     /**
      * Retrieves the header name used to extract the correlation request id.
      *
-     * Defaults to {@code X-Request-Id}.
+     * <p>Defaults to {@code X-Request-Id}.
      *
      * @return the header name used to extract the correlation request id
      */
@@ -164,7 +162,8 @@ public class RequestCorrelationProperties
      *
      * @return the logging configuration properties
      */
-    public LoggingProperties getLogging() {
+    public LoggingProperties getLogging()
+    {
         return logging;
     }
 }
