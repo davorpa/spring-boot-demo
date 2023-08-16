@@ -2,6 +2,7 @@ package io.davorpatech.fwk.web.request.correlation.config;
 
 import io.davorpatech.fwk.web.request.correlation.client.feign.FeignCorrelationConfiguration;
 import io.davorpatech.fwk.web.request.correlation.client.http.ClientHttpCorrelationConfiguration;
+import io.davorpatech.fwk.web.request.correlation.errorattr.CorrelationErrorAttributeConfiguration;
 import io.davorpatech.fwk.web.request.correlation.logging.LoggingRequestCorrelationConfiguration;
 import org.springframework.context.annotation.Import;
 
@@ -35,7 +36,8 @@ import java.lang.annotation.*;
         RequestCorrelationConfiguration.class,
         ClientHttpCorrelationConfiguration.class,
         FeignCorrelationConfiguration.class,
-        LoggingRequestCorrelationConfiguration.class
+        LoggingRequestCorrelationConfiguration.class,
+        CorrelationErrorAttributeConfiguration.class
 })
 public @interface EnableRequestCorrelation
 {
