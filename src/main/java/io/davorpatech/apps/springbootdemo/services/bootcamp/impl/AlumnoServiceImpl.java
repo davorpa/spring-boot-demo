@@ -6,6 +6,7 @@ import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
 import io.davorpatech.fwk.service.AbstractCrudEntityService;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -37,6 +38,7 @@ public class AlumnoServiceImpl
         return this.alumnoRepository;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Alumno> findByNid(
             final @NonNull String nid)
@@ -44,6 +46,7 @@ public class AlumnoServiceImpl
         return alumnoRepository.findByNid(nid);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public boolean existsByNid(
             final @NonNull String nid)
@@ -51,6 +54,7 @@ public class AlumnoServiceImpl
         return alumnoRepository.existsByNid(nid);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Alumno> findAllByNid(
             final @NonNull Iterable<String> nids)
@@ -58,6 +62,7 @@ public class AlumnoServiceImpl
         return alumnoRepository.findAllByNid(nids);
     }
 
+    @Transactional
     @Override
     public void deleteByNid(
             final @NonNull String nid)
@@ -65,6 +70,7 @@ public class AlumnoServiceImpl
         alumnoRepository.deleteByNid(nid);
     }
 
+    @Transactional
     @Override
     public void deleteAllByNid(
             final @NonNull Iterable<String> nids)
