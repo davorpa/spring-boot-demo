@@ -25,6 +25,11 @@ public class ClaseServiceImpl
 {
     private final ClaseRepository claseRepository;
 
+    /**
+     * Constructs a new {@link ClaseServiceImpl} with the given arguments.
+     *
+     * @param claseRepository the clase repository, never {@code null}
+     */
     public ClaseServiceImpl(
             final ClaseRepository claseRepository)
     {

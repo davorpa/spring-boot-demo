@@ -25,6 +25,11 @@ public class AlumnoServiceImpl
 {
     private final AlumnoRepository alumnoRepository;
 
+    /**
+     * Constructs a new {@link AlumnoServiceImpl} with the given arguments.
+     *
+     * @param alumnoRepository the alumno repository, never {@code null}
+     */
     public AlumnoServiceImpl(
             final AlumnoRepository alumnoRepository)
     {

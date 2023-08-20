@@ -23,12 +23,18 @@ import java.util.Optional;
 @Validated
 public class AlumnoController
 {
-    private AlumnoService alumnoService;
+    private final AlumnoService alumnoService;
 
-    public AlumnoController(final AlumnoService alumnoService)
+    /**
+     * Constructs a new {@link AlumnoController} with the given arguments.
+     *
+     * @param alumnoService the alumno service, never {@code null}
+     */
+    public AlumnoController(
+            final AlumnoService alumnoService)
     {
         this.alumnoService = Objects.requireNonNull(
-                alumnoService, "alumnoService must not be null!");
+                alumnoService, "AlumnoService must not be null!");
     }
 
     @GetMapping

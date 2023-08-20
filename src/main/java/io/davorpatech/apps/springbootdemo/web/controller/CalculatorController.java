@@ -14,10 +14,16 @@ public class CalculatorController
 {
     private final CalculatorService calculatorService;
 
-    public CalculatorController(final CalculatorService calculatorService)
+    /**
+     * Constructs a new {@link CalculatorController} with the given arguments.
+     *
+     * @param calculatorService the calculator service, never {@code null}
+     */
+    public CalculatorController(
+            final CalculatorService calculatorService)
     {
         this.calculatorService = Objects.requireNonNull(
-                calculatorService, "calculatorService must not be null!");
+                calculatorService, "CalculatorService must not be null!");
     }
 
     @GetMapping("/add")
