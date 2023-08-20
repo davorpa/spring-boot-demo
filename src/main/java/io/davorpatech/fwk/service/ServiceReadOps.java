@@ -11,8 +11,9 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * <ul>
  * <li>Retrieve all
- * <li>Retrieve one
- * <li>Check existence
+ * <li>Retrieve all by some ids
+ * <li>Retrieve one by id
+ * <li>Check existence by id
  * <li>Count records
  * </ul>
  *
@@ -27,6 +28,19 @@ public interface ServiceReadOps<T, ID> // NOSONAR
      * @return a collection with all elements, never {@code null}.
      */
     List<T> findAll();
+
+    /**
+     * Returns all instances of the type {@code T} with the given IDs.
+     *
+     * <p>If some or all ids are not found, no entities are returned for these IDs.
+     * <p>Note that the order of elements in the result is not guaranteed.
+     *
+     * @param ids must not be {@literal null} nor contain any {@literal null} values
+     * @return guaranteed to be not {@literal null}. The size can be equal or less
+     *         than the number of given {@literal ids}
+     */
+    public List<T> findAllById(
+            final @NotNull Iterable<ID> ids);
 
     /**
      * Gets a concrete record given it identifier.

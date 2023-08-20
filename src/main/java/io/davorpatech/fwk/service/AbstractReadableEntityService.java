@@ -29,6 +29,14 @@ public abstract class AbstractReadableEntityService<T extends Entitier<ID>, ID e
 
     @Transactional(readOnly = true)
     @Override
+    public List<T> findAllById(
+            final @NotNull Iterable<ID> ids)
+    {
+        return getRepository().findAllById(ids);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public Optional<T> findById(
             final @NotNull ID id) {
         return getRepository().findById(id);
