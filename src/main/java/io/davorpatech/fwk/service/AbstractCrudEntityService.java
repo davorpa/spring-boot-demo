@@ -1,6 +1,8 @@
 package io.davorpatech.fwk.service;
 
+import io.davorpatech.fwk.exception.NoSuchEntityException;
 import io.davorpatech.fwk.model.Entitier;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
@@ -47,6 +49,11 @@ public abstract class AbstractCrudEntityService<T extends Entitier<ID>, ID exten
     @Override
     public void deleteById(
             final @NotNull ID id) {
-        getRepository().deleteById(id);
+        try {
+            getRepository().deleteById(id);
+        } catch (EmptyResultDataAccessException ex) {
+            // Translate dao exception to domain exception
+            throw new NoSuchEntityException(getEntityClass(), id);
+        }
     }
 }
