@@ -14,8 +14,7 @@ public interface AlumnoService // NOSONAR
         extends CrudEntityService<Alumno, Long> // NOSONAR
 {
     /**
-     * Busca un alumno por su clave natural
-     * (documento nacional de indentidad).
+     * Busca un alumno por su clave natural (documento nacional de indentidad).
      *
      * @param nid número de documento nacional de indentidad del alumno,
      *            nunca {@code null}.
@@ -26,8 +25,8 @@ public interface AlumnoService // NOSONAR
             @NonNull String nid);
 
     /**
-     * Comprueba si un alumno existe dada su clave natural
-     * (documento nacional de indentidad).
+     * Comprueba si un alumno existe dada su clave natural (documento nacional
+     * de indentidad).
      *
      * @param nid número de documento nacional de indentidad del alumno,
      *            nunca {@code null}.
@@ -39,8 +38,8 @@ public interface AlumnoService // NOSONAR
     /**
      * Busca todos los alumnos dadas sus claves naturales
      * (documento nacional de indentidad).
-     * <p>
-     * Los {@literal nid} que no se hayan encontrado no se tendrán en cuenta
+     *
+     * <p>Los {@literal nid} que no se hayan encontrado no se tendrán en cuenta
      * para el retorno, es decir, el método podrá retornar menos resultados
      * que {@literal nids} de entrada.
      *
@@ -52,10 +51,9 @@ public interface AlumnoService // NOSONAR
             @NonNull Iterable<String> nids);
 
     /**
-     * Elimina un alumno por su clave natural
-     * (documento nacional de indentidad).
-     * <p>
-     * Si no se encuentra ningún alumno con dicho {@literal nid},
+     * Elimina un alumno por su clave natural (documento nacional de indentidad).
+     *
+     * <p>Si no se encuentra ningún alumno con dicho {@literal nid},
      * el sistema no hace nada.
      *
      * @param nid número de documento nacional de indentidad del alumno,
@@ -65,10 +63,9 @@ public interface AlumnoService // NOSONAR
             @NonNull String nid);
 
     /**
-     * Elimina alumnos por su clave natural
-     * (documento nacional de indentidad).
-     * <p>
-     * Si por casualidad no se encuentra el registro identificado por el
+     * Elimina alumnos por su clave natural (documento nacional de indentidad).
+     *
+     * <p>Si por casualidad no se encuentra el registro identificado por el
      * {@literal nid} proporcionado, la operación se ignora silenciosamente
      * siguiendo flujo normal del sistema.
      *
