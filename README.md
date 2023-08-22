@@ -19,6 +19,21 @@ The project provides the following service endpoints:
   - `GET` `/people/[id]`: Emits a JSON with the detail of a record given it ID.
   - `GET` `/people/search?initial=[letter]&age=[number]`: Emits a JSON response with the people list matching the given optional parameters.
   - `POST` `/people`: Creates a new person. Attributes are specified as a JSON request body.
+- Bootcamp:
+  - Students:
+    - `GET` `/bootcamp/alumnos`: Emits a JSON with all registered students.
+    - `GET` `/bootcamp/alumnos/[id]`: Emits a JSON with the detail of a record given it ID.
+    - `GET` `/bootcamp/alumnos/nid.[nid]`: Emits a JSON with the detail of a record given it NID.
+    - `POST` `/bootcamp/alumnos`: Creates a new student. Attributes are specified as a JSON request body.
+    - `PUT` `/bootcamp/alumnos/[id]`: Updates a record given it ID. Attributes are specified as a JSON request body.
+    - `DELETE` `/bootcamp/alumnos/[id]`: Deletes an existent student given it ID.
+  - Classrooms:
+    - `GET` `/bootcamp/clases`: Emits a JSON with all registered classroom.
+    - `GET` `/bootcamp/clases/[id]`: Emits a JSON with the detail of a record given it ID.
+    - `GET` `/bootcamp/clases/code.[code]`: Emits a JSON with the detail of a record given it CODE.
+    - `POST` `/bootcamp/clases`: Creates a new classroom. Attributes are specified as a JSON request body.
+    - `PUT` `/bootcamp/clases/[id]`: Updates a record given it ID. Attributes are specified as a JSON request body.
+    - `DELETE` `/bootcamp/clases/[id]`: Deletes an existent classroom given it ID.
 
 ## Getting Started
 
