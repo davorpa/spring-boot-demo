@@ -11,7 +11,6 @@ import java.util.function.Supplier;
 
 import static java.lang.String.format;
 
-
 /**
  * Exception that is thrown when the detail of a specific model object
  * (entity, POJO, DTO...) already exists when searching for any of its
@@ -20,7 +19,7 @@ import static java.lang.String.format;
  * <p>This will normally be used to indicate that a database Unique or
  * Primary Key has been violated.
  */
-@ResponseStatus(HttpStatus.BAD_REQUEST)
+@ResponseStatus(HttpStatus.CONFLICT)
 public class EntityAlreadyExistsException // NOSONAR
         extends PreconditionalException // NOSONAR
         implements Identifiable<Serializable>, ErrorDomain // NOSONAR

@@ -11,7 +11,6 @@ import java.util.function.Supplier;
 
 import static java.lang.String.format;
 
-
 /**
  * Exception raised when the detail of a certain model (entity, POJO, DTO...) has
  * not been found when searching for any of its identifiers, either by the primary

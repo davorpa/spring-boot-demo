@@ -14,7 +14,6 @@ import java.util.function.Supplier;
 
 import static java.lang.String.format;
 
-
 /**
  * Exception that is thrown when the detail of a specific model object
  * (entity, POJO, DTO...) is already linked to other resource.
@@ -22,7 +21,7 @@ import static java.lang.String.format;
  * <p>This will normally be used to indicate that a database Foreign Key
  * has been violated.
  */
-@ResponseStatus(HttpStatus.BAD_REQUEST)
+@ResponseStatus(HttpStatus.CONFLICT)
 public class EntityUsedByForeignsException // NOSONAR
         extends PreconditionalException // NOSONAR
         implements Identifiable<Serializable>, ErrorDomain, AdditionalArgumentsPopulator // NOSONAR

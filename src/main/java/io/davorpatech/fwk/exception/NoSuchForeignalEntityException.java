@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.io.Serializable;
 import java.util.function.Supplier;
 
-
 /**
  * Exception raised when the detail of a certain model (entity, POJO, DTO...) has
  * not been found when searching for any of its identifiers, either by the primary
@@ -19,7 +18,7 @@ import java.util.function.Supplier;
  * <p>This specialization is for those associations with a certain degree
  * of relationship within the graph of the set of entities that compose it.
  */
-@ResponseStatus(HttpStatus.BAD_REQUEST)
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class NoSuchForeignalEntityException // NOSONAR
         extends NoSuchEntityException // NOSONAR
 {
