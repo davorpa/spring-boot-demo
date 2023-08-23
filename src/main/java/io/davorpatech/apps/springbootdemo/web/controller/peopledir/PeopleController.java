@@ -16,24 +16,24 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/people")
 @Validated
-public class PeopleController
+class PeopleController
 {
     private final PeopleService peopleService;
 
-    public PeopleController(final PeopleService peopleService)
+    PeopleController(final PeopleService peopleService)
     {
         this.peopleService = Objects.requireNonNull(
                 peopleService, "peopleService must not be null!");
     }
 
     @GetMapping
-    public List<Person> listAll()
+    List<Person> listAll()
     {
         return peopleService.findAll();
     }
 
     @GetMapping("/search")
-    public List<Person> search(
+    List<Person> search(
             final @RequestParam(required = false) String initial,
             final @RequestParam(required = false) Long age)
     {
@@ -41,7 +41,7 @@ public class PeopleController
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person> read(
+    ResponseEntity<Person> read(
             final @PathVariable("id") Long id)
     {
         Person person = peopleService.read(id);
@@ -52,7 +52,7 @@ public class PeopleController
     }
 
     @PostMapping
-    public ResponseEntity<Person> create(
+    ResponseEntity<Person> create(
             final @RequestBody @Validated({ Default.class, OnCreate.class }) @Valid Person person)
     {
         Person createdPerson = peopleService.create(person);

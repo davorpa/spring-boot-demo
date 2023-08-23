@@ -21,7 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/bootcamp/alumnos")
 @Validated
-public class AlumnoController
+class AlumnoController
 {
     private final AlumnoService alumnoService;
 
@@ -30,7 +30,7 @@ public class AlumnoController
      *
      * @param alumnoService the alumno service, never {@code null}
      */
-    public AlumnoController(
+    AlumnoController(
             final AlumnoService alumnoService)
     {
         this.alumnoService = Objects.requireNonNull(
@@ -38,14 +38,14 @@ public class AlumnoController
     }
 
     @GetMapping
-    public List<Alumno> list()
+    List<Alumno> list()
     {
         // TODO: Apply Entity-2-Dto conversion
         return alumnoService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Alumno> retrieveById(
+    ResponseEntity<Alumno> retrieveById(
             final @PathVariable("id") Long id)
     {
         Optional<Alumno> entity = alumnoService.findById(id);
@@ -56,7 +56,7 @@ public class AlumnoController
     }
 
     @GetMapping("/nid.{id}")
-    public ResponseEntity<Alumno> retrieveByNid(
+    ResponseEntity<Alumno> retrieveByNid(
             final @PathVariable("id") String nid)
     {
         Optional<Alumno> entity = alumnoService.findByNid(nid);
@@ -67,7 +67,7 @@ public class AlumnoController
     }
 
     @PostMapping
-    public ResponseEntity<Alumno> create(
+    ResponseEntity<Alumno> create(
             final @RequestBody @Validated({ Default.class, OnCreate.class }) @Valid Alumno body)
     {
         // TODO: Apply Dto-2-Entity conversion
@@ -86,7 +86,7 @@ public class AlumnoController
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Alumno> update(
+    ResponseEntity<Alumno> update(
             final @PathVariable("id") Long id,
             final @RequestBody @Validated({ Default.class, OnUpdate.class }) @Valid Alumno body)
     {
@@ -102,7 +102,7 @@ public class AlumnoController
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(
+    void delete(
             final @PathVariable("id") Long id)
     {
         alumnoService.deleteById(id);

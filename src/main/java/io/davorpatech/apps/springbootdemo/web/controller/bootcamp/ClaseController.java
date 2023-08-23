@@ -21,7 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/bootcamp/clases")
 @Validated
-public class ClaseController
+class ClaseController
 {
     private final ClaseService claseService;
 
@@ -30,7 +30,7 @@ public class ClaseController
      *
      * @param claseService the clase service, never {@code null}
      */
-    public ClaseController(
+    ClaseController(
             final ClaseService claseService)
     {
         this.claseService = Objects.requireNonNull(
@@ -38,14 +38,14 @@ public class ClaseController
     }
 
     @GetMapping
-    public List<Clase> list()
+    List<Clase> list()
     {
         // TODO: Apply Entity-2-Dto conversion
         return claseService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Clase> retrieveById(
+    ResponseEntity<Clase> retrieveById(
             final @PathVariable("id") Long id)
     {
         Optional<Clase> entity = claseService.findById(id);
@@ -56,7 +56,7 @@ public class ClaseController
     }
 
     @GetMapping("/code.{code}")
-    public ResponseEntity<Clase> retrieveByCodigo(
+    ResponseEntity<Clase> retrieveByCodigo(
             final @PathVariable("code") String code)
     {
         Optional<Clase> entity = claseService.findByCodigo(code);
@@ -67,7 +67,7 @@ public class ClaseController
     }
 
     @PostMapping
-    public ResponseEntity<Clase> create(
+    ResponseEntity<Clase> create(
             final @RequestBody @Validated({ Default.class, OnCreate.class }) @Valid Clase body)
     {
         // TODO: Apply Dto-2-Entity conversion
@@ -86,7 +86,7 @@ public class ClaseController
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Clase> update(
+    ResponseEntity<Clase> update(
             final @PathVariable("id") Long id,
             final @RequestBody @Validated({ Default.class, OnUpdate.class }) @Valid Clase body)
     {
@@ -102,7 +102,7 @@ public class ClaseController
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(
+    void delete(
             final @PathVariable("id") Long id)
     {
         claseService.deleteById(id);

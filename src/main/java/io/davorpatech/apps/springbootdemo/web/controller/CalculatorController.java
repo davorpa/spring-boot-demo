@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/calculator")
-public class CalculatorController
+class CalculatorController
 {
     private final CalculatorService calculatorService;
 
@@ -19,7 +19,7 @@ public class CalculatorController
      *
      * @param calculatorService the calculator service, never {@code null}
      */
-    public CalculatorController(
+    CalculatorController(
             final CalculatorService calculatorService)
     {
         this.calculatorService = Objects.requireNonNull(
@@ -27,7 +27,7 @@ public class CalculatorController
     }
 
     @GetMapping("/add")
-    public double add(
+    double add(
             @RequestParam double num1,
             @RequestParam double num2)
     {
@@ -35,7 +35,7 @@ public class CalculatorController
     }
 
     @GetMapping("/substract")
-    public double substract(
+    double substract(
             @RequestParam double num1,
             @RequestParam double num2)
     {
@@ -43,7 +43,7 @@ public class CalculatorController
     }
 
     @GetMapping("/multiply")
-    public double multiply(
+    double multiply(
             @RequestParam double num1,
             @RequestParam double num2)
     {
@@ -51,7 +51,7 @@ public class CalculatorController
     }
 
     @GetMapping("/divide")
-    public double divide(
+    double divide(
             @RequestParam double dividend,
             @RequestParam double divisor)
     {
