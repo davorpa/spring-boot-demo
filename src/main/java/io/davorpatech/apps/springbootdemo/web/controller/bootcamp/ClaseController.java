@@ -75,13 +75,13 @@ public class ClaseController
         // TODO: Apply Entity-2-Dto conversion
 
         // Compose URI Location of the retrieve endpoint for this created resource
-        final URI createdResourceLocationUri = ServletUriComponentsBuilder.fromCurrentRequest()
+        final URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(entity.getId())
                 .toUri();
         // build response entity providing URI and body of the created resource
         return ResponseEntity
-                .created(createdResourceLocationUri)
+                .created(location)
                 .body(entity);
     }
 
