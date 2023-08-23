@@ -28,13 +28,6 @@
 					"raw": "{{controller_url}}",
 					"host": [
 						"{{controller_url}}"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": null,
-							"disabled": true
-						}
 					]
 				}
 			},
@@ -389,7 +382,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"nid\": \"00000001A\",\r\n    \"fullname\": \"Juan Carlos Alfonso Víctor María de Borbón y Borbón\"\r\n}",
+					"raw": "{\r\n    \"nid\": \"00000001A\",\r\n    \"fullname\": \"Juan Carlos Alfonso Víctor María de Borbón y Borbón\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
