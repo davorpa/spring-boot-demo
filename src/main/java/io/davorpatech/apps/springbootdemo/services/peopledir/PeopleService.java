@@ -1,6 +1,6 @@
 package io.davorpatech.apps.springbootdemo.services.peopledir;
 
-import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
+import io.davorpatech.apps.springbootdemo.domain.peopledir.Person;
 import io.davorpatech.fwk.validation.ValidatedGroups;
 import io.davorpatech.fwk.validation.groups.OnCreate;
 import org.springframework.lang.NonNull;

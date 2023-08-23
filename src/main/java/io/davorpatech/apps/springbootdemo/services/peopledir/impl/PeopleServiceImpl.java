@@ -1,7 +1,7 @@
 package io.davorpatech.apps.springbootdemo.services.peopledir.impl;
 
+import io.davorpatech.apps.springbootdemo.domain.peopledir.Person;
 import io.davorpatech.apps.springbootdemo.persistence.dao.peopledir.PeopleDao;
-import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
 import io.davorpatech.apps.springbootdemo.services.peopledir.PeopleService;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;

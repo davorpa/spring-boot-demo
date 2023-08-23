@@ -1,4 +1,4 @@
-package io.davorpatech.apps.springbootdemo.persistence.model.peopledir;
+package io.davorpatech.apps.springbootdemo.domain.peopledir;
 
 import io.davorpatech.fwk.model.BaseValueObject;
 import io.davorpatech.fwk.validation.groups.OnCreate;

@@ -1,6 +1,6 @@
 package io.davorpatech.apps.springbootdemo.web.controller.peopledir;
 
-import io.davorpatech.apps.springbootdemo.persistence.model.peopledir.Person;
+import io.davorpatech.apps.springbootdemo.domain.peopledir.Person;
 import io.davorpatech.apps.springbootdemo.services.peopledir.PeopleService;
 import io.davorpatech.fwk.validation.groups.OnCreate;
 import org.springframework.http.ResponseEntity;
