@@ -7,6 +7,8 @@ import java.util.Objects;
 
 public class AlumnoDTO extends BaseValueObject implements Identifiable<Long>
 {
+    private static final long serialVersionUID = -7715819929617487003L;
+
     private final Long id;
 
     private final String nid;
