@@ -1,26 +1,29 @@
 package io.davorpatech.apps.springbootdemo.services.bootcamp.impl;
 
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.*;
 import io.davorpatech.apps.springbootdemo.persistence.dao.bootcamp.AlumnoRepository;
 import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Alumno;
 import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
-import io.davorpatech.fwk.service.AbstractCrudEntityService;
+import io.davorpatech.fwk.exception.NoSuchEntityException;
+import io.davorpatech.fwk.model.PagedResult;
+import io.davorpatech.fwk.service.ServiceCommonSupport;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.validation.annotation.Validated;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import javax.validation.Valid;
 
-/**
- * Implementación del servicio de básicos para la entidad {@link Alumno}.
- * <p>
- * Se delega su operativa en el correspondiente
- * {@link org.springframework.data.jpa.repository.JpaRepository JpaRepository}.
- */
 @Service
+@Transactional(readOnly = true)
+@Validated
 public class AlumnoServiceImpl
-        extends AbstractCrudEntityService<Alumno, Long>
+        extends ServiceCommonSupport
         implements AlumnoService
 {
     private final AlumnoRepository alumnoRepository;
@@ -30,56 +33,94 @@ public class AlumnoServiceImpl
      *
      * @param alumnoRepository the alumno repository, never {@code null}
      */
-    public AlumnoServiceImpl(
-            final AlumnoRepository alumnoRepository)
-    {
-        this.alumnoRepository = Objects.requireNonNull(
-                alumnoRepository, "alumnoRepository must not be null!");
+    public AlumnoServiceImpl(final AlumnoRepository alumnoRepository) {
+        Assert.notNull(alumnoRepository, "AlumnoRepository must not be null!");
+        this.alumnoRepository = alumnoRepository;
     }
 
     @Override
-    protected AlumnoRepository getRepository()
-    {
-        return this.alumnoRepository;
+    public PagedResult<AlumnoDTO> findAll(
+            final @Valid FindAlumnosInput query) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+        int pageNumber = query.getPageNumber() > 0 ? query.getPageNumber() - 1 : 0;
+        Pageable pageable = PageRequest.of(pageNumber, query.getPageSize(), sort);
+        Page<AlumnoDTO> page = alumnoRepository.findAllAsDto(pageable);
+        return new PagedResult<>(
+                page.getContent(),
+                page.getTotalElements(),
+                page.getNumber() + 1,
+                page.getTotalPages(),
+                page.isFirst(),
+                page.isLast(),
+                page.hasNext(),
+                page.hasPrevious()
+            );
     }
 
-    @Transactional(readOnly = true)
     @Override
-    public Optional<Alumno> findByNid(
-            final @NonNull String nid)
-    {
-        return alumnoRepository.findByNid(nid);
+    public AlumnoDTO findById(
+            final Long id) {
+        return alumnoRepository.findById(id)
+                .map(this::mapEntityToDto)
+                .orElseThrow(NoSuchEntityException.creater(AlumnoConstants.DOMAIN_NAME, id));
     }
 
-    @Transactional(readOnly = true)
     @Override
-    public boolean existsByNid(
-            final @NonNull String nid)
-    {
-        return alumnoRepository.existsByNid(nid);
+    public AlumnoDTO findByNid(
+            final String nid) {
+        return alumnoRepository.findByNid(nid)
+                .map(this::mapEntityToDto)
+                .orElseThrow(NoSuchEntityException.creater(AlumnoConstants.DOMAIN_NAME, nid));
     }
 
-    @Transactional(readOnly = true)
     @Override
-    public List<Alumno> findAllByNid(
-            final @NonNull Iterable<String> nids)
-    {
-        return alumnoRepository.findAllByNid(nids);
-    }
-
     @Transactional
-    @Override
-    public void deleteByNid(
-            final @NonNull String nid)
-    {
-        alumnoRepository.deleteByNid(nid);
+    public AlumnoDTO create(
+            final @Valid CreateAlumnoInput input) {
+        // map create DTO to entity
+        Alumno entity = new Alumno();
+        entity.setNid(input.getNid());
+        entity.setFullname(input.getFullname());
+        // save/persist
+        entity = alumnoRepository.save(entity);
+        // map persisted entity to dto
+        return mapEntityToDto(entity);
     }
 
-    @Transactional
     @Override
-    public void deleteAllByNid(
-            final @NonNull Iterable<String> nids)
+    @Transactional
+    public AlumnoDTO update(
+            final @Valid UpdateAlumnoInput input) {
+        Long id = input.getId();
+        // find record which operate with
+        Alumno entity = alumnoRepository.findById(id)
+                .orElseThrow(NoSuchEntityException.creater(AlumnoConstants.DOMAIN_NAME, id));
+        // transfer each update DTO field to entity record
+        entity.setNid(input.getNid());
+        entity.setFullname(input.getFullname());
+        // save/merge
+        entity = alumnoRepository.save(entity);
+        // map merged entity to dto
+        return mapEntityToDto(entity);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(
+            final Long id) {
+        Alumno entity = alumnoRepository.findById(id)
+                .orElseThrow(NoSuchEntityException.creater(AlumnoConstants.DOMAIN_NAME, id));
+        alumnoRepository.delete(entity);
+    }
+
+    @NonNull
+    protected AlumnoDTO mapEntityToDto(
+            final @NonNull Alumno entity)
     {
-        alumnoRepository.deleteAllByNid(nids);
+        return new AlumnoDTO(
+                entity.getId(),
+                entity.getNid(),
+                entity.getFullname()
+        );
     }
 }

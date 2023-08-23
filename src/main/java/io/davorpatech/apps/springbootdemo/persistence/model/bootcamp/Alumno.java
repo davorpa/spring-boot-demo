@@ -1,5 +1,6 @@
 package io.davorpatech.apps.springbootdemo.persistence.model.bootcamp;
 
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.AlumnoConstants;
 import io.davorpatech.fwk.model.BaseEntity;
 import io.davorpatech.fwk.validation.groups.OnCreate;
 import io.davorpatech.fwk.validation.groups.OnUpdate;
@@ -36,15 +37,15 @@ public class Alumno extends BaseEntity<Long> // NOSONAR
     private Long id;
 
     @NaturalId(mutable = false)
-    @Column(name = "nid", length = 20, nullable = false, updatable = false)
+    @Column(name = "nid", length = AlumnoConstants.NID_MAXLEN, nullable = false, updatable = false)
     @NotBlank
-    @Size(min = 1, max = 20)
-    @Pattern(regexp = "[A-Z0-9]+")
+    @Size(min = AlumnoConstants.NID_MINLEN, max = AlumnoConstants.NID_MAXLEN)
+    @Pattern(regexp = AlumnoConstants.NID_REGEX)
     private String nid;
 
-    @Column(name = "fullname", length = 255, nullable = false)
+    @Column(name = "fullname", length = AlumnoConstants.FULLNAME_MAXLEN, nullable = false)
     @NotBlank
-    @Size(min = 1, max = 255)
+    @Size(min = AlumnoConstants.FULLNAME_MINLEN, max = AlumnoConstants.FULLNAME_MAXLEN)
     private String fullname;
 
     @OneToMany(mappedBy = "alumno", orphanRemoval = true)
@@ -56,82 +57,14 @@ public class Alumno extends BaseEntity<Long> // NOSONAR
         super();
     }
 
-    public Alumno(final String nid, final String fullname)
-    {
+    public Alumno(final String nid, final String fullname) {
         super();
         setNid(nid);
         setFullname(fullname);
     }
 
     @Override
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(final Long id)
-    {
-        this.id = Objects.requireNonNull(id, "id must not be null!");
-    }
-
-    public String getNid()
-    {
-        return nid;
-    }
-
-    public void setNid(final String nid)
-    {
-        this.nid = Objects.requireNonNull(nid, "nid must not be null!");
-    }
-
-    public String getFullname()
-    {
-        return fullname;
-    }
-
-    public void setFullname(final String fullname)
-    {
-        this.fullname = Objects.requireNonNull(fullname, "fullname must not be null!");
-    }
-
-    public Set<Asistencia> getAsistencias()
-    {
-        return Set.copyOf(asistencias);
-    }
-
-    public void setAsistencias(
-            final Set<Asistencia> asistencias)
-    {
-        this.asistencias = Objects.requireNonNull(asistencias, "asistencias must not be null!");
-    }
-
-    public void addAsistencia(
-            final Asistencia asistencia)
-    {
-        Objects.requireNonNull(asistencia, "asistencia to add must not be null!");
-        asistencias.add(asistencia);
-        asistencia.setAlumno(this);
-    }
-
-    public void removeAsistencia(
-            final Asistencia asistencia)
-    {
-        Objects.requireNonNull(asistencia, "asistencia to remove must not be null!");
-        asistencias.remove(asistencia);
-        asistencia.unsetAlumno();
-    }
-
-    public Set<Clase> getClases()
-    {
-        return this.asistencias
-                .stream()
-                .map(Asistencia::getClase)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-    }
-
-    @Override
-    public boolean equals(final Object o)
-    {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Alumno other = (Alumno) o;
@@ -139,15 +72,68 @@ public class Alumno extends BaseEntity<Long> // NOSONAR
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Objects.hash(nid);
     }
 
     @Override
-    protected String defineObjAttrs()
-    {
+    protected String defineObjAttrs() {
         return String.format("id=%s, nid='%s', fullname='%s', asistencias=%s, clases=%s",
                 id, nid, fullname, asistencias.size(), getClases().size());
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
+    public String getNid() {
+        return nid;
+    }
+
+    public void setNid(final String nid) {
+        this.nid = Objects.requireNonNull(nid, "nid must not be null!");
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(final String fullname) {
+        this.fullname = fullname;
+    }
+
+    public Set<Asistencia> getAsistencias() {
+        return Set.copyOf(asistencias);
+    }
+
+    public void setAsistencias(
+            final Set<Asistencia> asistencias) {
+        this.asistencias = Objects.requireNonNull(asistencias, "asistencias must not be null!");
+    }
+
+    public void addAsistencia(
+            final Asistencia asistencia) {
+        Objects.requireNonNull(asistencia, "asistencia to add must not be null!");
+        asistencias.add(asistencia);
+        asistencia.setAlumno(this);
+    }
+
+    public void removeAsistencia(
+            final Asistencia asistencia) {
+        Objects.requireNonNull(asistencia, "asistencia to remove must not be null!");
+        asistencias.remove(asistencia);
+        asistencia.unsetAlumno();
+    }
+
+    public Set<Clase> getClases() {
+        return this.asistencias
+                .stream()
+                .map(Asistencia::getClase)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

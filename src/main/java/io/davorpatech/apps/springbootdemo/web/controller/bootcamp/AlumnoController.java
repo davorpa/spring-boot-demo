@@ -1,26 +1,24 @@
 package io.davorpatech.apps.springbootdemo.web.controller.bootcamp;
 
-import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Alumno;
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.AlumnoDTO;
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.CreateAlumnoInput;
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.FindAlumnosInput;
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.UpdateAlumnoInput;
 import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
-import io.davorpatech.fwk.exception.NoMatchingRelatedFieldsException;
-import io.davorpatech.fwk.validation.groups.OnCreate;
-import io.davorpatech.fwk.validation.groups.OnUpdate;
+import io.davorpatech.apps.springbootdemo.web.model.bootcamp.CreateAlumnoRequest;
+import io.davorpatech.apps.springbootdemo.web.model.bootcamp.UpdateAlumnoRequest;
+import io.davorpatech.fwk.model.PagedResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
-import javax.validation.groups.Default;
 import java.net.URI;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/bootcamp/alumnos")
-@Validated
 class AlumnoController
 {
     private final AlumnoService alumnoService;
@@ -38,66 +36,57 @@ class AlumnoController
     }
 
     @GetMapping
-    List<Alumno> list()
+    PagedResult<AlumnoDTO> findAll(
+            final @RequestParam(name = "page", defaultValue = "1") Integer pageNumber,
+            final @RequestParam(name = "size", defaultValue = "100") Integer pageSize)
     {
-        // TODO: Apply Entity-2-Dto conversion
-        return alumnoService.findAll();
+        FindAlumnosInput query = new FindAlumnosInput(pageNumber, pageSize);
+        return alumnoService.findAll(query);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<Alumno> retrieveById(
+    ResponseEntity<AlumnoDTO> retrieveById(
             final @PathVariable("id") Long id)
     {
-        Optional<Alumno> entity = alumnoService.findById(id);
-        // TODO: Apply Entity-2-Dto conversion
-        return entity
-                .map(ResponseEntity::ok)
-                .orElseGet(ResponseEntity.notFound()::build);
+        AlumnoDTO dto = alumnoService.findById(id);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/nid.{id}")
-    ResponseEntity<Alumno> retrieveByNid(
+    ResponseEntity<AlumnoDTO> retrieveByNid(
             final @PathVariable("id") String nid)
     {
-        Optional<Alumno> entity = alumnoService.findByNid(nid);
-        // TODO: Apply Entity-2-Dto conversion
-        return entity
-                .map(ResponseEntity::ok)
-                .orElseGet(ResponseEntity.notFound()::build);
+        AlumnoDTO dto = alumnoService.findByNid(nid);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping
-    ResponseEntity<Alumno> create(
-            final @RequestBody @Validated({ Default.class, OnCreate.class }) @Valid Alumno body)
+    ResponseEntity<AlumnoDTO> create(
+            final @RequestBody @Validated CreateAlumnoRequest request)
     {
-        // TODO: Apply Dto-2-Entity conversion
-        Alumno entity = alumnoService.create(body);
-        // TODO: Apply Entity-2-Dto conversion
+        CreateAlumnoInput input = new CreateAlumnoInput(request.getNid(), request.getFullname());
+        AlumnoDTO dto = alumnoService.create(input);
 
         // Compose URI Location of the retrieve endpoint for this created resource
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(entity.getId())
+                .buildAndExpand(dto.getId())
                 .toUri();
         // build response entity providing URI and body of the created resource
         return ResponseEntity
                 .created(location)
-                .body(entity);
+                .body(dto);
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Alumno> update(
+    ResponseEntity<AlumnoDTO> update(
             final @PathVariable("id") Long id,
-            final @RequestBody @Validated({ Default.class, OnUpdate.class }) @Valid Alumno body)
+            final @RequestBody @Validated UpdateAlumnoRequest request)
     {
-        if (body.hasId() && !Objects.equals(id, body.getId())) {
-            throw new NoMatchingRelatedFieldsException(
-                    "update.id", id, "update.body.id", body.getId());
-        }
-        // TODO: Apply Dto-2-Entity conversion
-        Alumno entity = alumnoService.update(body);
-        // TODO: Apply Entity-2-Dto conversion
-        return ResponseEntity.ok(entity);
+        UpdateAlumnoInput input = new UpdateAlumnoInput(id,
+                request.getNid(), request.getFullname());
+        AlumnoDTO dto = alumnoService.update(input);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
