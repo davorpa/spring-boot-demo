@@ -7,6 +7,7 @@ import io.davorpatech.apps.springbootdemo.domain.bootcamp.UpdateAlumnoInput;
 import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
 import io.davorpatech.apps.springbootdemo.web.model.bootcamp.CreateAlumnoRequest;
 import io.davorpatech.apps.springbootdemo.web.model.bootcamp.UpdateAlumnoRequest;
+import io.davorpatech.fwk.exception.NoMatchingRelatedFieldsException;
 import io.davorpatech.fwk.model.PagedResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -83,6 +84,10 @@ class AlumnoController
             final @PathVariable("id") Long id,
             final @RequestBody @Validated UpdateAlumnoRequest request)
     {
+        if (request.hasId() && !Objects.equals(id, request.getId())) {
+            throw new NoMatchingRelatedFieldsException(
+                    "update.id", id, "update.request.id", request.getId());
+        }
         UpdateAlumnoInput input = new UpdateAlumnoInput(id,
                 request.getNid(), request.getFullname());
         AlumnoDTO dto = alumnoService.update(input);

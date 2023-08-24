@@ -1,13 +1,15 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
 import io.davorpatech.fwk.model.BaseValueObject;
+import io.davorpatech.fwk.model.Identifiable;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
-public class UpdateAlumnoInput extends BaseValueObject
+public class UpdateAlumnoInput extends BaseValueObject implements Identifiable<Long>
 {
     private static final long serialVersionUID = 8804797051751480022L;
 
@@ -31,10 +33,25 @@ public class UpdateAlumnoInput extends BaseValueObject
     }
 
     @Override
-    protected String defineObjAttrs() {
-        return String.format("id=%s, fullname='%s'", id, fullname);
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UpdateAlumnoInput other = (UpdateAlumnoInput) o;
+        return Objects.equals(id, other.id);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    protected String defineObjAttrs() {
+        return String.format("id=%s, nid='%s', fullname='%s'",
+                id, nid, fullname);
+    }
+
+    @Override
     public Long getId() {
         return id;
     }
