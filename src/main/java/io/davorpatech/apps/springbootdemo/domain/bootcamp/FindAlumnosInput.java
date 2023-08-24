@@ -2,6 +2,8 @@ package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
 import io.davorpatech.fwk.model.BaseValueObject;
 
+import java.util.Objects;
+
 public class FindAlumnosInput extends BaseValueObject
 {
     private static final long serialVersionUID = -1005702181697836040L;
@@ -13,6 +15,19 @@ public class FindAlumnosInput extends BaseValueObject
     public FindAlumnosInput(int pageNumber, int pageSize) {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FindAlumnosInput other = (FindAlumnosInput) o;
+        return pageNumber == other.pageNumber && pageSize == other.pageSize;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pageNumber, pageSize);
     }
 
     @Override

@@ -27,16 +27,16 @@ public class CreateAlumnoInput extends BaseValueObject
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CreateAlumnoInput other = (CreateAlumnoInput) o;
-        return Objects.equals(nid, other.nid);
+        return Objects.equals(nid, other.nid) && Objects.equals(fullname, other.fullname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nid);
+        return Objects.hash(nid, fullname);
     }
 
     @Override

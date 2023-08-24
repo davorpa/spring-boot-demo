@@ -33,16 +33,18 @@ public class UpdateAlumnoInput extends BaseValueObject implements Identifiable<L
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UpdateAlumnoInput other = (UpdateAlumnoInput) o;
-        return Objects.equals(id, other.id);
+        return Objects.equals(id, other.id) &&
+                Objects.equals(nid, other.nid) &&
+                Objects.equals(fullname, other.fullname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, nid, fullname);
     }
 
     @Override
