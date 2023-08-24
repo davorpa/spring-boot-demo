@@ -96,7 +96,7 @@ public class Alumno extends BaseEntity<Long> // NOSONAR
     }
 
     public void setNid(final String nid) {
-        this.nid = Objects.requireNonNull(nid, "nid must not be null!");
+        this.nid = nid;
     }
 
     public String getFullname() {

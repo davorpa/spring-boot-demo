@@ -21,7 +21,7 @@ The project provides the following service endpoints:
   - `POST` `/people`: Creates a new person. Attributes are specified as a JSON request body.
 - Bootcamp:
   - Students:
-    - `GET` `/bootcamp/alumnos`: Emits a JSON with all registered students.
+    - `GET` `/bootcamp/alumnos`: Emits a JSON with a paginated list with all registered students.
     - `GET` `/bootcamp/alumnos/[id]`: Emits a JSON with the detail of a record given it ID.
     - `GET` `/bootcamp/alumnos/nid.[nid]`: Emits a JSON with the detail of a record given it NID.
     - `POST` `/bootcamp/alumnos`: Creates a new student. Attributes are specified as a JSON request body.

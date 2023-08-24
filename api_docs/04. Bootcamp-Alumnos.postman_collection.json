@@ -28,6 +28,18 @@
 					"raw": "{{controller_url}}",
 					"host": [
 						"{{controller_url}}"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"disabled": true
+						}
 					]
 				}
 			},

@@ -44,7 +44,8 @@ public class AlumnoServiceImpl
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         int pageNumber = query.getPageNumber() > 0 ? query.getPageNumber() - 1 : 0;
         Pageable pageable = PageRequest.of(pageNumber, query.getPageSize(), sort);
-        Page<AlumnoDTO> page = alumnoRepository.findAllAsDto(pageable);
+        Page<AlumnoDTO> page = alumnoRepository.findAll(pageable)
+                .map(this::mapEntityToDto);
         return new PagedResult<>(
                 page.getContent(),
                 page.getTotalElements(),
