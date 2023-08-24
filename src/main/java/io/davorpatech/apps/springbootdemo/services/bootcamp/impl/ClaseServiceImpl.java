@@ -1,26 +1,29 @@
 package io.davorpatech.apps.springbootdemo.services.bootcamp.impl;
 
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.*;
 import io.davorpatech.apps.springbootdemo.persistence.dao.bootcamp.ClaseRepository;
 import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Clase;
 import io.davorpatech.apps.springbootdemo.services.bootcamp.ClaseService;
-import io.davorpatech.fwk.service.AbstractCrudEntityService;
+import io.davorpatech.fwk.exception.NoSuchEntityException;
+import io.davorpatech.fwk.model.PagedResult;
+import io.davorpatech.fwk.service.ServiceCommonSupport;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
-import java.util.List;
+import javax.validation.Valid;
 import java.util.Objects;
-import java.util.Optional;
 
-/**
- * Implementación del servicio de básicos para la entidad {@link Clase}.
- * <p>
- * Se delega su operativa en el correspondiente
- * {@link org.springframework.data.jpa.repository.JpaRepository JpaRepository}.
- */
 @Service
+@Transactional(readOnly = true)
+@Validated
 public class ClaseServiceImpl
-        extends AbstractCrudEntityService<Clase, Long>
+        extends ServiceCommonSupport
         implements ClaseService
 {
     private final ClaseRepository claseRepository;
@@ -38,48 +41,89 @@ public class ClaseServiceImpl
     }
 
     @Override
-    protected ClaseRepository getRepository()
-    {
-        return this.claseRepository;
+    public PagedResult<ClaseDTO> findAll(
+            final @Valid FindClasesInput query) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+        int pageNumber = query.getPageNumber() > 0 ? query.getPageNumber() - 1 : 0;
+        Pageable pageable = PageRequest.of(pageNumber, query.getPageSize(), sort);
+        Page<ClaseDTO> page = claseRepository.findAll(pageable)
+                .map(this::mapEntityToDto);
+        return new PagedResult<>(
+                page.getContent(),
+                page.getTotalElements(),
+                page.getNumber() + 1,
+                page.getTotalPages(),
+                page.isFirst(),
+                page.isLast(),
+                page.hasNext(),
+                page.hasPrevious()
+        );
     }
 
-    @Transactional(readOnly = true)
     @Override
-    public Optional<Clase> findByCodigo(
-            final @NonNull String codigo)
-    {
-        return claseRepository.findByCodigo(codigo);
+    public ClaseDTO findById(
+            final Long id) {
+        return claseRepository.findById(id)
+                .map(this::mapEntityToDto)
+                .orElseThrow(NoSuchEntityException.creater(ClaseConstants.DOMAIN_NAME, id));
     }
 
-    @Transactional(readOnly = true)
     @Override
-    public boolean existsByCodigo(
-            final @NonNull String codigo)
-    {
-        return claseRepository.existsByCodigo(codigo);
+    public ClaseDTO findByCodigo(
+            final String codigo) {
+        return claseRepository.findByCodigo(codigo)
+                .map(this::mapEntityToDto)
+                .orElseThrow(NoSuchEntityException.creater(AlumnoConstants.DOMAIN_NAME, codigo));
     }
 
-    @Transactional(readOnly = true)
     @Override
-    public List<Clase> findAllByCodigo(
-            final @NonNull Iterable<String> codigos)
-    {
-        return claseRepository.findAllByCodigo(codigos);
-    }
-
     @Transactional
-    @Override
-    public void deleteByCodigo(
-            final @NonNull String codigo)
-    {
-        claseRepository.deleteByCodigo(codigo);
+    public ClaseDTO create(
+            final @Valid CreateClaseInput input) {
+        // map create DTO to entity
+        Clase entity = new Clase();
+        entity.setCodigo(input.getCodigo());
+        entity.setNombre(input.getNombre());
+        // save/persist
+        entity = claseRepository.save(entity);
+        // map persisted entity to dto
+        return mapEntityToDto(entity);
     }
 
-    @Transactional
     @Override
-    public void deleteAllByCodigo(
-            final @NonNull Iterable<String> codigos)
+    @Transactional
+    public ClaseDTO update(
+            final @Valid UpdateClaseInput input) {
+        Long id = input.getId();
+        // find record which operate with
+        Clase entity = claseRepository.findById(id)
+                .orElseThrow(NoSuchEntityException.creater(ClaseConstants.DOMAIN_NAME, id));
+        // transfer each update DTO field to entity record
+        entity.setCodigo(input.getCodigo());
+        entity.setNombre(input.getNombre());
+        // save/merge
+        entity = claseRepository.save(entity);
+        // map merged entity to dto
+        return mapEntityToDto(entity);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(
+            final Long id) {
+        Clase entity = claseRepository.findById(id)
+                .orElseThrow(NoSuchEntityException.creater(ClaseConstants.DOMAIN_NAME, id));
+        claseRepository.delete(entity);
+    }
+
+    @NonNull
+    protected ClaseDTO mapEntityToDto(
+            final @NonNull Clase entity)
     {
-        claseRepository.deleteAllByCodigo(codigos);
+        return new ClaseDTO(
+                entity.getId(),
+                entity.getCodigo(),
+                entity.getNombre()
+        );
     }
 }

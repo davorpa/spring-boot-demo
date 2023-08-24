@@ -31,8 +31,13 @@
 					],
 					"query": [
 						{
-							"key": "",
-							"value": null,
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "10",
 							"disabled": true
 						}
 					]
@@ -389,7 +394,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"nid\": \"00000001A\",\r\n    \"fullname\": \"Juan Carlos Alfonso Víctor María de Borbón y Borbón\"\r\n}",
+					"raw": "{\r\n    //\"id\": 1,\r\n    \"codigo\": \"MATH1010\",\r\n    \"nombre\": \"Matemáticas 1010\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

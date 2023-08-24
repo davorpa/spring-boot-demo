@@ -1,22 +1,22 @@
 package io.davorpatech.apps.springbootdemo.web.controller.bootcamp;
 
-import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Clase;
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.ClaseDTO;
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.CreateClaseInput;
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.FindClasesInput;
+import io.davorpatech.apps.springbootdemo.domain.bootcamp.UpdateClaseInput;
 import io.davorpatech.apps.springbootdemo.services.bootcamp.ClaseService;
+import io.davorpatech.apps.springbootdemo.web.model.bootcamp.CreateClaseRequest;
+import io.davorpatech.apps.springbootdemo.web.model.bootcamp.UpdateClaseRequest;
 import io.davorpatech.fwk.exception.NoMatchingRelatedFieldsException;
-import io.davorpatech.fwk.validation.groups.OnCreate;
-import io.davorpatech.fwk.validation.groups.OnUpdate;
+import io.davorpatech.fwk.model.PagedResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
-import javax.validation.groups.Default;
 import java.net.URI;
-import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/bootcamp/clases")
@@ -38,66 +38,61 @@ class ClaseController
     }
 
     @GetMapping
-    List<Clase> list()
+    PagedResult<ClaseDTO> findAll(
+            final @RequestParam(name = "page", defaultValue = "1") Integer pageNumber,
+            final @RequestParam(name = "size", defaultValue = "100") Integer pageSize)
     {
-        // TODO: Apply Entity-2-Dto conversion
-        return claseService.findAll();
+        FindClasesInput query = new FindClasesInput(pageNumber, pageSize);
+        return claseService.findAll(query);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<Clase> retrieveById(
+    ResponseEntity<ClaseDTO> retrieveById(
             final @PathVariable("id") Long id)
     {
-        Optional<Clase> entity = claseService.findById(id);
-        // TODO: Apply Entity-2-Dto conversion
-        return entity
-                .map(ResponseEntity::ok)
-                .orElseGet(ResponseEntity.notFound()::build);
+        ClaseDTO dto = claseService.findById(id);
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping("/code.{code}")
-    ResponseEntity<Clase> retrieveByCodigo(
+    ResponseEntity<ClaseDTO> retrieveByCodigo(
             final @PathVariable("code") String code)
     {
-        Optional<Clase> entity = claseService.findByCodigo(code);
-        // TODO: Apply Entity-2-Dto conversion
-        return entity
-                .map(ResponseEntity::ok)
-                .orElseGet(ResponseEntity.notFound()::build);
+        ClaseDTO dto = claseService.findByCodigo(code);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping
-    ResponseEntity<Clase> create(
-            final @RequestBody @Validated({ Default.class, OnCreate.class }) @Valid Clase body)
+    ResponseEntity<ClaseDTO> create(
+            final @RequestBody @Validated CreateClaseRequest request)
     {
-        // TODO: Apply Dto-2-Entity conversion
-        Clase entity = claseService.create(body);
-        // TODO: Apply Entity-2-Dto conversion
+        CreateClaseInput input = new CreateClaseInput(request.getCodigo(), request.getNombre());
+        ClaseDTO dto = claseService.create(input);
 
         // Compose URI Location of the retrieve endpoint for this created resource
         final URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(entity.getId())
+                .buildAndExpand(dto.getId())
                 .toUri();
         // build response entity providing URI and body of the created resource
         return ResponseEntity
                 .created(location)
-                .body(entity);
+                .body(dto);
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Clase> update(
+    ResponseEntity<ClaseDTO> update(
             final @PathVariable("id") Long id,
-            final @RequestBody @Validated({ Default.class, OnUpdate.class }) @Valid Clase body)
+            final @RequestBody @Validated UpdateClaseRequest request)
     {
-        if (body.hasId() && !Objects.equals(id, body.getId())) {
+        if (request.hasId() && !Objects.equals(id, request.getId())) {
             throw new NoMatchingRelatedFieldsException(
-                    "update.id", id, "update.body.id", body.getId());
+                    "update.id", id, "update.request.id", request.getId());
         }
-        // TODO: Apply Dto-2-Entity conversion
-        Clase entity = claseService.update(body);
-        // TODO: Apply Entity-2-Dto conversion
-        return ResponseEntity.ok(entity);
+        UpdateClaseInput input = new UpdateClaseInput(id,
+                request.getCodigo(), request.getNombre());
+        ClaseDTO dto = claseService.update(input);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")
