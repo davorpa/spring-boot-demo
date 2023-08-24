@@ -23,11 +23,14 @@ public interface AlumnoService // NOSONAR
     AlumnoDTO findByNid(
             final @NonNull String nid);
 
+    @NonNull
     AlumnoDTO create(
-            @NonNull @Valid CreateAlumnoInput input);
+            final @NonNull @Valid CreateAlumnoInput input);
 
+    @NonNull
     AlumnoDTO update(
-            @NonNull @Valid UpdateAlumnoInput input);
+            final @NonNull @Valid UpdateAlumnoInput input);
 
-    void deleteById(Long id);
+    void deleteById(
+            final @NonNull Long id);
 }
