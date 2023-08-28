@@ -64,13 +64,11 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
     @Column(name = "asiste", nullable = false)
     private boolean asiste = false;
 
-    public Asistencia()
-    {
+    public Asistencia() {
         super();
     }
 
-    public Asistencia(final Clase clase, final Alumno alumno, final LocalDate fecha, final boolean asiste)
-    {
+    public Asistencia(final Clase clase, final Alumno alumno, final LocalDate fecha, final boolean asiste) {
         super();
         setClase(clase);
         setAlumno(alumno);
@@ -79,81 +77,7 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
     }
 
     @Override
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(final Long id)
-    {
-        this.id = Objects.requireNonNull(id, "id must not be null!");
-    }
-
-    public Clase getClase()
-    {
-        return clase;
-    }
-
-    private Long getClaseId()
-    {
-        Clase target = getClase();
-        return target == null ? null : target.getId();
-    }
-
-    public void setClase(final Clase clase)
-    {
-        this.clase = Objects.requireNonNull(clase, "clase must not be null!");
-    }
-
-    void unsetClase()
-    {
-        this.clase = null;
-    }
-
-    public Alumno getAlumno()
-    {
-        return alumno;
-    }
-
-    private Long getAlummoId()
-    {
-        Alumno target = getAlumno();
-        return target == null ? null : target.getId();
-    }
-
-    public void setAlumno(final Alumno alumno)
-    {
-        this.alumno = Objects.requireNonNull(alumno, "alumno must not be null!");
-    }
-
-    void unsetAlumno()
-    {
-        this.alumno = null;
-    }
-
-    public LocalDate getFecha()
-    {
-        return fecha;
-    }
-
-    public void setFecha(final LocalDate fecha)
-    {
-        this.fecha = Objects.requireNonNull(fecha, "fecha must not be null!");
-    }
-
-    public boolean isAsiste()
-    {
-        return asiste;
-    }
-
-    public void setAsiste(final boolean asiste)
-    {
-        this.asiste = asiste;
-    }
-
-    @Override
-    public boolean equals(final Object o)
-    {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Asistencia other = (Asistencia) o;
@@ -161,15 +85,72 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Objects.hash(id);
     }
 
     @Override
-    protected String defineObjAttrs()
-    {
+    protected String defineObjAttrs() {
         return String.format("id=%s, clase_id=%s, alumno_id=%s, fecha='%s', asiste=%s",
                 id, getClaseId(), getAlummoId(), fecha, asiste);
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
+    }
+
+    public Clase getClase() {
+        return clase;
+    }
+
+    public Long getClaseId() {
+        Clase target = getClase();
+        return target == null ? null : target.getId();
+    }
+
+    public void setClase(final Clase clase) {
+        this.clase = Objects.requireNonNull(clase, "clase must not be null!");
+    }
+
+    void unsetClase() {
+        this.clase = null;
+    }
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public Long getAlummoId() {
+        Alumno target = getAlumno();
+        return target == null ? null : target.getId();
+    }
+
+    public void setAlumno(final Alumno alumno) {
+        this.alumno = Objects.requireNonNull(alumno, "alumno must not be null!");
+    }
+
+    void unsetAlumno() {
+        this.alumno = null;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(final LocalDate fecha) {
+        this.fecha = Objects.requireNonNull(fecha, "fecha must not be null!");
+    }
+
+    public boolean isAsiste() {
+        return asiste;
+    }
+
+    public void setAsiste(final boolean asiste) {
+        this.asiste = asiste;
     }
 }
