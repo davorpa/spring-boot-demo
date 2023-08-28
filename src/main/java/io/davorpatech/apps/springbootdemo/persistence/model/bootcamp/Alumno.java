@@ -1,12 +1,15 @@
 package io.davorpatech.apps.springbootdemo.persistence.model.bootcamp;
 
 import io.davorpatech.apps.springbootdemo.domain.bootcamp.AlumnoConstants;
+import io.davorpatech.fwk.auditing.jpa.Audit;
+import io.davorpatech.fwk.auditing.jpa.AuditAccessor;
 import io.davorpatech.fwk.model.BaseEntity;
 import io.davorpatech.fwk.validation.groups.OnCreate;
 import io.davorpatech.fwk.validation.groups.OnUpdate;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -16,13 +19,18 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@EntityListeners({
+        AuditingEntityListener.class
+})
 @Entity
 @Table(name = "ALUMNO", schema = "BOOTCAMP")
 @org.hibernate.annotations.Cache(
         usage = CacheConcurrencyStrategy.READ_WRITE
 )
 @NaturalIdCache
-public class Alumno extends BaseEntity<Long> // NOSONAR
+public class Alumno // NOSONAR
+        extends BaseEntity<Long> // NOSONAR
+        implements AuditAccessor
 {
     private static final long serialVersionUID = 7421101598367640587L;
 
@@ -47,6 +55,9 @@ public class Alumno extends BaseEntity<Long> // NOSONAR
     @NotBlank
     @Size(min = AlumnoConstants.FULLNAME_MINLEN, max = AlumnoConstants.FULLNAME_MAXLEN)
     private String fullname;
+
+    @Embedded
+    private final Audit audit = new Audit();
 
     @OneToMany(mappedBy = "alumno", orphanRemoval = true)
     @OrderBy("clase.id ASC, fecha ASC")
@@ -105,6 +116,11 @@ public class Alumno extends BaseEntity<Long> // NOSONAR
 
     public void setFullname(final String fullname) {
         this.fullname = fullname;
+    }
+
+    @Override
+    public Audit getAudit() {
+        return audit;
     }
 
     public Set<Asistencia> getAsistencias() {
