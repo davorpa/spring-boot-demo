@@ -28,12 +28,18 @@ The project provides the following service endpoints:
     - `PUT` `/bootcamp/alumnos/[id]`: Updates a record given it ID. Attributes are specified as a JSON request body.
     - `DELETE` `/bootcamp/alumnos/[id]`: Deletes an existent student given it ID.
   - Classrooms:
-    - `GET` `/bootcamp/clases`: Emits a JSON with all registered classroom.
+    - `GET` `/bootcamp/clases`: Emits a JSON with a paginated list with all registered classroom.
     - `GET` `/bootcamp/clases/[id]`: Emits a JSON with the detail of a record given it ID.
     - `GET` `/bootcamp/clases/code.[code]`: Emits a JSON with the detail of a record given it CODE.
     - `POST` `/bootcamp/clases`: Creates a new classroom. Attributes are specified as a JSON request body.
     - `PUT` `/bootcamp/clases/[id]`: Updates a record given it ID. Attributes are specified as a JSON request body.
     - `DELETE` `/bootcamp/clases/[id]`: Deletes an existent classroom given it ID.
+  - Assistance:
+    - `GET` `/bootcamp/asistencias`: Emits a JSON with a paginated list with all registered assistances.
+    - `GET` `/bootcamp/asistencias/[id]`: Emits a JSON with the detail of a record given it ID.
+    - `POST` `/bootcamp/asistencias`: Creates a new assistance. Attributes are specified as a JSON request body.
+    - `PUT` `/bootcamp/asistencias/[id]`: Updates a record given it ID. Attributes are specified as a JSON request body.
+    - `DELETE` `/bootcamp/asistencias/[id]`: Deletes an existent assistance given it ID.
 
 ## Getting Started
 
