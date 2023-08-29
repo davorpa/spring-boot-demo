@@ -1,6 +1,8 @@
 package io.davorpatech.apps.springbootdemo.persistence.model.bootcamp;
 
 import io.davorpatech.apps.springbootdemo.domain.bootcamp.ClaseConstants;
+import io.davorpatech.fwk.auditing.jpa.Audit;
+import io.davorpatech.fwk.auditing.jpa.AuditAccessor;
 import io.davorpatech.fwk.model.BaseEntity;
 import io.davorpatech.fwk.validation.groups.OnCreate;
 import io.davorpatech.fwk.validation.groups.OnDelete;
@@ -8,6 +10,7 @@ import io.davorpatech.fwk.validation.groups.OnUpdate;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -17,13 +20,18 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@EntityListeners({
+        AuditingEntityListener.class
+})
 @Entity
 @Table(name = "CLASE", schema = "BOOTCAMP")
 @org.hibernate.annotations.Cache(
         usage = CacheConcurrencyStrategy.READ_WRITE
 )
 @NaturalIdCache
-public class Clase extends BaseEntity<Long> // NOSONAR
+public class Clase // NOSONAR
+        extends BaseEntity<Long> // NOSONAR
+        implements AuditAccessor // NOSONAR
 {
     private static final long serialVersionUID = 4541825044455915092L;
 
@@ -48,6 +56,9 @@ public class Clase extends BaseEntity<Long> // NOSONAR
     @NotBlank
     @Size(min = ClaseConstants.NAME_MINLEN, max = ClaseConstants.NAME_MAXLEN)
     private String nombre;
+
+    @Embedded
+    private final Audit audit = new Audit();
 
     @OneToMany(mappedBy = "clase", orphanRemoval = true)
     @OrderBy("alumno.id ASC, fecha ASC")
@@ -105,6 +116,11 @@ public class Clase extends BaseEntity<Long> // NOSONAR
 
     public void setNombre(final String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public Audit getAudit() {
+        return audit;
     }
 
     public Set<Asistencia> getAsistencias() {

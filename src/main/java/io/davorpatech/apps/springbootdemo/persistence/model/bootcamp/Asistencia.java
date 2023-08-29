@@ -1,9 +1,12 @@
 package io.davorpatech.apps.springbootdemo.persistence.model.bootcamp;
 
+import io.davorpatech.fwk.auditing.jpa.Audit;
+import io.davorpatech.fwk.auditing.jpa.AuditAccessor;
 import io.davorpatech.fwk.model.BaseEntity;
 import io.davorpatech.fwk.validation.groups.OnCreate;
 import io.davorpatech.fwk.validation.groups.OnDelete;
 import io.davorpatech.fwk.validation.groups.OnUpdate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -13,6 +16,9 @@ import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@EntityListeners({
+        AuditingEntityListener.class
+})
 @Entity
 @Table(
         name = "ASISTENCIA",
@@ -24,7 +30,9 @@ import java.util.Objects;
                 )
         }
 )
-public class Asistencia extends BaseEntity<Long> // NOSONAR
+public class Asistencia // NOSONAR
+        extends BaseEntity<Long> // NOSONAR
+        implements AuditAccessor // NOSONAR
 {
     private static final long serialVersionUID = 1557607792781748416L;
 
@@ -63,6 +71,9 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
 
     @Column(name = "asiste", nullable = false)
     private boolean asiste = false;
+
+    @Embedded
+    private final Audit audit = new Audit();
 
     public Asistencia() {
         super();
@@ -152,5 +163,10 @@ public class Asistencia extends BaseEntity<Long> // NOSONAR
 
     public void setAsiste(final boolean asiste) {
         this.asiste = asiste;
+    }
+
+    @Override
+    public Audit getAudit() {
+        return audit;
     }
 }

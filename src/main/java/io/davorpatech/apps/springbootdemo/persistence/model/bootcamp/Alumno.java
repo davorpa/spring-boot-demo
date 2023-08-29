@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 @NaturalIdCache
 public class Alumno // NOSONAR
         extends BaseEntity<Long> // NOSONAR
-        implements AuditAccessor
+        implements AuditAccessor // NOSONAR
 {
     private static final long serialVersionUID = 7421101598367640587L;
 
