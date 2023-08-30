@@ -59,7 +59,7 @@ public class Alumno // NOSONAR
     @Embedded
     private final Audit audit = new Audit();
 
-    @OneToMany(mappedBy = "alumno", orphanRemoval = true)
+    @OneToMany(mappedBy = "alumno", fetch = FetchType.LAZY, orphanRemoval = true)
     @OrderBy("clase.id ASC, fecha ASC")
     private Set<@Valid Asistencia> asistencias = new LinkedHashSet<>();
 

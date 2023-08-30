@@ -46,7 +46,7 @@ public class Asistencia // NOSONAR
     @NotNull(groups = { OnUpdate.class, OnDelete.class })
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(
             name = "clase_id",
             nullable = false,
@@ -55,7 +55,7 @@ public class Asistencia // NOSONAR
     @Valid
     private Clase clase;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(
             name = "alumno_id",
             nullable = false,
