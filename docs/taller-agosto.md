@@ -2,8 +2,9 @@
 
 1. Registrar los libros que ha escrito un autor:
 
-       libro   = isbn, nombre, autor{id}
-       autor   = nombre, correo, dni
+       book             = isbn, title, synopsis, year
+       person           = nid, name, email, birthdate, country
+       book_authorship  = book{id}, person{id}
 
 2. Registrar inventario de los productos:
 
