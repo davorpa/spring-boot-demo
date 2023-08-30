@@ -3,10 +3,7 @@ package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 import io.davorpatech.fwk.model.BaseValueObject;
 import io.davorpatech.fwk.model.Identifiable;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class UpdateAlumnoInput extends BaseValueObject implements Identifiable<Long>
@@ -25,11 +22,16 @@ public class UpdateAlumnoInput extends BaseValueObject implements Identifiable<L
     @Size(min = AlumnoConstants.FULLNAME_MINLEN, max = AlumnoConstants.FULLNAME_MAXLEN)
     private final String fullname;
 
-    public UpdateAlumnoInput(final Long id, final String nid, final String fullname) {
+    @Size(max = AlumnoConstants.EMAIL_MAXLEN)
+    @Email
+    private final String email;
+
+    public UpdateAlumnoInput(final Long id, final String nid, final String fullname, final String email) {
         super();
         this.id = id;
         this.nid = nid;
         this.fullname = fullname;
+        this.email = email;
     }
 
     @Override
@@ -39,18 +41,19 @@ public class UpdateAlumnoInput extends BaseValueObject implements Identifiable<L
         UpdateAlumnoInput other = (UpdateAlumnoInput) o;
         return Objects.equals(id, other.id) &&
                 Objects.equals(nid, other.nid) &&
-                Objects.equals(fullname, other.fullname);
+                Objects.equals(fullname, other.fullname) &&
+                Objects.equals(email, other.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nid, fullname);
+        return Objects.hash(id, nid, fullname, email);
     }
 
     @Override
     protected String defineObjAttrs() {
-        return String.format("id=%s, nid='%s', fullname='%s'",
-                id, nid, fullname);
+        return String.format("id=%s, nid='%s', fullname='%s', email='%s'",
+                id, nid, fullname, email);
     }
 
     @Override
@@ -64,5 +67,9 @@ public class UpdateAlumnoInput extends BaseValueObject implements Identifiable<L
 
     public String getFullname() {
         return fullname;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

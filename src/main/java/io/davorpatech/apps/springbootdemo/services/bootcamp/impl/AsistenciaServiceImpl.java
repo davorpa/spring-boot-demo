@@ -139,7 +139,7 @@ public class AsistenciaServiceImpl // NOSONAR
         return new AsistenciaDTO(
                 entity.getId(),
                 new ClaseDTO(clase.getId(), clase.getCodigo(), clase.getNombre()),
-                new AlumnoDTO(alumno.getId(), alumno.getNid(), alumno.getFullname()),
+                new AlumnoDTO(alumno.getId(), alumno.getNid(), alumno.getFullname(), alumno.getEmail()),
                 entity.getFecha(),
                 entity.isAsiste()
         );

@@ -21,7 +21,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface AlumnoRepository extends JpaRepository<Alumno, Long>
 {
-    @Query("SELECT new io.davorpatech.apps.springbootdemo.domain.bootcamp.AlumnoDTO(e.id, e.nid, e.fullname) " +
+    @Query("SELECT new io.davorpatech.apps.springbootdemo.domain.bootcamp.AlumnoDTO(e.id, e.nid, e.fullname, e.email) " +
             " FROM #{#entityName} e")
     Page<AlumnoDTO> findAllAsDto(final Pageable pageable);
 

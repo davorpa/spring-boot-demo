@@ -4,6 +4,7 @@ import io.davorpatech.apps.springbootdemo.domain.bootcamp.AlumnoConstants;
 import io.davorpatech.fwk.model.BaseValueObject;
 import io.davorpatech.fwk.model.Identifiable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -24,11 +25,16 @@ public class UpdateAlumnoRequest extends BaseValueObject implements Identifiable
     @Size(min = AlumnoConstants.FULLNAME_MINLEN, max = AlumnoConstants.FULLNAME_MAXLEN)
     private final String fullname;
 
-    public UpdateAlumnoRequest(final Long id, final String nid, final String fullname) {
+    @Size(max = AlumnoConstants.EMAIL_MAXLEN)
+    @Email
+    private final String email;
+
+    public UpdateAlumnoRequest(final Long id, final String nid, final String fullname, final String email) {
         super();
         this.id = id;
         this.nid = nid;
         this.fullname = fullname;
+        this.email = email;
     }
 
     @Override
@@ -38,18 +44,19 @@ public class UpdateAlumnoRequest extends BaseValueObject implements Identifiable
         UpdateAlumnoRequest other = (UpdateAlumnoRequest) o;
         return Objects.equals(id, other.id) &&
                 Objects.equals(nid, other.nid) &&
-                Objects.equals(fullname, other.fullname);
+                Objects.equals(fullname, other.fullname) &&
+                Objects.equals(email, other.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nid, fullname);
+        return Objects.hash(id, nid, fullname, email);
     }
 
     @Override
     protected String defineObjAttrs() {
-        return String.format("id=%s, nid='%s', fullname='%s'",
-                id, nid, fullname);
+        return String.format("id=%s, nid='%s', fullname='%s', email='%s'",
+                id, nid, fullname, email);
     }
 
     @Override
@@ -63,5 +70,9 @@ public class UpdateAlumnoRequest extends BaseValueObject implements Identifiable
 
     public String getFullname() {
         return fullname;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

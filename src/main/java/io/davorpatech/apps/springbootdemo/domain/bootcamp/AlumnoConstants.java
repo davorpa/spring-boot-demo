@@ -13,4 +13,6 @@ public interface AlumnoConstants // NOSONAR
     int FULLNAME_MINLEN = 1;
 
     int FULLNAME_MAXLEN = 255;
+
+    int EMAIL_MAXLEN = 255;
 }

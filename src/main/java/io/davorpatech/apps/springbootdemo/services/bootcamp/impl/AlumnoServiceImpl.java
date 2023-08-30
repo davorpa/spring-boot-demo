@@ -82,6 +82,7 @@ public class AlumnoServiceImpl
         Alumno entity = new Alumno();
         entity.setNid(input.getNid());
         entity.setFullname(input.getFullname());
+        entity.setEmail(input.getEmail());
         // save/persist
         entity = alumnoRepository.save(entity);
         // map persisted entity to dto
@@ -99,6 +100,7 @@ public class AlumnoServiceImpl
         // transfer each update DTO field to entity record
         entity.setNid(input.getNid());
         entity.setFullname(input.getFullname());
+        entity.setEmail(input.getEmail());
         // save/merge
         entity = alumnoRepository.save(entity);
         // map merged entity to dto
@@ -121,7 +123,8 @@ public class AlumnoServiceImpl
         return new AlumnoDTO(
                 entity.getId(),
                 entity.getNid(),
-                entity.getFullname()
+                entity.getFullname(),
+                entity.getEmail()
         );
     }
 }

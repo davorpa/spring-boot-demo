@@ -65,6 +65,11 @@ public class Alumno // NOSONAR
     @Size(min = AlumnoConstants.FULLNAME_MINLEN, max = AlumnoConstants.FULLNAME_MAXLEN)
     private String fullname;
 
+    @Column(name = "email", length = AlumnoConstants.EMAIL_MAXLEN, nullable = true)
+    @Size(max = AlumnoConstants.EMAIL_MAXLEN)
+    @Email
+    private String email;
+
     @Embedded
     private final Audit audit = new Audit();
 
@@ -77,10 +82,11 @@ public class Alumno // NOSONAR
         super();
     }
 
-    public Alumno(final String nid, final String fullname) {
+    public Alumno(final String nid, final String fullname, final String email) {
         super();
         setNid(nid);
         setFullname(fullname);
+        setEmail(email);
     }
 
     @Override
@@ -98,8 +104,8 @@ public class Alumno // NOSONAR
 
     @Override
     protected String defineObjAttrs() {
-        return String.format("id=%s, nid='%s', fullname='%s', asistencias=%s, clases=%s",
-                id, nid, fullname, asistencias.size(), getClases().size());
+        return String.format("id=%s, nid='%s', fullname='%s', email='%s', asistencias=%s, clases=%s",
+                id, nid, fullname, email, asistencias.size(), getClases().size());
     }
 
     @Override
@@ -125,6 +131,14 @@ public class Alumno // NOSONAR
 
     public void setFullname(final String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(final String email) {
+        this.email = email;
     }
 
     @Override

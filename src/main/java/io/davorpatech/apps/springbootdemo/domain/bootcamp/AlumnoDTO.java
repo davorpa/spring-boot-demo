@@ -15,10 +15,14 @@ public class AlumnoDTO extends BaseValueObject implements Identifiable<Long>
 
     private final String fullname;
 
-    public AlumnoDTO(Long id, String nid, String fullname) {
+    private final String email;
+
+    public AlumnoDTO(Long id, String nid, String fullname, String email) {
+        super();
         this.id = id;
         this.nid = nid;
         this.fullname = fullname;
+        this.email = email;
     }
 
     @Override
@@ -36,8 +40,8 @@ public class AlumnoDTO extends BaseValueObject implements Identifiable<Long>
 
     @Override
     protected String defineObjAttrs() {
-        return String.format("id=%s, nid='%s', fullname='%s'",
-                id, nid, fullname);
+        return String.format("id=%s, nid='%s', fullname='%s', email='%s'",
+                id, nid, fullname, email);
     }
 
     @Override
@@ -51,5 +55,9 @@ public class AlumnoDTO extends BaseValueObject implements Identifiable<Long>
 
     public String getFullname() {
         return fullname;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

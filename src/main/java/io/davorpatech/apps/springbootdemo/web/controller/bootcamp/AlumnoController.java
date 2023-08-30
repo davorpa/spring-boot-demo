@@ -65,7 +65,8 @@ class AlumnoController
     ResponseEntity<AlumnoDTO> create(
             final @RequestBody @Validated CreateAlumnoRequest request)
     {
-        CreateAlumnoInput input = new CreateAlumnoInput(request.getNid(), request.getFullname());
+        CreateAlumnoInput input = new CreateAlumnoInput(
+                request.getNid(), request.getFullname(), request.getEmail());
         AlumnoDTO dto = alumnoService.create(input);
 
         // Compose URI Location of the retrieve endpoint for this created resource
@@ -89,7 +90,7 @@ class AlumnoController
                     "update.id", id, "update.request.id", request.getId());
         }
         UpdateAlumnoInput input = new UpdateAlumnoInput(id,
-                request.getNid(), request.getFullname());
+                request.getNid(), request.getFullname(), request.getEmail());
         AlumnoDTO dto = alumnoService.update(input);
         return ResponseEntity.ok(dto);
     }

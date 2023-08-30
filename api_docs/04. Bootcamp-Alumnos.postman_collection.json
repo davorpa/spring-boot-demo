@@ -249,7 +249,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nid\": \"00000001A\",\r\n    \"fullname\": \"Juan Carlos Alfonso Víctor María de Borbón y Borbón\"\r\n}",
+					"raw": "{\r\n    \"nid\": \"00000001A\",\r\n    \"fullname\": \"Juan Carlos Alfonso Víctor María de Borbón y Borbón\",\r\n    \"email\": \"foo@example.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -394,7 +394,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nid\": \"00000001A\",\r\n    \"fullname\": \"Juan Carlos Alfonso Víctor María de Borbón y Borbón\"\r\n}",
+					"raw": "{\r\n    \"nid\": \"00000001A\",\r\n    \"fullname\": \"Juan Carlos Alfonso Víctor María de Borbón y Borbón\",\r\n    \"email\": \"bar@example.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
