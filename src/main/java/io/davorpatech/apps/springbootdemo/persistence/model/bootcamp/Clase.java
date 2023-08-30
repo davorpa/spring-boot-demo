@@ -24,7 +24,16 @@ import java.util.stream.Collectors;
         AuditingEntityListener.class
 })
 @Entity
-@Table(name = "CLASE", schema = "BOOTCAMP")
+@Table(
+        name = "CLASE",
+        schema = "BOOTCAMP",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "UK_bootcamp_clase_codigo",
+                        columnNames = {"codigo"}
+                )
+        }
+)
 @org.hibernate.annotations.Cache(
         usage = CacheConcurrencyStrategy.READ_WRITE
 )
@@ -46,7 +55,7 @@ public class Clase // NOSONAR
     private Long id;
 
     @NaturalId(mutable = false)
-    @Column(name = "codigo", length = ClaseConstants.CODE_MAXLEN, nullable = false, unique = true, updatable = false)
+    @Column(name = "codigo", length = ClaseConstants.CODE_MAXLEN, nullable = false, updatable = false)
     @NotBlank
     @Size(min = ClaseConstants.CODE_MINLEN, max = ClaseConstants.CODE_MAXLEN)
     @Pattern(regexp = ClaseConstants.CODE_REGEX)

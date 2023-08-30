@@ -23,7 +23,16 @@ import java.util.stream.Collectors;
         AuditingEntityListener.class
 })
 @Entity
-@Table(name = "ALUMNO", schema = "BOOTCAMP")
+@Table(
+        name = "ALUMNO",
+        schema = "BOOTCAMP",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "UK_bootcamp_alumno_nid",
+                        columnNames = {"nid"}
+                )
+        }
+)
 @org.hibernate.annotations.Cache(
         usage = CacheConcurrencyStrategy.READ_WRITE
 )
