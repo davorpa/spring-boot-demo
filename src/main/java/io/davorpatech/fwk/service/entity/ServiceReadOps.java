@@ -1,4 +1,4 @@
-package io.davorpatech.fwk.service;
+package io.davorpatech.fwk.service.entity;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

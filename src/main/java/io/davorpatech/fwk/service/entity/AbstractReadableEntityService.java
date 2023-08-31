@@ -1,4 +1,4 @@
-package io.davorpatech.fwk.service;
+package io.davorpatech.fwk.service.entity;
 
 import io.davorpatech.fwk.model.Entitier;
 import org.springframework.transaction.annotation.Transactional;

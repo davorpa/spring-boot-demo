@@ -1,6 +1,7 @@
-package io.davorpatech.fwk.service;
+package io.davorpatech.fwk.service.entity;
 
 import io.davorpatech.fwk.model.Entitier;
+import io.davorpatech.fwk.service.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.groups.Default;

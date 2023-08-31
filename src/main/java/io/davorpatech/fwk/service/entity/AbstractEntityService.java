@@ -1,6 +1,7 @@
-package io.davorpatech.fwk.service;
+package io.davorpatech.fwk.service.entity;
 
 import io.davorpatech.fwk.model.Entitier;
+import io.davorpatech.fwk.service.ServiceCommonSupport;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;
