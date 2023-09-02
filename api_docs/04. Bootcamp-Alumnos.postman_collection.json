@@ -32,12 +32,27 @@
 					"query": [
 						{
 							"key": "page",
-							"value": "1",
+							"value": "0",
 							"disabled": true
 						},
 						{
 							"key": "size",
 							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "unpaged",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "fullname,ASC",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "id,DESC",
 							"disabled": true
 						}
 					]
