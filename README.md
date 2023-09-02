@@ -63,3 +63,4 @@ The following guides illustrate how to use some features concretely:
 * [Spring Boot Starter Request Correlation](https://github.com/stevesaliman/spring-boot-starter-request-correlation)
 * [Spring Boot Actuator with Correlation ID](https://www.jvt.me/posts/2022/01/13/spring-boot-actuator-audit/)
 * [Validation with Spring Boot - the Complete Guide](https://reflectoring.io/bean-validation-with-spring-boot/)
+* [Paging with Spring Boot Data](https://reflectoring.io/spring-boot-paging/)

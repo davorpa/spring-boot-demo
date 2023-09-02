@@ -9,6 +9,9 @@ import io.davorpatech.apps.springbootdemo.web.model.bootcamp.CreateAlumnoRequest
 import io.davorpatech.apps.springbootdemo.web.model.bootcamp.UpdateAlumnoRequest;
 import io.davorpatech.fwk.exception.NoMatchingRelatedFieldsException;
 import io.davorpatech.fwk.model.PagedResult;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -38,10 +41,16 @@ class AlumnoController
 
     @GetMapping
     PagedResult<AlumnoDTO> findAll(
-            final @RequestParam(name = "page", defaultValue = "1") Integer pageNumber,
-            final @RequestParam(name = "size", defaultValue = "100") Integer pageSize)
+            final /*@PageableDefault(size = 50)*/
+            @SortDefault.SortDefaults(
+                    @SortDefault(sort = "id", direction = Sort.Direction.ASC)
+            ) Pageable pageable,
+            final @RequestParam(value = "unpaged", defaultValue = "false") boolean forceUnpaged)
     {
-        FindAlumnosInput query = new FindAlumnosInput(pageNumber, pageSize);
+        FindAlumnosInput query = new FindAlumnosInput(
+                forceUnpaged || pageable.isUnpaged() ?  0 : pageable.getPageNumber(),
+                forceUnpaged || pageable.isUnpaged() ? -1 : pageable.getPageSize()
+            );
         return alumnoService.findAll(query);
     }
 
