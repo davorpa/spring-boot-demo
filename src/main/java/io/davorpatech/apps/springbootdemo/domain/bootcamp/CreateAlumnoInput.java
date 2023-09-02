@@ -1,6 +1,7 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
 import io.davorpatech.fwk.model.BaseValueObject;
+import io.davorpatech.fwk.model.commands.CreateInputCmd;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -8,7 +9,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public class CreateAlumnoInput extends BaseValueObject
+public class CreateAlumnoInput // NOSONAR
+        extends BaseValueObject // NOSONAR
+        implements CreateInputCmd // NOSONAR
 {
     private static final long serialVersionUID = -3511682225584425317L;
 

@@ -1,10 +1,13 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
 import io.davorpatech.fwk.model.BaseValueObject;
+import io.davorpatech.fwk.model.commands.FindInputCmd;
 
 import java.util.Objects;
 
-public class FindAlumnosInput extends BaseValueObject
+public class FindAlumnosInput // NOSONAR
+        extends BaseValueObject // NOSONAR
+        implements FindInputCmd // NOSONAR
 {
     private static final long serialVersionUID = -1005702181697836040L;
 
@@ -35,10 +38,12 @@ public class FindAlumnosInput extends BaseValueObject
         return String.format("pageNumber=%s, pageSize=%s", pageNumber, pageSize);
     }
 
+    @Override
     public int getPageNumber() {
         return pageNumber;
     }
 
+    @Override
     public int getPageSize() {
         return pageSize;
     }

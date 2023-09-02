@@ -1,12 +1,14 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
 import io.davorpatech.fwk.model.BaseValueObject;
-import io.davorpatech.fwk.model.Identifiable;
+import io.davorpatech.fwk.model.commands.UpdateInputCmd;
 
 import javax.validation.constraints.*;
 import java.util.Objects;
 
-public class UpdateAlumnoInput extends BaseValueObject implements Identifiable<Long>
+public class UpdateAlumnoInput // NOSONAR
+        extends BaseValueObject // NOSONAR
+        implements UpdateInputCmd<Long> // NOSONAR
 {
     private static final long serialVersionUID = 8804797051751480022L;
 
