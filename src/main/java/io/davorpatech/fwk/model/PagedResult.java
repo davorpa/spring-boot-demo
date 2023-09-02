@@ -3,26 +3,36 @@ package io.davorpatech.fwk.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.lang.NonNull;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class PagedResult<T extends ValueObject>
+/**
+ * A paged result is a slice of a list of objects.
+ *
+ * <p>It allows gain information about the position of it in the containing entire list.
+ *
+ * @param <T> the component type of the paged data
+ */
+public class PagedResult<T extends Serializable> implements Serializable // NOSONAR
 {
-    public final Collection<T> data;
+    private static final long serialVersionUID = 1924584331116408492L;
 
-    public final long totalElements;
+    private final Collection<T> data;
 
-    public final int pageNumber;
+    private final long totalElements;
 
-    public final int totalPages;
+    private final int pageNumber;
+
+    private final int totalPages;
 
     @JsonProperty("isFirst")
-    public final boolean first;
+    private final boolean first;
     @JsonProperty("isLast")
-    public final boolean last;
+    private final boolean last;
     @JsonProperty("hasNext")
-    public final boolean hasNext;
+    private final boolean hasNext;
     @JsonProperty("hasPrevious")
-    public final boolean hasPrevious;
+    private final boolean hasPrevious;
 
     public PagedResult( // NOSONAR
             final @NonNull Collection<T> data,
@@ -43,34 +53,74 @@ public class PagedResult<T extends ValueObject>
         this.hasPrevious = hasPrevious;
     }
 
+    /**
+     * Returns the page content as {@link Collection}.
+     *
+     * @return
+     */
     public Collection<T> getData() {
         return data;
     }
 
+    /**
+     * Returns the total amount of elements. Is always non-negative.
+     *
+     * @return the total amount of elements
+     */
     public long getTotalElements() {
         return totalElements;
     }
 
+    /**
+     * Returns the number of the current page. Is always non-negative.
+     *
+     * @return the number of the current page
+     */
     public int getPageNumber() {
         return pageNumber;
     }
 
+    /**
+     * Returns the number of total pages. Is always non-negative.
+     *
+     * @return the number of total pages
+     */
     public int getTotalPages() {
         return totalPages;
     }
 
+    /**
+     * Returns whether the current page is the first one.
+     *
+     * @return {@code true} if the current page is the first one
+     */
     public boolean isFirst() {
         return first;
     }
 
+    /**
+     * Returns whether the current page is the last one.
+     *
+     * @return {@code true} if the current page is the last one
+     */
     public boolean isLast() {
         return last;
     }
 
+    /**
+     * Returns if there is a next page.
+     *
+     * @return {@code true} if there is a next page
+     */
     public boolean hasNext() {
         return hasNext;
     }
 
+    /**
+     * Returns if there is a previous page.
+     *
+     * @return {@code true} if there is a previous page
+     */
     public boolean hasPrevious() {
         return hasPrevious;
     }
