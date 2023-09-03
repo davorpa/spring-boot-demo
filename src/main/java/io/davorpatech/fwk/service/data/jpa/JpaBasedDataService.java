@@ -1,4 +1,4 @@
-package io.davorpatech.fwk.service.data;
+package io.davorpatech.fwk.service.data.jpa;
 
 import io.davorpatech.fwk.exception.NoSuchEntityException;
 import io.davorpatech.fwk.model.Entitier;
@@ -9,6 +9,7 @@ import io.davorpatech.fwk.model.commands.FindInputCmd;
 import io.davorpatech.fwk.model.commands.Sortable;
 import io.davorpatech.fwk.model.commands.UpdateInputCmd;
 import io.davorpatech.fwk.service.ServiceCommonSupport;
+import io.davorpatech.fwk.service.data.DataService;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;
@@ -33,7 +34,7 @@ import java.util.List;
  * @param <UPDATE_CMD> type of the update input command
  */
 @Transactional(readOnly = true)
-public abstract class AbstractDataService< // NOSONAR
+public abstract class JpaBasedDataService< // NOSONAR
                 R extends JpaRepository<T, ID>, // NOSONAR
                 ID  extends Serializable, // NOSONAR
                 T   extends Entitier<ID>, // NOSONAR
@@ -57,13 +58,13 @@ public abstract class AbstractDataService< // NOSONAR
     protected final R repository;
 
     /**
-     * Constructs a new {@link AbstractDataService} with the given arguments.
+     * Constructs a new {@link JpaBasedDataService} with the given arguments.
      *
      * @param repository the repository of the business entity, never {@code null}
      * @param domainName the domain name that uniquely identifies the underlayed
      *                   business entity
      */
-    protected AbstractDataService(
+    protected JpaBasedDataService(
             final R repository, final String domainName)
     {
         super();
@@ -79,7 +80,7 @@ public abstract class AbstractDataService< // NOSONAR
     protected Class<ID> getIdClass()
     {
         if (idClass == null) {
-            //only works if one extends AbstractDataService, we will take care of it with CDI
+            //only works if one extends JpaBasedDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
             // 0: <R> value type
             // 1: <ID> value type
@@ -99,7 +100,7 @@ public abstract class AbstractDataService< // NOSONAR
     protected Class<T> getEntityClass()
     {
         if (entityClass == null) {
-            //only works if one extends AbstractDataService, we will take care of it with CDI
+            //only works if one extends JpaBasedDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
             // 0: <R> value type
             // 1: <ID> value type
@@ -119,7 +120,7 @@ public abstract class AbstractDataService< // NOSONAR
     protected Class<DTO> getDtoClass()
     {
         if (dtoClass == null) {
-            //only works if one extends AbstractDataService, we will take care of it with CDI
+            //only works if one extends JpaBasedDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
             // 0: <R> value type
             // 1: <ID> value type
@@ -139,7 +140,7 @@ public abstract class AbstractDataService< // NOSONAR
     protected Class<FIND_CMD> getFindCmdClass()
     {
         if (findCmdClass == null) {
-            //only works if one extends AbstractDataService, we will take care of it with CDI
+            //only works if one extends JpaBasedDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
             // 0: <R> value type
             // 1: <ID> value type
@@ -159,7 +160,7 @@ public abstract class AbstractDataService< // NOSONAR
     protected Class<CREATE_CMD> getCreateCmdClass()
     {
         if (createCmdClass == null) {
-            //only works if one extends AbstractDataService, we will take care of it with CDI
+            //only works if one extends JpaBasedDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
             // 0: <R> value type
             // 1: <ID> value type
@@ -179,7 +180,7 @@ public abstract class AbstractDataService< // NOSONAR
     protected Class<UPDATE_CMD> getUpdateCmdClass()
     {
         if (updateCmdClass == null) {
-            //only works if one extends AbstractDataService, we will take care of it with CDI
+            //only works if one extends JpaBasedDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
             // 0: <R> value type
             // 1: <ID> value type

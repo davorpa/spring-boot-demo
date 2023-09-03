@@ -5,7 +5,7 @@ import io.davorpatech.apps.springbootdemo.persistence.dao.bootcamp.ClaseReposito
 import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Clase;
 import io.davorpatech.apps.springbootdemo.services.bootcamp.ClaseService;
 import io.davorpatech.fwk.exception.NoSuchEntityException;
-import io.davorpatech.fwk.service.data.AbstractDataService;
+import io.davorpatech.fwk.service.data.jpa.JpaBasedDataService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 public class ClaseServiceImpl // NOSONAR
-        extends AbstractDataService< // NOSONAR
-            ClaseRepository, // NOSONAR
-            Long, Clase, ClaseDTO, // NOSONAR
-            FindClasesInput, CreateClaseInput, UpdateClaseInput> // NOSONAR
+        extends JpaBasedDataService< // NOSONAR
+                    ClaseRepository, // NOSONAR
+                    Long, Clase, ClaseDTO, // NOSONAR
+                    FindClasesInput, CreateClaseInput, UpdateClaseInput> // NOSONAR
         implements ClaseService // NOSONAR
 {
     /**

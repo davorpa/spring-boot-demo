@@ -5,7 +5,7 @@ import io.davorpatech.apps.springbootdemo.persistence.dao.bootcamp.AlumnoReposit
 import io.davorpatech.apps.springbootdemo.persistence.model.bootcamp.Alumno;
 import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
 import io.davorpatech.fwk.exception.NoSuchEntityException;
-import io.davorpatech.fwk.service.data.AbstractDataService;
+import io.davorpatech.fwk.service.data.jpa.JpaBasedDataService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 public class AlumnoServiceImpl // NOSONAR
-        extends AbstractDataService< // NOSONAR
-            AlumnoRepository, // NOSONAR
-            Long, Alumno, AlumnoDTO, // NOSONAR
-            FindAlumnosInput, CreateAlumnoInput, UpdateAlumnoInput> // NOSONAR
+        extends JpaBasedDataService< // NOSONAR
+                    AlumnoRepository, // NOSONAR
+                    Long, Alumno, AlumnoDTO, // NOSONAR
+                    FindAlumnosInput, CreateAlumnoInput, UpdateAlumnoInput> // NOSONAR
         implements AlumnoService // NOSONAR
 {
     /**
