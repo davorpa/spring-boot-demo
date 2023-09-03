@@ -5,7 +5,9 @@ import io.davorpatech.fwk.model.Identifiable;
 
 import java.util.Objects;
 
-public class AlumnoDTO extends BaseValueObject implements Identifiable<Long>
+public class AlumnoDTO // NOSONAR
+        extends BaseValueObject // NOSONAR
+        implements Identifiable<Long> // NOSONAR
 {
     private static final long serialVersionUID = -7715819929617487003L;
 

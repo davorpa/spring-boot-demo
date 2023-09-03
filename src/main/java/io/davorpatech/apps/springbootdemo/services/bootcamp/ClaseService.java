@@ -9,7 +9,7 @@ import io.davorpatech.fwk.service.data.DataService;
 import org.springframework.lang.NonNull;
 
 public interface ClaseService // NOSONAR
-        extends DataService<Long, Clase, ClaseDTO, FindClasesInput, CreateClaseInput, UpdateClaseInput>
+        extends DataService<Long, Clase, ClaseDTO, FindClasesInput, CreateClaseInput, UpdateClaseInput> // NOSONAR
 {
     @NonNull
     ClaseDTO findByCodigo(

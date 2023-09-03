@@ -16,9 +16,9 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Transactional(readOnly = true)
 @Validated
-public class AlumnoServiceImpl
-        extends AbstractDataService<Long, Alumno, AlumnoDTO, FindAlumnosInput, CreateAlumnoInput, UpdateAlumnoInput>
-        implements AlumnoService
+public class AlumnoServiceImpl // NOSONAR
+        extends AbstractDataService<Long, Alumno, AlumnoDTO, FindAlumnosInput, CreateAlumnoInput, UpdateAlumnoInput> // NOSONAR
+        implements AlumnoService // NOSONAR
 {
     private final AlumnoRepository alumnoRepository;
 
