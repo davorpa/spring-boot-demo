@@ -1,11 +1,15 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
 import io.davorpatech.fwk.model.BaseValueObject;
+import io.davorpatech.fwk.model.commands.FindInputCmd;
+import io.davorpatech.fwk.model.commands.Sortable;
 import org.springframework.data.domain.Sort;
 
 import java.util.Objects;
 
-public class FindAsistenciasInput extends BaseValueObject // NOSONAR
+public class FindAsistenciasInput // NOSONAR
+        extends BaseValueObject // NOSONAR
+        implements FindInputCmd, Sortable // NOSONAR
 {
     private static final long serialVersionUID = -375698255318579169L;
 
@@ -41,14 +45,17 @@ public class FindAsistenciasInput extends BaseValueObject // NOSONAR
         return String.format("pageNumber=%s, pageSize=%s, sort=%s", pageNumber, pageSize, sort);
     }
 
+    @Override
     public int getPageNumber() {
         return pageNumber;
     }
 
+    @Override
     public int getPageSize() {
         return pageSize;
     }
 
+    @Override
     public Sort getSort() {
         return sort;
     }

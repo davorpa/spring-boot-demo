@@ -1,13 +1,16 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
 import io.davorpatech.fwk.model.BaseValueObject;
+import io.davorpatech.fwk.model.commands.CreateInputCmd;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class CreateAsistenciaInput extends BaseValueObject // NOSONAR
+public class CreateAsistenciaInput // NOSONAR
+        extends BaseValueObject // NOSONAR
+        implements CreateInputCmd // NOSONAR
 {
     private static final long serialVersionUID = 5305261415324207966L;
 
