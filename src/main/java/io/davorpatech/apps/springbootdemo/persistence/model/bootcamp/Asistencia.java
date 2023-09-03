@@ -88,19 +88,6 @@ public class Asistencia // NOSONAR
     }
 
     @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Asistencia other = (Asistencia) o;
-        return Objects.equals(id, other.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
     protected String defineObjAttrs() {
         return String.format("id=%s, clase_id=%s, alumno_id=%s, fecha='%s', asiste=%s",
                 id, getClaseId(), getAlummoId(), fecha, asiste);
