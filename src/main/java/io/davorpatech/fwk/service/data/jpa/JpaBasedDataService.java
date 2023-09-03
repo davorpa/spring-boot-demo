@@ -19,7 +19,6 @@ import org.springframework.util.Assert;
 
 import javax.validation.Valid;
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
@@ -72,126 +71,6 @@ public abstract class JpaBasedDataService< // NOSONAR
         Assert.notNull(repository, domainName + " Repository must not be null!");
         this.domainName = domainName;
         this.repository = repository;
-    }
-
-    private Class<ID> idClass;
-
-    @SuppressWarnings("unchecked")
-    protected Class<ID> getIdClass()
-    {
-        if (idClass == null) {
-            //only works if one extends JpaBasedDataService, we will take care of it with CDI
-            ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <R> value type
-            // 1: <ID> value type
-            // 2: <T> value type
-            // 3: <DTO> value type
-            // 4: <FIND_CMD> value type
-            // 5: <CREATE_CMD> value type
-            // 6: <UPDATE_CMD> value type
-            idClass = (Class<ID>) clazz.getActualTypeArguments()[1];
-        }
-        return idClass;
-    }
-
-    private Class<T> entityClass;
-
-    @SuppressWarnings("unchecked")
-    protected Class<T> getEntityClass()
-    {
-        if (entityClass == null) {
-            //only works if one extends JpaBasedDataService, we will take care of it with CDI
-            ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <R> value type
-            // 1: <ID> value type
-            // 2: <T> value type
-            // 3: <DTO> value type
-            // 4: <FIND_CMD> value type
-            // 5: <CREATE_CMD> value type
-            // 6: <UPDATE_CMD> value type
-            entityClass = (Class<T>) clazz.getActualTypeArguments()[2];
-        }
-        return entityClass;
-    }
-
-    private Class<DTO> dtoClass;
-
-    @SuppressWarnings("unchecked")
-    protected Class<DTO> getDtoClass()
-    {
-        if (dtoClass == null) {
-            //only works if one extends JpaBasedDataService, we will take care of it with CDI
-            ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <R> value type
-            // 1: <ID> value type
-            // 2: <T> value type
-            // 3: <DTO> value type
-            // 4: <FIND_CMD> value type
-            // 5: <CREATE_CMD> value type
-            // 6: <UPDATE_CMD> value type
-            dtoClass = (Class<DTO>) clazz.getActualTypeArguments()[3];
-        }
-        return dtoClass;
-    }
-
-    private Class<FIND_CMD> findCmdClass;
-
-    @SuppressWarnings("unchecked")
-    protected Class<FIND_CMD> getFindCmdClass()
-    {
-        if (findCmdClass == null) {
-            //only works if one extends JpaBasedDataService, we will take care of it with CDI
-            ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <R> value type
-            // 1: <ID> value type
-            // 2: <T> value type
-            // 3: <DTO> value type
-            // 4: <FIND_CMD> value type
-            // 5: <CREATE_CMD> value type
-            // 6: <UPDATE_CMD> value type
-            findCmdClass = (Class<FIND_CMD>) clazz.getActualTypeArguments()[4];
-        }
-        return findCmdClass;
-    }
-
-    private Class<CREATE_CMD> createCmdClass;
-
-    @SuppressWarnings("unchecked")
-    protected Class<CREATE_CMD> getCreateCmdClass()
-    {
-        if (createCmdClass == null) {
-            //only works if one extends JpaBasedDataService, we will take care of it with CDI
-            ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <R> value type
-            // 1: <ID> value type
-            // 2: <T> value type
-            // 3: <DTO> value type
-            // 4: <FIND_CMD> value type
-            // 5: <CREATE_CMD> value type
-            // 6: <UPDATE_CMD> value type
-            createCmdClass = (Class<CREATE_CMD>) clazz.getActualTypeArguments()[5];
-        }
-        return createCmdClass;
-    }
-
-    private Class<UPDATE_CMD> updateCmdClass;
-
-    @SuppressWarnings("unchecked")
-    protected Class<UPDATE_CMD> getUpdateCmdClass()
-    {
-        if (updateCmdClass == null) {
-            //only works if one extends JpaBasedDataService, we will take care of it with CDI
-            ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <R> value type
-            // 1: <ID> value type
-            // 2: <T> value type
-            // 3: <DTO> value type
-            // 4: <FIND_CMD> value type
-            // 5: <CREATE_CMD> value type
-            // 6: <UPDATE_CMD> value type
-            updateCmdClass = (Class<UPDATE_CMD>) clazz.getActualTypeArguments()[6];
-        }
-        return updateCmdClass;
     }
 
     @Override
