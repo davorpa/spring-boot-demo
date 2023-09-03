@@ -25,14 +25,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{controller_url}}",
+					"raw": "{{controller_url}}?sort=fullname,ASC",
 					"host": [
 						"{{controller_url}}"
 					],
 					"query": [
 						{
 							"key": "page",
-							"value": "0",
+							"value": "1",
 							"disabled": true
 						},
 						{
@@ -47,8 +47,7 @@
 						},
 						{
 							"key": "sort",
-							"value": "fullname,ASC",
-							"disabled": true
+							"value": "fullname,ASC"
 						},
 						{
 							"key": "sort",

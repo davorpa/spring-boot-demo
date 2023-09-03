@@ -49,7 +49,8 @@ class AlumnoController
     {
         FindAlumnosInput query = new FindAlumnosInput(
                 forceUnpaged || pageable.isUnpaged() ?  0 : pageable.getPageNumber(),
-                forceUnpaged || pageable.isUnpaged() ? -1 : pageable.getPageSize()
+                forceUnpaged || pageable.isUnpaged() ? -1 : pageable.getPageSize(),
+                pageable.getSort()
             );
         return alumnoService.findAll(query);
     }
