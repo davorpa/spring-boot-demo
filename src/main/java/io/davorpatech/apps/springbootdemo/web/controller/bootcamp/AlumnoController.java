@@ -11,6 +11,7 @@ import io.davorpatech.fwk.exception.NoMatchingRelatedFieldsException;
 import io.davorpatech.fwk.model.PagedResult;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ class AlumnoController
 
     @GetMapping
     PagedResult<AlumnoDTO> findAll(
-            final /*@PageableDefault(size = 50)*/
+            final @PageableDefault(size = 50)
             @SortDefault.SortDefaults(
                     @SortDefault(sort = "id", direction = Sort.Direction.ASC)
             ) Pageable pageable,
