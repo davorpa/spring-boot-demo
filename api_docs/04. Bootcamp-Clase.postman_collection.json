@@ -25,7 +25,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{controller_url}}",
+					"raw": "{{controller_url}}?sort=nombre,ASC",
 					"host": [
 						"{{controller_url}}"
 					],
@@ -38,6 +38,20 @@
 						{
 							"key": "size",
 							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "unpaged",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "nombre,ASC"
+						},
+						{
+							"key": "sort",
+							"value": "id,ASC",
 							"disabled": true
 						}
 					]

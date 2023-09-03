@@ -9,6 +9,9 @@ import io.davorpatech.apps.springbootdemo.web.model.bootcamp.CreateClaseRequest;
 import io.davorpatech.apps.springbootdemo.web.model.bootcamp.UpdateClaseRequest;
 import io.davorpatech.fwk.exception.NoMatchingRelatedFieldsException;
 import io.davorpatech.fwk.model.PagedResult;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -39,10 +42,17 @@ class ClaseController
 
     @GetMapping
     PagedResult<ClaseDTO> findAll(
-            final @RequestParam(name = "page", defaultValue = "1") Integer pageNumber,
-            final @RequestParam(name = "size", defaultValue = "100") Integer pageSize)
+            final
+            @SortDefault.SortDefaults(
+                    @SortDefault(sort = "id", direction = Sort.Direction.ASC)
+            ) Pageable pageable,
+            final @RequestParam(value = "unpaged", defaultValue = "false") boolean forceUnpaged)
     {
-        FindClasesInput query = new FindClasesInput(pageNumber, pageSize);
+        FindClasesInput query = new FindClasesInput(
+                forceUnpaged || pageable.isUnpaged() ?  0 : pageable.getPageNumber(),
+                forceUnpaged || pageable.isUnpaged() ? -1 : pageable.getPageSize(),
+                pageable.getSort()
+            );
         return claseService.findAll(query);
     }
 
