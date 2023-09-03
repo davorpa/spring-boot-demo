@@ -10,13 +10,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
-@Validated
 public class ClaseServiceImpl // NOSONAR
         extends AbstractDataService<Long, Clase, ClaseDTO, FindClasesInput, CreateClaseInput, UpdateClaseInput> // NOSONAR
         implements ClaseService // NOSONAR

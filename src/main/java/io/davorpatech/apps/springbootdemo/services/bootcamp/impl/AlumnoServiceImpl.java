@@ -11,11 +11,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.validation.annotation.Validated;
 
 @Service
 @Transactional(readOnly = true)
-@Validated
 public class AlumnoServiceImpl // NOSONAR
         extends AbstractDataService<Long, Alumno, AlumnoDTO, FindAlumnosInput, CreateAlumnoInput, UpdateAlumnoInput> // NOSONAR
         implements AlumnoService // NOSONAR
