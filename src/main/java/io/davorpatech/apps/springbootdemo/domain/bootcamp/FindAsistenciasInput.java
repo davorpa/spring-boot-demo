@@ -1,6 +1,7 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
 import io.davorpatech.fwk.model.BaseValueObject;
+import org.springframework.data.domain.Sort;
 
 import java.util.Objects;
 
@@ -12,9 +13,12 @@ public class FindAsistenciasInput extends BaseValueObject // NOSONAR
 
     private final int pageSize;
 
-    public FindAsistenciasInput(int pageNumber, int pageSize) {
+    private final Sort sort;
+
+    public FindAsistenciasInput(int pageNumber, int pageSize, Sort sort) {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
+        this.sort = sort;
     }
 
     @Override
@@ -22,17 +26,19 @@ public class FindAsistenciasInput extends BaseValueObject // NOSONAR
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FindAsistenciasInput other = (FindAsistenciasInput) o;
-        return pageNumber == other.pageNumber && pageSize == other.pageSize;
+        return pageNumber == other.pageNumber &&
+                pageSize == other.pageSize &&
+                Objects.equals(sort, other.sort);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pageNumber, pageSize);
+        return Objects.hash(pageNumber, pageSize, sort);
     }
 
     @Override
     protected String defineObjAttrs() {
-        return String.format("pageNumber=%s, pageSize=%s", pageNumber, pageSize);
+        return String.format("pageNumber=%s, pageSize=%s, sort=%s", pageNumber, pageSize, sort);
     }
 
     public int getPageNumber() {
@@ -41,5 +47,9 @@ public class FindAsistenciasInput extends BaseValueObject // NOSONAR
 
     public int getPageSize() {
         return pageSize;
+    }
+
+    public Sort getSort() {
+        return sort;
     }
 }

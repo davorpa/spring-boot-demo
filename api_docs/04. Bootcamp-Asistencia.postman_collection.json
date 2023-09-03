@@ -25,7 +25,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{controller_url}}",
+					"raw": "{{controller_url}}?size=10&sort=fecha,DESC",
 					"host": [
 						"{{controller_url}}"
 					],
@@ -37,7 +37,20 @@
 						},
 						{
 							"key": "size",
-							"value": "10",
+							"value": "10"
+						},
+						{
+							"key": "unpaged",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "sort",
+							"value": "fecha,DESC"
+						},
+						{
+							"key": "sort",
+							"value": "id,ASC",
 							"disabled": true
 						}
 					]

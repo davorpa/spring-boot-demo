@@ -12,10 +12,7 @@ import io.davorpatech.fwk.exception.NoSuchEntityException;
 import io.davorpatech.fwk.exception.NoSuchForeignalEntityException;
 import io.davorpatech.fwk.model.PagedResult;
 import io.davorpatech.fwk.service.ServiceCommonSupport;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,15 +57,23 @@ public class AsistenciaServiceImpl // NOSONAR
     @Override
     public PagedResult<AsistenciaDTO> findAll(
             final @Valid FindAsistenciasInput query) {
-        Sort sort = Sort.by(Sort.Direction.ASC, "clase.id", "alumno.id", "fecha");
-        int pageNumber = query.getPageNumber() > 0 ? query.getPageNumber() - 1 : 0;
-        Pageable pageable = PageRequest.of(pageNumber, query.getPageSize(), sort);
-        Page<AsistenciaDTO> page = asistenciaRepository.findAll(pageable)
-                .map(this::mapEntityToDto);
+        int pageSize = query.getPageSize();
+        int pageNumber = query.getPageNumber();
+        Sort sort = query.getSort();
+        // do search using resolved find all arguments
+        final Page<AsistenciaDTO> page;
+        if (pageSize > 0) { // paged search
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+            page = asistenciaRepository.findAll(pageable)
+                    .map(this::mapEntityToDto);
+        } else { // unpaged search
+            page = new PageImpl<>(asistenciaRepository.findAll(sort))
+                    .map(this::mapEntityToDto);
+        }
         return new PagedResult<>(
                 page.getContent(),
                 page.getTotalElements(),
-                page.getNumber() + 1,
+                page.getNumber(),
                 page.getTotalPages(),
                 page.isFirst(),
                 page.isLast(),
