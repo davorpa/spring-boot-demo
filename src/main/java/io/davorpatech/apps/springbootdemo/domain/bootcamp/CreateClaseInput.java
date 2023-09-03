@@ -1,13 +1,16 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
 import io.davorpatech.fwk.model.BaseValueObject;
+import io.davorpatech.fwk.model.commands.CreateInputCmd;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public class CreateClaseInput extends BaseValueObject
+public class CreateClaseInput // NOSONAR
+        extends BaseValueObject // NOSONAR
+        implements CreateInputCmd // NOSONAR
 {
     private static final long serialVersionUID = 3944033294390548808L;
 
