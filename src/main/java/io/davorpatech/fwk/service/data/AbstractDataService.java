@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import javax.validation.Valid;
 import java.io.Serializable;
@@ -23,17 +24,17 @@ import java.util.List;
 /**
  * Implementations must delegate most of their operations to the JPA repository of duty.
  *
+ * @param <R> component type of the data repository
  * @param <ID> component type of the field that uniquely identifies said entity
  * @param <T> component type representing the domain entity
  * @param <DTO> component type representing the domain data transfer object
  * @param <FIND_CMD> type of the find input command
  * @param <CREATE_CMD> type of the create input command
  * @param <UPDATE_CMD> type of the update input command
- *
- * @see #getRepository()
  */
 @Transactional(readOnly = true)
 public abstract class AbstractDataService< // NOSONAR
+                R extends JpaRepository<T, ID>, // NOSONAR
                 ID  extends Serializable, // NOSONAR
                 T   extends Entitier<ID>, // NOSONAR
                 DTO extends ValueObject, // NOSONAR
@@ -44,6 +45,34 @@ public abstract class AbstractDataService< // NOSONAR
         extends ServiceCommonSupport // NOSONAR
         implements DataService<ID, T, DTO, FIND_CMD, CREATE_CMD, UPDATE_CMD> // NOSONAR
 {
+    /**
+     * The domain name of any business entity is a constant value that uniquely
+     * identifies it in the entire application.
+     */
+    protected final String domainName;
+
+    /**
+     * The repository handling the data of this domain entity service.
+     */
+    protected final R repository;
+
+    /**
+     * Constructs a new {@link AbstractDataService} with the given arguments.
+     *
+     * @param repository the repository of the business entity, never {@code null}
+     * @param domainName the domain name that uniquely identifies the underlayed
+     *                   business entity
+     */
+    protected AbstractDataService(
+            final R repository, final String domainName)
+    {
+        super();
+        Assert.hasText(domainName, "Domain Name must not be blank!");
+        Assert.notNull(repository, domainName + " Repository must not be null!");
+        this.domainName = domainName;
+        this.repository = repository;
+    }
+
     private Class<ID> idClass;
 
     @SuppressWarnings("unchecked")
@@ -52,13 +81,14 @@ public abstract class AbstractDataService< // NOSONAR
         if (idClass == null) {
             //only works if one extends AbstractDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <ID> value type
-            // 1: <T> value type
-            // 2: <DTO> value type
-            // 3: <FIND_CMD> value type
-            // 4: <CREATE_CMD> value type
-            // 5: <UPDATE_CMD> value type
-            idClass = (Class<ID>) clazz.getActualTypeArguments()[0];
+            // 0: <R> value type
+            // 1: <ID> value type
+            // 2: <T> value type
+            // 3: <DTO> value type
+            // 4: <FIND_CMD> value type
+            // 5: <CREATE_CMD> value type
+            // 6: <UPDATE_CMD> value type
+            idClass = (Class<ID>) clazz.getActualTypeArguments()[1];
         }
         return idClass;
     }
@@ -71,13 +101,14 @@ public abstract class AbstractDataService< // NOSONAR
         if (entityClass == null) {
             //only works if one extends AbstractDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <ID> value type
-            // 1: <T> value type
-            // 2: <DTO> value type
-            // 3: <FIND_CMD> value type
-            // 4: <CREATE_CMD> value type
-            // 5: <UPDATE_CMD> value type
-            entityClass = (Class<T>) clazz.getActualTypeArguments()[1];
+            // 0: <R> value type
+            // 1: <ID> value type
+            // 2: <T> value type
+            // 3: <DTO> value type
+            // 4: <FIND_CMD> value type
+            // 5: <CREATE_CMD> value type
+            // 6: <UPDATE_CMD> value type
+            entityClass = (Class<T>) clazz.getActualTypeArguments()[2];
         }
         return entityClass;
     }
@@ -90,13 +121,14 @@ public abstract class AbstractDataService< // NOSONAR
         if (dtoClass == null) {
             //only works if one extends AbstractDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <ID> value type
-            // 1: <T> value type
-            // 2: <DTO> value type
-            // 3: <FIND_CMD> value type
-            // 4: <CREATE_CMD> value type
-            // 5: <UPDATE_CMD> value type
-            dtoClass = (Class<DTO>) clazz.getActualTypeArguments()[2];
+            // 0: <R> value type
+            // 1: <ID> value type
+            // 2: <T> value type
+            // 3: <DTO> value type
+            // 4: <FIND_CMD> value type
+            // 5: <CREATE_CMD> value type
+            // 6: <UPDATE_CMD> value type
+            dtoClass = (Class<DTO>) clazz.getActualTypeArguments()[3];
         }
         return dtoClass;
     }
@@ -109,13 +141,14 @@ public abstract class AbstractDataService< // NOSONAR
         if (findCmdClass == null) {
             //only works if one extends AbstractDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <ID> value type
-            // 1: <T> value type
-            // 2: <DTO> value type
-            // 3: <FIND_CMD> value type
-            // 4: <CREATE_CMD> value type
-            // 5: <UPDATE_CMD> value type
-            findCmdClass = (Class<FIND_CMD>) clazz.getActualTypeArguments()[3];
+            // 0: <R> value type
+            // 1: <ID> value type
+            // 2: <T> value type
+            // 3: <DTO> value type
+            // 4: <FIND_CMD> value type
+            // 5: <CREATE_CMD> value type
+            // 6: <UPDATE_CMD> value type
+            findCmdClass = (Class<FIND_CMD>) clazz.getActualTypeArguments()[4];
         }
         return findCmdClass;
     }
@@ -128,13 +161,14 @@ public abstract class AbstractDataService< // NOSONAR
         if (createCmdClass == null) {
             //only works if one extends AbstractDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <ID> value type
-            // 1: <T> value type
-            // 2: <DTO> value type
-            // 3: <FIND_CMD> value type
-            // 4: <CREATE_CMD> value type
-            // 5: <UPDATE_CMD> value type
-            createCmdClass = (Class<CREATE_CMD>) clazz.getActualTypeArguments()[4];
+            // 0: <R> value type
+            // 1: <ID> value type
+            // 2: <T> value type
+            // 3: <DTO> value type
+            // 4: <FIND_CMD> value type
+            // 5: <CREATE_CMD> value type
+            // 6: <UPDATE_CMD> value type
+            createCmdClass = (Class<CREATE_CMD>) clazz.getActualTypeArguments()[5];
         }
         return createCmdClass;
     }
@@ -147,24 +181,17 @@ public abstract class AbstractDataService< // NOSONAR
         if (updateCmdClass == null) {
             //only works if one extends AbstractDataService, we will take care of it with CDI
             ParameterizedType clazz = (ParameterizedType) getClass().getGenericSuperclass();
-            // 0: <ID> value type
-            // 1: <T> value type
-            // 2: <DTO> value type
-            // 3: <FIND_CMD> value type
-            // 4: <CREATE_CMD> value type
-            // 5: <UPDATE_CMD> value type
-            updateCmdClass = (Class<UPDATE_CMD>) clazz.getActualTypeArguments()[5];
+            // 0: <R> value type
+            // 1: <ID> value type
+            // 2: <T> value type
+            // 3: <DTO> value type
+            // 4: <FIND_CMD> value type
+            // 5: <CREATE_CMD> value type
+            // 6: <UPDATE_CMD> value type
+            updateCmdClass = (Class<UPDATE_CMD>) clazz.getActualTypeArguments()[6];
         }
         return updateCmdClass;
     }
-
-
-    /**
-     * Gets the repository that handles the data of this domain entity service.
-     *
-     * @return the JPA repository
-     */
-    protected abstract JpaRepository<T, ID> getRepository();
 
     @Override
     public @NonNull PagedResult<DTO> findAll(
@@ -181,13 +208,13 @@ public abstract class AbstractDataService< // NOSONAR
         if (pageSize > 0) { // paged search
             final Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
             page = (example == null
-                        ? getRepository().findAll(pageable)
-                        : getRepository().findAll(example, pageable))
+                        ? repository.findAll(pageable)
+                        : repository.findAll(example, pageable))
                     .map(this::convertEntityToDto);
         } else { // unpaged search
             List<T> content = example == null
-                    ? getRepository().findAll(sort)
-                    : getRepository().findAll(example, sort);
+                    ? repository.findAll(sort)
+                    : repository.findAll(example, sort);
             page = new PageImpl<>(content)
                     .map(this::convertEntityToDto);
         }
@@ -257,9 +284,9 @@ public abstract class AbstractDataService< // NOSONAR
     public @NonNull DTO findById(
             final @NonNull @Valid ID id)
     {
-        return getRepository().findById(id)
+        return repository.findById(id)
                 .map(this::convertEntityToDto)
-                .orElseThrow(NoSuchEntityException.creater(getDomainName(), id));
+                .orElseThrow(NoSuchEntityException.creater(domainName, id));
     }
 
     /**
@@ -278,7 +305,7 @@ public abstract class AbstractDataService< // NOSONAR
         // map create DTO to entity
         T entity = convertCreateToEntity(input);
         // save/persist
-        entity = getRepository().save(entity);
+        entity = repository.save(entity);
         // map persisted entity to dto
         return convertEntityToDto(entity);
     }
@@ -298,12 +325,12 @@ public abstract class AbstractDataService< // NOSONAR
     {
         final ID id = input.getId();
         // find record which operate with
-        T entity = getRepository().findById(id)
-                .orElseThrow(NoSuchEntityException.creater(getDomainName(), id));
+        T entity = repository.findById(id)
+                .orElseThrow(NoSuchEntityException.creater(domainName, id));
         // transfer each update DTO field to entity record
         populateEntityToUpdate(entity, input);
         // save/merge
-        entity = getRepository().save(entity);
+        entity = repository.save(entity);
         // map merged entity to dto
         return convertEntityToDto(entity);
     }
@@ -323,9 +350,8 @@ public abstract class AbstractDataService< // NOSONAR
     public void deleteById(
             final @NonNull @Valid ID id)
     {
-        final JpaRepository<T, ID> repository = getRepository();
         final T entity = repository.findById(id)
-                .orElseThrow(NoSuchEntityException.creater(getDomainName(), id));
+                .orElseThrow(NoSuchEntityException.creater(domainName, id));
         repository.delete(entity);
     }
 }

@@ -7,38 +7,26 @@ import io.davorpatech.apps.springbootdemo.services.bootcamp.AlumnoService;
 import io.davorpatech.fwk.exception.NoSuchEntityException;
 import io.davorpatech.fwk.service.data.AbstractDataService;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 @Service
 @Transactional(readOnly = true)
 public class AlumnoServiceImpl // NOSONAR
-        extends AbstractDataService<Long, Alumno, AlumnoDTO, FindAlumnosInput, CreateAlumnoInput, UpdateAlumnoInput> // NOSONAR
+        extends AbstractDataService< // NOSONAR
+            AlumnoRepository, // NOSONAR
+            Long, Alumno, AlumnoDTO, // NOSONAR
+            FindAlumnosInput, CreateAlumnoInput, UpdateAlumnoInput> // NOSONAR
         implements AlumnoService // NOSONAR
 {
-    private final AlumnoRepository alumnoRepository;
-
     /**
      * Constructs a new {@link AlumnoServiceImpl} with the given arguments.
      *
      * @param alumnoRepository the alumno repository, never {@code null}
      */
-    public AlumnoServiceImpl(final AlumnoRepository alumnoRepository) {
-        super();
-        Assert.notNull(alumnoRepository, "AlumnoRepository must not be null!");
-        this.alumnoRepository = alumnoRepository;
-    }
-
-    @Override
-    public String getDomainName() {
-        return AlumnoConstants.DOMAIN_NAME;
-    }
-
-    @Override
-    protected JpaRepository<Alumno, Long> getRepository() {
-        return alumnoRepository;
+    public AlumnoServiceImpl(
+            final AlumnoRepository alumnoRepository) {
+        super(alumnoRepository, AlumnoConstants.DOMAIN_NAME);
     }
 
     @Override
@@ -76,8 +64,8 @@ public class AlumnoServiceImpl // NOSONAR
     @Override
     public AlumnoDTO findByNid(
             final String nid) {
-        return alumnoRepository.findByNid(nid)
+        return repository.findByNid(nid)
                 .map(this::convertEntityToDto)
-                .orElseThrow(NoSuchEntityException.creater(getDomainName(), nid));
+                .orElseThrow(NoSuchEntityException.creater(domainName, nid));
     }
 }

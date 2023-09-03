@@ -42,14 +42,6 @@ public interface DataService< // NOSONAR
         extends Service // NOSONAR
 {
     /**
-     * The domain name of any business entity is a constant value that uniquely
-     * identifies it in the entire application.
-     *
-     * @return the domain name identifying the underlying business entity
-     */
-    String getDomainName();
-
-    /**
      * Gets all records representing this domain data that matches query parameters.
      *
      * @param query the find query command used to sort, filtering and paging data

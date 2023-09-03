@@ -7,20 +7,18 @@ import io.davorpatech.apps.springbootdemo.services.bootcamp.ClaseService;
 import io.davorpatech.fwk.exception.NoSuchEntityException;
 import io.davorpatech.fwk.service.data.AbstractDataService;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
 public class ClaseServiceImpl // NOSONAR
-        extends AbstractDataService<Long, Clase, ClaseDTO, FindClasesInput, CreateClaseInput, UpdateClaseInput> // NOSONAR
+        extends AbstractDataService< // NOSONAR
+            ClaseRepository, // NOSONAR
+            Long, Clase, ClaseDTO, // NOSONAR
+            FindClasesInput, CreateClaseInput, UpdateClaseInput> // NOSONAR
         implements ClaseService // NOSONAR
 {
-    private final ClaseRepository claseRepository;
-
     /**
      * Constructs a new {@link ClaseServiceImpl} with the given arguments.
      *
@@ -29,18 +27,7 @@ public class ClaseServiceImpl // NOSONAR
     public ClaseServiceImpl(
             final ClaseRepository claseRepository)
     {
-        this.claseRepository = Objects.requireNonNull(
-                claseRepository, "ClaseRepository must not be null!");
-    }
-
-    @Override
-    public String getDomainName() {
-        return ClaseConstants.DOMAIN_NAME;
-    }
-
-    @Override
-    protected JpaRepository<Clase, Long> getRepository() {
-        return claseRepository;
+        super(claseRepository, ClaseConstants.DOMAIN_NAME);
     }
 
     @Override
@@ -75,8 +62,8 @@ public class ClaseServiceImpl // NOSONAR
     @Override
     public ClaseDTO findByCodigo(
             final String codigo) {
-        return claseRepository.findByCodigo(codigo)
+        return repository.findByCodigo(codigo)
                 .map(this::convertEntityToDto)
-                .orElseThrow(NoSuchEntityException.creater(getDomainName(), codigo));
+                .orElseThrow(NoSuchEntityException.creater(domainName, codigo));
     }
 }
