@@ -1,62 +1,21 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
-import io.davorpatech.fwk.model.BaseValueObject;
-import io.davorpatech.fwk.model.commands.FindInputCmd;
-import io.davorpatech.fwk.model.commands.Sortable;
+import io.davorpatech.fwk.model.commands.BaseSortableFindInputCmd;
 import org.springframework.data.domain.Sort;
 
-import java.util.Objects;
-
 public class FindAsistenciasInput // NOSONAR
-        extends BaseValueObject // NOSONAR
-        implements FindInputCmd, Sortable // NOSONAR
+        extends BaseSortableFindInputCmd // NOSONAR
 {
     private static final long serialVersionUID = -375698255318579169L;
 
-    private final int pageNumber;
-
-    private final int pageSize;
-
-    private final Sort sort;
-
+    /**
+     * Constructs a new {@link FindAsistenciasInput} with the given arguments.
+     *
+     * @param pageNumber the number of the current page (zero-index based)
+     * @param pageSize   the page size; thus is, the number of items to be returned
+     * @param sort       the sort to be used as part of any search query
+     */
     public FindAsistenciasInput(int pageNumber, int pageSize, Sort sort) {
-        this.pageNumber = pageNumber;
-        this.pageSize = pageSize;
-        this.sort = sort;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FindAsistenciasInput other = (FindAsistenciasInput) o;
-        return pageNumber == other.pageNumber &&
-                pageSize == other.pageSize &&
-                Objects.equals(sort, other.sort);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(pageNumber, pageSize, sort);
-    }
-
-    @Override
-    protected String defineObjAttrs() {
-        return String.format("pageNumber=%s, pageSize=%s, sort=%s", pageNumber, pageSize, sort);
-    }
-
-    @Override
-    public int getPageNumber() {
-        return pageNumber;
-    }
-
-    @Override
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    @Override
-    public Sort getSort() {
-        return sort;
+        super(pageNumber, pageSize, sort);
     }
 }

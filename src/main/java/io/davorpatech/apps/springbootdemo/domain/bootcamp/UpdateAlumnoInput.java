@@ -1,19 +1,17 @@
 package io.davorpatech.apps.springbootdemo.domain.bootcamp;
 
-import io.davorpatech.fwk.model.BaseValueObject;
-import io.davorpatech.fwk.model.commands.UpdateInputCmd;
+import io.davorpatech.fwk.model.commands.BaseUpdateInputCmd;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class UpdateAlumnoInput // NOSONAR
-        extends BaseValueObject // NOSONAR
-        implements UpdateInputCmd<Long> // NOSONAR
+        extends BaseUpdateInputCmd<Long> // NOSONAR
 {
     private static final long serialVersionUID = 8804797051751480022L;
-
-    @NotNull
-    private final Long id;
 
     @NotBlank
     @Size(min = AlumnoConstants.NID_MINLEN, max = AlumnoConstants.NID_MAXLEN)
@@ -29,8 +27,7 @@ public class UpdateAlumnoInput // NOSONAR
     private final String email;
 
     public UpdateAlumnoInput(final Long id, final String nid, final String fullname, final String email) {
-        super();
-        this.id = id;
+        super(id);
         this.nid = nid;
         this.fullname = fullname;
         this.email = email;
@@ -40,27 +37,22 @@ public class UpdateAlumnoInput // NOSONAR
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         UpdateAlumnoInput other = (UpdateAlumnoInput) o;
-        return Objects.equals(id, other.id) &&
-                Objects.equals(nid, other.nid) &&
+        return Objects.equals(nid, other.nid) &&
                 Objects.equals(fullname, other.fullname) &&
                 Objects.equals(email, other.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nid, fullname, email);
+        return Objects.hash(super.hashCode(), nid, fullname, email);
     }
 
     @Override
     protected String defineObjAttrs() {
-        return String.format("id=%s, nid='%s', fullname='%s', email='%s'",
-                id, nid, fullname, email);
-    }
-
-    @Override
-    public Long getId() {
-        return id;
+        return String.format("%s, nid='%s', fullname='%s', email='%s'",
+                super.defineObjAttrs(), nid, fullname, email);
     }
 
     public String getNid() {
