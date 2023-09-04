@@ -10,9 +10,9 @@ import org.springframework.data.domain.Sort;
 public interface Sortable
 {
     /**
-     * Return the sort properties holder used as part of any search query.
+     * Return the sort holder used as part of any search query.
      *
-     * @return the sort properties holder
+     * @return the sort holder
      */
     Sort getSort();
 }
